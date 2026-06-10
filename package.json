@@ -1,0 +1,42 @@
+{
+  "name": "lumiere-studio",
+  "version": "1.0.0",
+  "description": "Lumière Studio — Premium Wedding Photography & Videography Website",
+  "private": true,
+  "author": "Lumière Studio",
+  "license": "UNLICENSED",
+  "homepage": "https://lumierestudio.in",
+  "keywords": [
+    "wedding",
+    "photography",
+    "videography",
+    "lumiere",
+    "studio"
+  ],
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/",
+    "serve": "serve . -p 3000",
+    "start": "npm run dev",
+    "lint": "eslint js/**/*.js api/**/*.js",
+    "lint:fix": "eslint js/**/*.js api/**/*.js --fix",
+    "format": "prettier --write \"**/*.{html,css,js,json}\" --ignore-path .prettierignore",
+    "convert-images": "node scripts/convert-images.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "live-server": "^1.2.2",
+    "prettier": "^3.2.5",
+    "serve": "^14.2.3",
+    "sharp": "^0.32.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not IE 11"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "checkJs": true,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@js/*": ["js/*"],
+      "@css/*": ["css/*"]
+    }
+  },
+  "include": ["js/**/*.js", "api/**/*.js"],
+  "exclude": ["node_modules"]
+}

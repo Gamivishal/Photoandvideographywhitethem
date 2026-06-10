@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Now – Yash Raj Motion Picture | Ahmedabad</title>
+  <meta name="description" content="Book your photography session with Yash Raj Motion Picture." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <style>
+    /* Premium Luxury Dark Theme Booking Page Custom Styles */
+    .booking-page {
+      position: relative;
+      background: #ffffff;
+      padding: 100px 0;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Fallback for devices that don't support parallax/fixed attachment nicely */
+    @media (hover: none) {
+      .booking-page {
+        background-attachment: scroll;
+      }
+    }
+
+    .booking-form-container {
+      background: #ffffff;
+      padding: 4.5rem 3.5rem;
+      border-radius: 8px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(200, 160, 106, 0.3);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      width: 100%;
+    }
+
+    .booking-form-container:hover {
+      border-color: rgba(200, 160, 106, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    .booking-form-container .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .booking-form-container .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #333333;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .booking-form-container .form-control {
+      width: 100%;
+      background: #fafafa;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #333333;
+      padding: 1.1rem 1.25rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .booking-form-container .form-control:focus {
+      border-color: #C8A06A;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(200, 160, 106, 0.15);
+    }
+
+    .booking-form-container .form-control::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .booking-form-container .form-select option {
+      background: #ffffff;
+      color: #333333;
+    }
+
+    .booking-form-container .field-error {
+      min-height: 1rem;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #dc3232;
+    }
+
+    .booking-form-container .form-control.error {
+      border-color: #dc3232;
+      box-shadow: 0 0 0 1px rgba(220, 50, 50, 0.15);
+    }
+
+    .booking-form-container .form-control.error:focus {
+      border-color: #dc3232;
+      box-shadow: 0 0 10px rgba(220, 50, 50, 0.25);
+    }
+
+    .booking-form-container .checkbox-group {
+      margin-bottom: 2rem;
+      color: #333333;
+    }
+
+    @media (max-width: 768px) {
+      .booking-form-container {
+        padding: 3rem 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">Yash Raj</div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-circle" id="cursorCircle"></div>
+
+  <script src="../js/header.js"></script>
+
+  <section class="page-hero" id="pageHero">
+    <div class="page-hero-bg"
+      style="background-image: url('https://images.unsplash.com/photo-1486916856992-e4db22c8df33?w=1920&q=80')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <!-- <span class="section-label">Reserve Your Date</span> -->
+      <h1>Book Now</h1>
+      <p class="breadcrumb"><a href="../">Home</a> / Book Now</p>
+    </div>
+  </section>
+
+  <!-- BOOKING FORM SECTION -->
+  <section class="booking-page" id="bookingSection">
+    <div class="container" style="max-width: 680px;">
+
+      <div class="booking-form-container reveal-up">
+        <div class="form-header-new" style="margin-bottom: 3rem;">
+          <span
+            style="font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: #C8A06A; font-weight: 600; display: block; margin-bottom: 0.5rem;">ENQUIRE
+            NOW</span>
+          <h2 style="font-family: var(--font-serif); font-size: 2.5rem; color: #13100E; margin: 0; font-weight: 500;">
+            Book Online</h2>
+        </div>
+        <form id="bookingForm" novalidate>
+          <div class="form-group">
+            <label for="bookName">Your Name *</label>
+            <input type="text" id="bookName" name="yourName" class="form-control" placeholder="Your full name"
+              required />
+            <div class="field-error" id="bookNameError" aria-live="polite"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookEmail">Email Address *</label>
+              <input type="email" id="bookEmail" name="email" class="form-control" placeholder="your@email.com"
+                required />
+              <div class="field-error" id="bookEmailError" aria-live="polite"></div>
+            </div>
+            <div class="form-group">
+              <label for="bookPhone">WhatsApp / Phone *</label>
+              <input type="tel" id="bookPhone" name="phone" class="form-control" placeholder="+91 XXXXX XXXXX"
+                required />
+              <div class="field-error" id="bookPhoneError" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookDate">Event Date *</label>
+              <input type="date" id="bookDate" name="eventDate" class="form-control" required />
+              <div class="field-error" id="bookDateError" aria-live="polite"></div>
+            </div>
+            <div class="form-group">
+              <label for="bookCity">Event City *</label>
+              <input type="text" id="bookCity" name="eventCity" class="form-control" placeholder="e.g. Ahmedabad, Surat"
+                required />
+              <div class="field-error" id="bookCityError" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bookCategory">Category *</label>
+            <select id="bookCategory" name="category" class="form-control form-select" required>
+              <option value="">Select a category...</option>
+              <option value="wedding">Wedding Photography</option>
+              <option value="pre-wedding">Pre-Wedding Shoots</option>
+              <option value="corporate">Corporate & Events</option>
+              <option value="product">Product & Fashion</option>
+            </select>
+            <div class="field-error" id="bookCategoryError" aria-live="polite"></div>
+          </div>
+          <!-- Package dropdown (shown when category is selected) -->
+          <div class="form-group" id="packageWrapper" style="display: none;">
+            <label for="bookPackage">Package</label>
+            <select id="bookPackage" name="package" class="form-control form-select">
+              <option value="">Select a package...</option>
+            </select>
+          </div>
+          <div class="form-group" id="vibeGroup" style="display: none;">
+            <label for="bookVibe">Pre-Wedding Vibe</label>
+            <select id="bookVibe" name="vibe" class="form-control form-select">
+              <option value="">Select a vibe...</option>
+              <option value="romantic-classic">Romantic Classic</option>
+              <option value="vintage-heritage">Vintage Heritage</option>
+              <option value="adventure-outdoor">Adventure Outdoor</option>
+              <option value="fun-candid">Fun &amp; Candid</option>
+            </select>
+          </div>
+          <div class="form-group checkbox-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="bookDrone" name="drone" value="yes" />
+              <span id="droneLabelText">Drone Coverage: No</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="bookBudget">Approximate Budget</label>
+            <select id="bookBudget" name="budget" class="form-control form-select">
+              <option value="">Select budget range...</option>
+              <option value="under25k">Under ₹25,000</option>
+              <option value="25-50k">₹25,000 – ₹50,000</option>
+              <option value="50-1L">₹50,000 – ₹1,00,000</option>
+              <option value="1-2L">₹1,00,000 – ₹2,00,000</option>
+              <option value="2-3L">₹2,00,000 – ₹3,00,000</option>
+              <option value="3L+">₹3,00,000+</option>
+              <option value="custom">Custom / To be discussed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bookMessage">Tell Us More</label>
+            <textarea id="bookMessage" name="message" class="form-control"
+              placeholder="Tell us about your event, venue, style preferences..."></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn-primary" id="bookSubmitBtn" style="width:100%;">Book Now</button>
+          </div>
+          <div id="bookFormMessage" class="form-message"></div>
+        </form>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const categorySelect = document.getElementById('bookCategory');
+          const vibeGroup = document.getElementById('vibeGroup');
+          const vibeSelect = document.getElementById('bookVibe');
+          const packageWrapper = document.getElementById('packageWrapper');
+          const packageSelect = document.getElementById('bookPackage');
+
+          const packagesByCategory = {
+            'wedding': [
+              { value: 'silver', text: 'Silver' },
+              { value: 'gold', text: 'Gold' },
+              { value: 'platinum', text: 'Platinum' }
+            ],
+            'pre-wedding': [
+              { value: 'basic', text: 'Basic' },
+              { value: 'signature', text: 'Signature' },
+              { value: 'destination', text: 'Destination' }
+            ],
+            'corporate': [
+              { value: 'starter', text: 'Starter Corporate' },
+              { value: 'business', text: 'Business Corporate' },
+              { value: 'enterprise', text: 'Enterprise Corporate' },
+              { value: 'half-day', text: 'Half Day Event' },
+              { value: 'full-event', text: 'Full Event Coverage' },
+              { value: 'grand-event', text: 'Grand Event Coverage' }
+            ],
+            'product': [
+              { value: 'starter', text: 'Starter Package' },
+              { value: 'catalogue', text: 'Catalogue Package' },
+              { value: 'brand-story', text: 'Brand Story' }
+            ]
+          };
+
+          const updatePackageOptions = () => {
+            const cat = categorySelect.value;
+            if (cat && packagesByCategory[cat]) {
+              packageSelect.innerHTML = '';
+              const defaultOption = document.createElement('option');
+              defaultOption.value = '';
+              defaultOption.textContent = 'Select a package...';
+              packageSelect.appendChild(defaultOption);
+
+              packagesByCategory[cat].forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.value;
+                opt.textContent = p.text;
+                packageSelect.appendChild(opt);
+              });
+              packageWrapper.style.display = 'block';
+            } else {
+              packageWrapper.style.display = 'none';
+              packageSelect.innerHTML = '<option value="">Select a package...</option>';
+            }
+          };
+
+          // Dynamic drone checkbox label change
+          const droneCheckbox = document.getElementById('bookDrone');
+          const droneLabelText = document.getElementById('droneLabelText');
+          if (droneCheckbox && droneLabelText) {
+            droneCheckbox.addEventListener('change', () => {
+              droneLabelText.textContent = droneCheckbox.checked ? 'Drone Coverage: Yes' : 'Drone Coverage: No';
+            });
+          }
+
+          // Show/Hide vibe & package dropdown based on category selection
+          categorySelect.addEventListener('change', (e) => {
+            updatePackageOptions();
+            if (e.target.value === 'pre-wedding') {
+              vibeGroup.style.display = 'block';
+            } else {
+              vibeGroup.style.display = 'none';
+              vibeSelect.value = ''; // reset
+            }
+          });
+
+          // Auto-select based on URL parameters
+          const urlParams = new URLSearchParams(window.location.search);
+          const serviceParam = urlParams.get('service');
+          const vibeParam = urlParams.get('vibe');
+          const droneParam = urlParams.get('drone');
+          const packageParam = urlParams.get('package');
+
+          if (serviceParam) {
+            const optionExists = Array.from(categorySelect.options).some(opt => opt.value === serviceParam);
+            if (optionExists) {
+              categorySelect.value = serviceParam;
+            }
+
+            // Populate package dropdown
+            updatePackageOptions();
+
+            // Set package selection if valid
+            if (packageParam) {
+              const pkgExists = Array.from(packageSelect.options).some(opt => opt.value === packageParam);
+              if (pkgExists) {
+                packageSelect.value = packageParam;
+              }
+            }
+
+            if (serviceParam === 'pre-wedding') {
+              vibeGroup.style.display = 'block';
+              if (vibeParam) {
+                vibeSelect.value = vibeParam;
+              }
+            }
+          } else {
+            // Initial call to hide wrapper
+            updatePackageOptions();
+          }
+
+          if (droneParam === 'yes' && droneCheckbox && droneLabelText) {
+            droneCheckbox.checked = true;
+            droneLabelText.textContent = 'Drone Coverage: Yes';
+          }
+
+          // Form validation and static submission simulation
+          const bookingForm = document.getElementById('bookingForm');
+          const formMessage = document.getElementById('bookFormMessage');
+          const submitBtn = document.getElementById('bookSubmitBtn');
+
+          const requiredFields = [
+            {
+              input: document.getElementById('bookName'),
+              error: document.getElementById('bookNameError'),
+              message: 'Please enter your name.'
+            },
+            {
+              input: document.getElementById('bookEmail'),
+              error: document.getElementById('bookEmailError'),
+              message: 'Please enter a valid email address.'
+            },
+            {
+              input: document.getElementById('bookPhone'),
+              error: document.getElementById('bookPhoneError'),
+              message: 'Please enter your phone number.'
+            },
+            {
+              input: categorySelect,
+              error: document.getElementById('bookCategoryError'),
+              message: 'Please select a category.'
+            },
+            {
+              input: document.getElementById('bookDate'),
+              error: document.getElementById('bookDateError'),
+              message: 'Please select an event date.',
+              customValidate: (val) => {
+                const errorEl = document.getElementById('bookDateError');
+                if (!val) {
+                  if (errorEl) errorEl.textContent = 'Please select an event date.';
+                  return false;
+                }
+                const fullyBookedDates = ['2026-06-15', '2026-07-01', '2026-12-25'];
+                if (fullyBookedDates.includes(val)) {
+                  if (errorEl) errorEl.textContent = 'This date is fully booked (max 2 bookings per day). Please choose another date.';
+                  return false;
+                }
+                return true;
+              }
+            },
+            {
+              input: document.getElementById('bookCity'),
+              error: document.getElementById('bookCityError'),
+              message: 'Please enter the event city.'
+            }
+          ];
+
+          const clearValidation = () => {
+            requiredFields.forEach(({ input, error }) => {
+              if (input) input.classList.remove('error');
+              if (input) input.setAttribute('aria-invalid', 'false');
+              if (error) error.textContent = '';
+            });
+            if (formMessage) formMessage.className = 'form-message';
+            if (formMessage) formMessage.textContent = '';
+          };
+
+          const validateField = (field) => {
+            const { input, error, message, customValidate } = field;
+            if (!input) return true;
+            const value = input.value.trim();
+            let isValid = Boolean(value);
+
+            if (input.type === 'email' && value) {
+              isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            }
+
+            if (customValidate) {
+              isValid = customValidate(value);
+            }
+
+            if (!isValid) {
+              input.classList.add('error');
+              input.setAttribute('aria-invalid', 'true');
+              if (error && !error.textContent) error.textContent = message;
+              return false;
+            }
+
+            input.classList.remove('error');
+            input.setAttribute('aria-invalid', 'false');
+            if (error) error.textContent = '';
+            return true;
+          };
+
+          requiredFields.forEach((field) => {
+            const { input, error } = field;
+            if (!input) return;
+            input.addEventListener('input', () => {
+              if (error && error.textContent) {
+                validateField(field);
+              }
+              if (formMessage && formMessage.classList.contains('error')) {
+                formMessage.className = 'form-message';
+                formMessage.textContent = '';
+              }
+            });
+            input.addEventListener('blur', () => validateField(field));
+            if (input.tagName === 'SELECT' || input.type === 'date') {
+              input.addEventListener('change', () => validateField(field));
+            }
+          });
+
+          bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            clearValidation();
+
+            const invalidFields = requiredFields.filter(field => !validateField(field));
+            if (invalidFields.length > 0) {
+              if (formMessage) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Please fill in the required fields before submitting.';
+              }
+              invalidFields[0].input?.focus();
+              return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const droneCheckbox = document.getElementById('bookDrone');
+
+            // Collect form data
+            const formData = {
+              name: document.getElementById('bookName').value,
+              email: document.getElementById('bookEmail').value,
+              phone: document.getElementById('bookPhone').value,
+              eventDate: document.getElementById('bookDate').value,
+              eventCity: document.getElementById('bookCity').value,
+              category: categorySelect.value,
+              package: packageSelect.value,
+              vibe: vibeSelect.value,
+              drone: droneCheckbox ? (droneCheckbox.checked ? 'Yes' : 'No') : 'No',
+              budget: document.getElementById('bookBudget').value,
+              message: document.getElementById('bookMessage').value
+            };
+
+            console.log('[YRMP] Booking Submitted:', formData);
+
+            setTimeout(() => {
+              if (formMessage) {
+                formMessage.className = 'form-message success';
+                formMessage.textContent = '✓ Booking request submitted successfully! We\'ll get in touch with you shortly.';
+              }
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Book Now';
+              bookingForm.reset();
+              if (droneLabelText) {
+                droneLabelText.textContent = 'Drone Coverage: No';
+              }
+              updatePackageOptions();
+              vibeGroup.style.display = 'none';
+              clearValidation();
+            }, 1200);
+          });
+        });
+      </script>
+
+    </div>
+  </section>
+
+  <script src="../js/footer.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/animations.js"></script>
+</body>
+
+</html>

@@ -230,9 +230,9 @@
 }
 
 .team-card span {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   letter-spacing: 0.2em;
-  color: var(--gold);
+  color: var(--gold-dark);
   text-transform: uppercase;
 }
 

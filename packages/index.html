@@ -21,7 +21,8 @@
 <body class="white-theme">
   <div id="loader" class="loader">
     <div class="loader-inner">
-      <div class="loader-logo"><img src="../Staticdata/images/Logo-removebg-preview.png" alt="Yash Raj" style="height: 60px; border-radius: 4px; margin: 0 auto;"></div>
+      <div class="loader-logo"><img src="../Staticdata/images/Logo-removebg-preview.png" alt="Yash Raj"
+          style="height: 60px; border-radius: 4px; margin: 0 auto;"></div>
       <div class="loader-bar"><span></span></div>
     </div>
   </div>
@@ -37,10 +38,11 @@
 
   <section class="page-hero" id="pageHero">
     <div class="page-hero-bg"
-      style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=50&fm=webp')"></div>
+      style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=50&fm=webp')">
+    </div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
-      <span class="section-label">Transparent Pricing</span>
+      <!-- <span class="section-label">Transparent Pricing</span> -->
       <h1>Packages &amp; Pricing</h1>
       <p class="breadcrumb"><a href="../">Home</a> / Packages</p>
     </div>
@@ -94,45 +96,69 @@
       <!-- WEDDING PANEL -->
       <div class="pkg-panel active" id="pkg-wedding">
         <div class="packages-grid">
-          <div class="package-card reveal-up" id="pkgWed1">
-            <div class="package-name">Silver</div>
-            <div class="package-price">₹75,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>1 Lead Photographer</li>
-              <li>8 Hours Coverage</li>
-              <li>300+ Edited Photos</li>
-              <li>Online Gallery</li>
-              <li>Standard Retouch</li>
-            </ul><a href="../book-now/index.html?service=wedding&package=silver" class="btn-outline"
-              id="pkgWed1Btn">Book Now</a>
+          <!-- Silver Package -->
+          <div class="package-card flip-container reveal-up" id="pkgWed1">
+            <div class="flip-inner">
+              <div class="flip-front silver">
+                <div class="package-name">Silver</div>
+                <div class="package-price">₹75,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #c0c0c0; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back silver">
+                <ul class="package-features">
+                  <li>1 Lead Photographer</li>
+                  <li>8 Hours Coverage</li>
+                  <li>300+ Edited Photos</li>
+                  <li>Online Gallery</li>
+                  <li>Standard Retouch</li>
+                </ul>
+                <a href="../book-now/index.html?service=wedding&package=silver" class="btn-outline" id="pkgWed1Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card featured reveal-up delay-1" id="pkgWed2">
-            <div class="package-badge">Most Popular</div>
-            <div class="package-name">Gold</div>
-            <div class="package-price">₹1,50,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>2 Lead Photographers</li>
-              <li>Full Day (14h)</li>
-              <li>600+ Edited Photos</li>
-              <li>Drone Aerial Shots</li>
-              <li>Highlight Reel (5 min)</li>
-              <li>Karizma Album</li>
-            </ul><a href="../book-now/index.html?service=wedding&package=gold" class="btn-primary" id="pkgWed2Btn">Book
-              Now</a>
+          <!-- Gold Package -->
+          <div class="package-card featured flip-container reveal-up delay-1" id="pkgWed2">
+            <div class="flip-inner">
+              <div class="flip-front gold">
+                <div class="package-badge" style="z-index: 10;">Most Popular</div>
+                <div class="package-name">Gold</div>
+                <div class="package-price">₹1,50,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back gold">
+                <ul class="package-features">
+                  <li>2 Lead Photographers</li>
+                  <li>Full Day (14h)</li>
+                  <li>600+ Edited Photos</li>
+                  <li>Drone Aerial Shots</li>
+                  <li>Highlight Reel (5 min)</li>
+                  <li>Karizma Album</li>
+                </ul>
+                <a href="../book-now/index.html?service=wedding&package=gold" class="btn-primary" id="pkgWed2Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card reveal-up delay-2" id="pkgWed3">
-            <div class="package-name">Platinum</div>
-            <div class="package-price">₹2,75,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>Full Photo + Video Team</li>
-              <li>Multi-day Coverage</li>
-              <li>1000+ Edited Photos</li>
-              <li>Cinematic Film (20 min)</li>
-              <li>Drone + Gimbal Shots</li>
-              <li>Premium Album + Prints</li>
-              <li>Same-Day Edit Teaser</li>
-            </ul><a href="../book-now/index.html?service=wedding&package=platinum" class="btn-outline"
-              id="pkgWed3Btn">Book Now</a>
+          <!-- Platinum Package -->
+          <div class="package-card flip-container reveal-up delay-2" id="pkgWed3">
+            <div class="flip-inner">
+              <div class="flip-front platinum">
+                <div class="package-name">Platinum</div>
+                <div class="package-price">₹2,75,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #e5e4e2; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back platinum">
+                <ul class="package-features">
+                  <li>Full Photo + Video Team</li>
+                  <li>Multi-day Coverage</li>
+                  <li>1000+ Edited Photos</li>
+                  <li>Cinematic Film (20 min)</li>
+                  <li>Drone + Gimbal Shots</li>
+                  <li>Premium Album + Prints</li>
+                  <li>Same-Day Edit Teaser</li>
+                </ul>
+                <a href="../book-now/index.html?service=wedding&package=platinum" class="btn-outline" id="pkgWed3Btn">Book Now</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -140,44 +166,68 @@
       <!-- PRE-WEDDING PANEL -->
       <div class="pkg-panel" id="pkg-prewedding">
         <div class="packages-grid">
-          <div class="package-card reveal-up" id="pkgPW1">
-            <div class="package-name">Basic</div>
-            <div class="package-price">₹25,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>1 Photographer</li>
-              <li>3 Hours Session</li>
-              <li>100+ Edited Photos</li>
-              <li>1 Outfit Change</li>
-              <li>Online Gallery</li>
-            </ul><a href="../book-now/index.html?service=pre-wedding&package=basic" class="btn-outline"
-              id="pkgPW1Btn">Book Now</a>
+          <!-- Basic Package -->
+          <div class="package-card flip-container reveal-up" id="pkgPW1">
+            <div class="flip-inner">
+              <div class="flip-front silver">
+                <div class="package-name">Basic</div>
+                <div class="package-price">₹25,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #c0c0c0; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back silver">
+                <ul class="package-features">
+                  <li>1 Photographer</li>
+                  <li>3 Hours Session</li>
+                  <li>100+ Edited Photos</li>
+                  <li>1 Outfit Change</li>
+                  <li>Online Gallery</li>
+                </ul>
+                <a href="../book-now/index.html?service=pre-wedding&package=basic" class="btn-outline" id="pkgPW1Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card featured reveal-up delay-1" id="pkgPW2">
-            <div class="package-badge">Best Value</div>
-            <div class="package-name">Signature</div>
-            <div class="package-price">₹45,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>2 Photographers</li>
-              <li>Full Day Session (8h)</li>
-              <li>300+ Edited Photos</li>
-              <li>3 Outfit Changes</li>
-              <li>Drone Shots</li>
-              <li>Short Video Reel</li>
-            </ul><a href="../book-now/index.html?service=pre-wedding&package=signature" class="btn-primary"
-              id="pkgPW2Btn">Book Now</a>
+          <!-- Signature Package -->
+          <div class="package-card featured flip-container reveal-up delay-1" id="pkgPW2">
+            <div class="flip-inner">
+              <div class="flip-front gold">
+                <div class="package-badge" style="z-index: 10;">Best Value</div>
+                <div class="package-name">Signature</div>
+                <div class="package-price">₹45,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back gold">
+                <ul class="package-features">
+                  <li>2 Photographers</li>
+                  <li>Full Day Session (8h)</li>
+                  <li>300+ Edited Photos</li>
+                  <li>3 Outfit Changes</li>
+                  <li>Drone Shots</li>
+                  <li>Short Video Reel</li>
+                </ul>
+                <a href="../book-now/index.html?service=pre-wedding&package=signature" class="btn-primary" id="pkgPW2Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card reveal-up delay-2" id="pkgPW3">
-            <div class="package-name">Destination</div>
-            <div class="package-price">₹75,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>2 Photographers + 1 Videographer</li>
-              <li>2-Day Shoot</li>
-              <li>500+ Edited Photos</li>
-              <li>Cinematic Pre-Wedding Film</li>
-              <li>Drone Aerial Coverage</li>
-              <li>Location: Rann / Udaipur / Goa</li>
-            </ul><a href="../book-now/index.html?service=pre-wedding&package=destination" class="btn-outline"
-              id="pkgPW3Btn">Book Now</a>
+          <!-- Destination Package -->
+          <div class="package-card flip-container reveal-up delay-2" id="pkgPW3">
+            <div class="flip-inner">
+              <div class="flip-front platinum">
+                <div class="package-name">Destination</div>
+                <div class="package-price">₹75,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #e5e4e2; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back platinum">
+                <ul class="package-features">
+                  <li>2 Photographers + 1 Videographer</li>
+                  <li>2-Day Shoot</li>
+                  <li>500+ Edited Photos</li>
+                  <li>Cinematic Pre-Wedding Film</li>
+                  <li>Drone Aerial Coverage</li>
+                  <li>Location: Rann / Udaipur / Goa</li>
+                </ul>
+                <a href="../book-now/index.html?service=pre-wedding&package=destination" class="btn-outline" id="pkgPW3Btn">Book Now</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -185,41 +235,65 @@
       <!-- CORPORATE PANEL -->
       <div class="pkg-panel" id="pkg-corporate">
         <div class="packages-grid">
-          <div class="package-card reveal-up" id="pkgCorp1">
-            <div class="package-name">Starter</div>
-            <div class="package-price">₹15,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>1 Photographer</li>
-              <li>4 Hours Coverage</li>
-              <li>100+ Edited Photos</li>
-              <li>Online Gallery</li>
-            </ul><a href="../book-now/index.html?service=corporate&package=starter" class="btn-outline"
-              id="pkgCorp1Btn">Book Now</a>
+          <!-- Starter Package -->
+          <div class="package-card flip-container reveal-up" id="pkgCorp1">
+            <div class="flip-inner">
+              <div class="flip-front silver">
+                <div class="package-name">Starter</div>
+                <div class="package-price">₹15,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #c0c0c0; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back silver">
+                <ul class="package-features">
+                  <li>1 Photographer</li>
+                  <li>4 Hours Coverage</li>
+                  <li>100+ Edited Photos</li>
+                  <li>Online Gallery</li>
+                </ul>
+                <a href="../book-now/index.html?service=corporate&package=starter" class="btn-outline" id="pkgCorp1Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card featured reveal-up delay-1" id="pkgCorp2">
-            <div class="package-badge">Popular</div>
-            <div class="package-name">Business</div>
-            <div class="package-price">₹35,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>2 Photographers</li>
-              <li>Full Day (8h)</li>
-              <li>300+ Photos + Video</li>
-              <li>Corporate Headshots</li>
-              <li>Brand Video (5 min)</li>
-            </ul><a href="../book-now/index.html?service=corporate&package=business" class="btn-primary"
-              id="pkgCorp2Btn">Book Now</a>
+          <!-- Business Package -->
+          <div class="package-card featured flip-container reveal-up delay-1" id="pkgCorp2">
+            <div class="flip-inner">
+              <div class="flip-front gold">
+                <div class="package-badge" style="z-index: 10;">Popular</div>
+                <div class="package-name">Business</div>
+                <div class="package-price">₹35,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back gold">
+                <ul class="package-features">
+                  <li>2 Photographers</li>
+                  <li>Full Day (8h)</li>
+                  <li>300+ Photos + Video</li>
+                  <li>Corporate Headshots</li>
+                  <li>Brand Video (5 min)</li>
+                </ul>
+                <a href="../book-now/index.html?service=corporate&package=business" class="btn-primary" id="pkgCorp2Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card reveal-up delay-2" id="pkgCorp3">
-            <div class="package-name">Enterprise</div>
-            <div class="package-price">Custom</div>
-            <ul class="package-features">
-              <li>Dedicated Team</li>
-              <li>Multi-day AMC</li>
-              <li>Video + Photo</li>
-              <li>Drone if required</li>
-              <li>Priority turnaround</li>
-            </ul><a href="../book-now/index.html?service=corporate&package=enterprise" class="btn-outline"
-              id="pkgCorp3Btn">Book Now</a>
+          <!-- Enterprise Package -->
+          <div class="package-card flip-container reveal-up delay-2" id="pkgCorp3">
+            <div class="flip-inner">
+              <div class="flip-front platinum">
+                <div class="package-name">Enterprise</div>
+                <div class="package-price">Custom</div>
+                <p style="margin-top: 2rem; color: #e5e4e2; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back platinum">
+                <ul class="package-features">
+                  <li>Dedicated Team</li>
+                  <li>Multi-day AMC</li>
+                  <li>Video + Photo</li>
+                  <li>Drone if required</li>
+                  <li>Priority turnaround</li>
+                </ul>
+                <a href="../book-now/index.html?service=corporate&package=enterprise" class="btn-outline" id="pkgCorp3Btn">Book Now</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -227,42 +301,66 @@
       <!-- EVENTS PANEL -->
       <div class="pkg-panel" id="pkg-events">
         <div class="packages-grid">
-          <div class="package-card reveal-up" id="pkgEv1">
-            <div class="package-name">Half Day</div>
-            <div class="package-price">₹12,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>1 Photographer</li>
-              <li>4 Hours</li>
-              <li>150+ Photos</li>
-              <li>Basic Editing</li>
-            </ul><a href="../book-now/index.html?service=corporate&package=half-day" class="btn-outline"
-              id="pkgEv1Btn">Book Now</a>
+          <!-- Half Day Package -->
+          <div class="package-card flip-container reveal-up" id="pkgEv1">
+            <div class="flip-inner">
+              <div class="flip-front silver">
+                <div class="package-name">Half Day</div>
+                <div class="package-price">₹12,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #c0c0c0; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back silver">
+                <ul class="package-features">
+                  <li>1 Photographer</li>
+                  <li>4 Hours</li>
+                  <li>150+ Photos</li>
+                  <li>Basic Editing</li>
+                </ul>
+                <a href="../book-now/index.html?service=corporate&package=half-day" class="btn-outline" id="pkgEv1Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card featured reveal-up delay-1" id="pkgEv2">
-            <div class="package-badge">Most Booked</div>
-            <div class="package-name">Full Event</div>
-            <div class="package-price">₹25,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>2 Photographers</li>
-              <li>8 Hours</li>
-              <li>400+ Photos</li>
-              <li>Video Coverage</li>
-              <li>Edited Highlights</li>
-            </ul><a href="../book-now/index.html?service=corporate&package=full-event" class="btn-primary"
-              id="pkgEv2Btn">Book Now</a>
+          <!-- Full Event Package -->
+          <div class="package-card featured flip-container reveal-up delay-1" id="pkgEv2">
+            <div class="flip-inner">
+              <div class="flip-front gold">
+                <div class="package-badge" style="z-index: 10;">Most Booked</div>
+                <div class="package-name">Full Event</div>
+                <div class="package-price">₹25,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back gold">
+                <ul class="package-features">
+                  <li>2 Photographers</li>
+                  <li>8 Hours</li>
+                  <li>400+ Photos</li>
+                  <li>Video Coverage</li>
+                  <li>Edited Highlights</li>
+                </ul>
+                <a href="../book-now/index.html?service=corporate&package=full-event" class="btn-primary" id="pkgEv2Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card reveal-up delay-2" id="pkgEv3">
-            <div class="package-name">Grand Event</div>
-            <div class="package-price">₹50,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>3+ Person Team</li>
-              <li>Multi-day Coverage</li>
-              <li>600+ Photos + Video</li>
-              <li>Drone Aerial</li>
-              <li>Live Streaming</li>
-              <li>Same-Day Highlights</li>
-            </ul><a href="../book-now/index.html?service=corporate&package=grand-event" class="btn-outline"
-              id="pkgEv3Btn">Book Now</a>
+          <!-- Grand Event Package -->
+          <div class="package-card flip-container reveal-up delay-2" id="pkgEv3">
+            <div class="flip-inner">
+              <div class="flip-front platinum">
+                <div class="package-name">Grand Event</div>
+                <div class="package-price">₹50,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #e5e4e2; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back platinum">
+                <ul class="package-features">
+                  <li>3+ Person Team</li>
+                  <li>Multi-day Coverage</li>
+                  <li>600+ Photos + Video</li>
+                  <li>Drone Aerial</li>
+                  <li>Live Streaming</li>
+                  <li>Same-Day Highlights</li>
+                </ul>
+                <a href="../book-now/index.html?service=corporate&package=grand-event" class="btn-outline" id="pkgEv3Btn">Book Now</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -270,41 +368,65 @@
       <!-- PRODUCT PANEL -->
       <div class="pkg-panel" id="pkg-product">
         <div class="packages-grid">
-          <div class="package-card reveal-up" id="pkgProd1">
-            <div class="package-name">Starter</div>
-            <div class="package-price">₹8,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>Up to 20 Products</li>
-              <li>White Background</li>
-              <li>Basic Retouching</li>
-              <li>Web-Ready JPEGs</li>
-            </ul><a href="../book-now/index.html?service=product&package=starter" class="btn-outline"
-              id="pkgProd1Btn">Book Now</a>
+          <!-- Starter Package -->
+          <div class="package-card flip-container reveal-up" id="pkgProd1">
+            <div class="flip-inner">
+              <div class="flip-front silver">
+                <div class="package-name">Starter</div>
+                <div class="package-price">₹8,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: #c0c0c0; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back silver">
+                <ul class="package-features">
+                  <li>Up to 20 Products</li>
+                  <li>White Background</li>
+                  <li>Basic Retouching</li>
+                  <li>Web-Ready JPEGs</li>
+                </ul>
+                <a href="../book-now/index.html?service=product&package=starter" class="btn-outline" id="pkgProd1Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card featured reveal-up delay-1" id="pkgProd2">
-            <div class="package-badge">Best Seller</div>
-            <div class="package-name">Catalogue</div>
-            <div class="package-price">₹20,000<span> onwards</span></div>
-            <ul class="package-features">
-              <li>Up to 60 Products</li>
-              <li>White + Lifestyle Shots</li>
-              <li>Professional Retouching</li>
-              <li>High-Res + Web Files</li>
-              <li>2-Day Delivery</li>
-            </ul><a href="../book-now/index.html?service=product&package=catalogue" class="btn-primary"
-              id="pkgProd2Btn">Book Now</a>
+          <!-- Catalogue Package -->
+          <div class="package-card featured flip-container reveal-up delay-1" id="pkgProd2">
+            <div class="flip-inner">
+              <div class="flip-front gold">
+                <div class="package-badge" style="z-index: 10;">Best Seller</div>
+                <div class="package-name">Catalogue</div>
+                <div class="package-price">₹20,000<span> onwards</span></div>
+                <p style="margin-top: 2rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back gold">
+                <ul class="package-features">
+                  <li>Up to 60 Products</li>
+                  <li>White + Lifestyle Shots</li>
+                  <li>Professional Retouching</li>
+                  <li>High-Res + Web Files</li>
+                  <li>2-Day Delivery</li>
+                </ul>
+                <a href="../book-now/index.html?service=product&package=catalogue" class="btn-primary" id="pkgProd2Btn">Book Now</a>
+              </div>
+            </div>
           </div>
-          <div class="package-card reveal-up delay-2" id="pkgProd3">
-            <div class="package-name">Brand Story</div>
-            <div class="package-price">Custom</div>
-            <ul class="package-features">
-              <li>Unlimited Products</li>
-              <li>Lifestyle + Video</li>
-              <li>Instagram Reels</li>
-              <li>Full Brand Kit</li>
-              <li>AMC Available</li>
-            </ul><a href="../book-now/index.html?service=product&package=brand-story" class="btn-outline"
-              id="pkgProd3Btn">Book Now</a>
+          <!-- Brand Story Package -->
+          <div class="package-card flip-container reveal-up delay-2" id="pkgProd3">
+            <div class="flip-inner">
+              <div class="flip-front platinum">
+                <div class="package-name">Brand Story</div>
+                <div class="package-price">Custom</div>
+                <p style="margin-top: 2rem; color: #e5e4e2; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; opacity: 0.8; font-family: var(--font-sans);">Hover to Reveal Features</p>
+              </div>
+              <div class="flip-back platinum">
+                <ul class="package-features">
+                  <li>Unlimited Products</li>
+                  <li>Lifestyle + Video</li>
+                  <li>Instagram Reels</li>
+                  <li>Full Brand Kit</li>
+                  <li>AMC Available</li>
+                </ul>
+                <a href="../book-now/index.html?service=product&package=brand-story" class="btn-outline" id="pkgProd3Btn">Book Now</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

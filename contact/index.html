@@ -16,10 +16,10 @@
   <link rel="stylesheet" href="../css/pages.css" />
   <link rel="stylesheet" href="../css/animations.css" />
   <style>
-    /* Premium Luxury Dark Theme Contact Page Custom Styles */
+    /* Premium White Theme Contact Page Styles */
     .contact-page {
       position: relative;
-      background: #ffffff;
+      background: var(--light);
       padding: 100px 0;
     }
 
@@ -33,39 +33,34 @@
     .contact-grid {
       display: grid;
       grid-template-columns: 0.82fr 1.18fr;
-      /* 41% vs 59% approx */
       gap: 4rem;
       align-items: stretch;
     }
 
     /* Left Side - Contact Info Card */
     .contact-info {
-      background: #1E1A17;
-      /* Lighter dark luxury shade */
+      background: var(--light-2);
       padding: 4.5rem 3.5rem;
       border-radius: 8px;
-      /* Consistent border radius */
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-      /* Soft shadows for depth */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border: 1px solid rgba(200, 160, 106, 0.15);
-      /* Gold border accent */
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(153, 120, 82, 0.1);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .contact-info:hover {
-      border-color: rgba(200, 160, 106, 0.35);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      border-color: var(--gold-dark);
+      box-shadow: 0 20px 45px rgba(204, 166, 119, 0.15);
+      transform: translateY(-4px);
     }
 
     .contact-info .section-label {
       font-size: 0.75rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #C8A06A;
-      /* Gold tone label */
+      color: var(--gold-dark);
       font-weight: 600;
       margin-bottom: 1.2rem;
       display: inline-block;
@@ -75,16 +70,14 @@
       font-family: var(--font-serif);
       font-size: 2.2rem;
       line-height: 1.35;
-      color: #FFFFFF;
-      /* White heading */
+      color: var(--dark);
       margin-bottom: 1.5rem;
       font-weight: 500;
       letter-spacing: 0.01em;
     }
 
     .contact-info p {
-      color: rgba(255, 255, 255, 0.75);
-      /* Secondary text color */
+      color: var(--dark-3);
       line-height: 1.8;
       font-size: 0.95rem;
       margin-bottom: 3rem;
@@ -105,45 +98,42 @@
 
     .contact-item-new:hover {
       transform: translateX(6px);
-      /* Subtle hover translate effect */
     }
 
     .contact-icon-new {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(200, 160, 106, 0.08);
+      background: rgba(204, 166, 119, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      color: #C8A06A;
-      /* Gold tone icon */
+      color: var(--gold-dark);
       flex-shrink: 0;
-      border: 1px solid rgba(200, 160, 106, 0.25);
+      border: 1px solid rgba(204, 166, 119, 0.2);
       transition: all 0.3s ease;
     }
 
     .contact-item-new:hover .contact-icon-new {
-      background: #C8A06A;
-      color: #1E1A17;
-      box-shadow: 0 0 15px rgba(200, 160, 106, 0.4);
+      background: var(--gold-dark);
+      color: var(--light-2);
+      box-shadow: 0 0 15px rgba(153, 120, 82, 0.3);
+      border-color: var(--gold-dark);
     }
 
     .contact-details h4 {
       font-size: 0.72rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      /* Secondary text */
+      color: var(--dark-3);
       margin-bottom: 0.4rem;
       font-weight: 600;
     }
 
     .contact-details p,
     .contact-details a {
-      color: #FFFFFF;
-      /* Primary text */
+      color: var(--dark);
       font-size: 1rem;
       line-height: 1.5;
       text-decoration: none;
@@ -151,26 +141,23 @@
     }
 
     .contact-details a:hover {
-      color: #C8A06A;
+      color: var(--gold-dark);
     }
 
     /* Right Side - Contact Form Card */
     .contact-form-container {
-      background: #13100E;
-      /* Darker luxury background */
+      background: var(--light-2);
       padding: 4.5rem 3.5rem;
       border-radius: 8px;
-      /* Consistent border radius */
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-      /* Soft shadows for depth */
-      border: 1px solid rgba(200, 160, 106, 0.15);
-      /* Gold border accent */
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(153, 120, 82, 0.1);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     .contact-form-container:hover {
-      border-color: rgba(200, 160, 106, 0.35);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      border-color: var(--gold-dark);
+      box-shadow: 0 20px 45px rgba(204, 166, 119, 0.15);
+      transform: translateY(-4px);
     }
 
     .form-header-new {
@@ -181,8 +168,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #C8A06A;
-      /* Gold section label */
+      color: var(--gold-dark);
       font-weight: 600;
       display: block;
       margin-bottom: 0.5rem;
@@ -191,8 +177,7 @@
     .form-header-new h2 {
       font-family: var(--font-serif);
       font-size: 2.5rem;
-      color: #FFFFFF;
-      /* Large white contact us heading */
+      color: var(--dark);
       margin: 0;
       font-weight: 500;
     }
@@ -207,20 +192,16 @@
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.65);
-      /* Secondary text */
+      color: var(--dark-3);
       margin-bottom: 0.75rem;
       font-weight: 500;
     }
 
     .contact-form-container .form-control {
       width: 100%;
-      background: #13100E;
-      /* Dark input background matching card */
-      border: 1px solid rgba(200, 160, 106, 0.15);
-      /* Thin gold border */
-      color: #FFFFFF;
-      /* Primary text */
+      background: var(--white);
+      border: 1px solid rgba(153, 120, 82, 0.2);
+      color: var(--dark);
       padding: 1.1rem 1.25rem;
       font-family: var(--font-sans);
       font-size: 0.95rem;
@@ -230,46 +211,42 @@
     }
 
     .contact-form-container .form-control:focus {
-      border-color: #C8A06A;
-      /* Bright gold on focus */
-      background: rgba(255, 255, 255, 0.02);
-      box-shadow: 0 0 10px rgba(200, 160, 106, 0.15);
-      /* Soft gold glow */
+      border-color: var(--gold-dark);
+      background: var(--white);
+      box-shadow: 0 0 10px rgba(153, 120, 82, 0.1);
     }
 
     .contact-form-container .form-control::placeholder {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(18, 16, 14, 0.45);
     }
 
     .contact-form-container .form-select option {
-      background: #13100E;
-      color: #FFFFFF;
+      background: var(--white);
+      color: var(--dark);
     }
 
     .contact-form-container .field-error {
       min-height: 1rem;
       margin-top: 0.4rem;
       font-size: 0.8rem;
-      color: #fca5a5;
+      color: #dc2626;
     }
 
     .contact-form-container .form-control.error {
-      border-color: #dc3232;
-      box-shadow: 0 0 0 1px rgba(220, 50, 50, 0.15);
+      border-color: #dc2626;
+      box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.15);
     }
 
     .contact-form-container .form-control.error:focus {
-      border-color: #dc3232;
-      box-shadow: 0 0 10px rgba(220, 50, 50, 0.25);
+      border-color: #dc2626;
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.25);
     }
 
-    /* Gold Button Black Text styling */
+    /* Premium Button styling */
     .contact-form-container .btn-primary {
-      background: #C8A06A;
-      /* Gold background */
-      color: #13100E;
-      /* Dark text */
-      border: 1px solid #C8A06A;
+      background: var(--gold);
+      color: var(--dark);
+      border: 1px solid var(--gold);
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -281,12 +258,13 @@
       width: 100%;
     }
 
+    .white-theme .contact-form-container .btn-primary:hover,
     .contact-form-container .btn-primary:hover {
-      background: transparent;
-      color: #C8A06A;
-      border-color: #C8A06A;
+      background: var(--gold-dark) !important;
+      color: var(--white) !important;
+      border-color: var(--gold-dark) !important;
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(200, 160, 106, 0.15);
+      box-shadow: 0 10px 20px rgba(153, 120, 82, 0.2) !important;
     }
 
     /* Responsive overrides */
@@ -317,7 +295,7 @@
   </style>
 </head>
 
-<body>
+<body class="white-theme">
 
   <div id="loader" class="loader">
     <div class="loader-inner">
@@ -344,7 +322,6 @@
       style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1920&q=80')"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
-      <span class="section-label">Get in Touch</span>
       <h1>Contact Us</h1>
       <p class="breadcrumb"><a href="../">Home</a> / Contact</p>
     </div>
@@ -359,8 +336,8 @@
         <div class="contact-info reveal-left">
           <span class="section-label">Reach Out</span>
           <h3>Let's Create Something<br />Beautiful Together</h3>
-          <p>Fill out the form and we'll get back to you within a few hours. For a faster response, WhatsApp us
-            directly!</p>
+          <!-- <p>Fill out the form and we'll get back to you within a few hours. For a faster response, WhatsApp us
+            directly!</p> -->
 
           <div class="contact-list">
             <div class="contact-item-new">
@@ -479,7 +456,7 @@
   </section>
 
   <!-- GOOGLE MAP -->
-  <section style="background:var(--dark-2); padding:0;" id="mapSection">
+  <section style="background:var(--light-2); padding:0;" id="mapSection">
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14689.012085932248!2d72.5046!3d23.0225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848abad45ebd%3A0xb7f8a2a71c2f3b4a!2sPrahladnagar%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000"
       width="100%" height="320" style="border:0; display:block;" allowfullscreen="" loading="lazy"

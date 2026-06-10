@@ -42,12 +42,13 @@
         </ul>
       </div>
       <div class="footer-col">
-      <h4>Contact</h4>
-      <ul class="footer-contact">
-        <li>📍 Ahmedabad, Gujarat 380015</li>
-        <li>📞 <a href="tel:+919876543210">+91 98765 43210</a></li>
-        <li>✉️ <a href="mailto:info@yashrajmotionpicture.com">info@yashrajmotionpicture.com</a></li>
-      </ul>
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>📍 Ahmedabad, Gujarat 380015</li>
+          <li>📞 <a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li>✉️ <a href="mailto:info@yashrajmotionpicture.com">info@yashrajmotionpicture.com</a></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom" style="text-align: center;">
       <p style="text-align: center; margin: 0 auto;">© 2025 Yash Raj Motion Picture. All rights reserved.</p>

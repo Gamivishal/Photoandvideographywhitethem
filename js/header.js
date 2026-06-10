@@ -9,7 +9,7 @@
   const headerHTML = `
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="${root}" class="nav-logo"><span class="logo-light">Yash Raj</span><span class="logo-sub">Motion Picture</span></a>
+      <a href="${root}" class="nav-logo"><img src="${root}Staticdata/images/Logo-removebg-preview.png" alt="Yash Raj Motion Picture"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="${root}" class="nav-link">Home</a></li>
         <li><a href="${root}about/" class="nav-link">About</a></li>

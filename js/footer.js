@@ -8,7 +8,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">Yash Raj Motion Picture</div>
+        <div class="footer-logo"><img src="${root}Staticdata/images/Logo-removebg-preview.png" alt="Yash Raj Motion Picture"></div>
         <p>Capturing love stories across Gujarat and India.</p>
         <div class="social-links">
 

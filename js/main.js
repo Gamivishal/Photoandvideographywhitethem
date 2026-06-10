@@ -8,16 +8,17 @@ const loader = document.getElementById('loader');
 const hideLoader = () => {
   setTimeout(() => {
     if (loader) loader.classList.add('hidden');
-  }, 600);
+  }, 200);
 };
 
-if (document.readyState === 'complete') {
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
   hideLoader();
 } else {
+  document.addEventListener('DOMContentLoaded', hideLoader);
   window.addEventListener('load', hideLoader);
 }
 // Fallback in case load event gets missed
-setTimeout(hideLoader, 2000);
+setTimeout(hideLoader, 800);
 
 document.addEventListener('DOMContentLoaded', () => {
 

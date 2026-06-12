@@ -44,9 +44,9 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul class="footer-contact">
-          <li>📍 Ahmedabad, Gujarat 380015</li>
-          <li>📞 <a href="tel:+919876543210">+91 98765 43210</a></li>
-          <li>✉️ <a href="mailto:info@yashrajmotionpicture.com">info@yashrajmotionpicture.com</a></li>
+          <li><span class="contact-icon">📍</span><span class="contact-text">Ahmedabad, Gujarat 380015</span></li>
+          <li><span class="contact-icon">📞</span><span class="contact-text"><a href="tel:+919876543210">+91 98765 43210</a></span></li>
+          <li><span class="contact-icon">✉️</span><span class="contact-text"><a href="mailto:info@yashrajmotionpicture.com">info@yashrajmotionpicture.com</a></span></li>
         </ul>
       </div>
     </div>

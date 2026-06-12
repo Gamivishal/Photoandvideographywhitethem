@@ -1718,24 +1718,24 @@ ul {
    ============================================================ */
 .footer {
   background: #050505;
-  padding: 80px 0 0;
+  padding: 30px 0 0;
   border-top: 1px solid rgba(201, 169, 110, 0.1);
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .footer-logo {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   display: block;
 }
 
 .footer-logo img {
-  height: 200px;
+  height: 80px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -1746,7 +1746,7 @@ ul {
   color: #ffffff;
   font-size: 1.05rem;
   letter-spacing: 0.05em;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .social-links {
@@ -1758,6 +1758,7 @@ ul {
   width: 40px;
   height: 40px;
   border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1853,7 +1854,18 @@ ul {
   letter-spacing: 0.05em;
   line-height: 1.6;
   margin-bottom: 0.75rem;
-  white-space: nowrap;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.footer-contact .contact-icon {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+.footer-contact .contact-text {
+  word-break: break-word;
 }
 
 .footer-contact li a {
@@ -1867,12 +1879,12 @@ ul {
 }
 
 .footer-contact {
-  text-align: justify;
+  text-align: left;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   text-align: center;
 }
 
@@ -1918,7 +1930,7 @@ ul {
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
 
   .nav-links {
@@ -2089,8 +2101,13 @@ ul {
     grid-template-rows: auto;
   }
 
+  .footer {
+    padding: 20px 0 0;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 

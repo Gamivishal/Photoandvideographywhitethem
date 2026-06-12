@@ -900,6 +900,15 @@
               <textarea id="bookMessage" name="message" class="form-control"
                 placeholder="Tell us about your event, venue, style preferences..."></textarea>
             </div>
+            <!-- Dynamic Price Estimator Widget -->
+            <div class="price-estimator-widget" id="priceEstimatorWidget" style="display: none; background: rgba(153, 120, 82, 0.05); border: 1px solid rgba(153, 120, 82, 0.15); border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; transition: all 0.3s ease;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600;">Estimated Price</span>
+                <span id="estimatedPriceVal" style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--dark); font-weight: 600;">₹0</span>
+              </div>
+              <p id="estimatorExplanation" style="font-family: var(--font-sans); font-size: 0.78rem; color: var(--grey); margin: 0; line-height: 1.4;"></p>
+            </div>
+
             <div class="form-submit">
               <button type="submit" class="btn-primary" id="bookSubmitBtn" style="width:100%;">Book Now</button>
             </div>
@@ -962,6 +971,33 @@
             ]
           };
 
+          const pricingTable = {
+            'wedding': {
+              'silver': { base: 75000, droneIncluded: false, label: 'Wedding Silver Package' },
+              'gold': { base: 150000, droneIncluded: true, label: 'Wedding Gold Package' },
+              'platinum': { base: 275000, droneIncluded: true, label: 'Wedding Platinum Package' }
+            },
+            'pre-wedding': {
+              'basic': { base: 25000, droneIncluded: false, label: 'Pre-Wedding Basic Package' },
+              'signature': { base: 45000, droneIncluded: true, label: 'Pre-Wedding Signature Package' },
+              'destination': { base: 75000, droneIncluded: true, label: 'Pre-Wedding Destination Package' }
+            },
+            'corporate': {
+              'starter': { base: 15000, droneIncluded: false, label: 'Starter Corporate Package' },
+              'business': { base: 35000, droneIncluded: false, label: 'Business Corporate Package' },
+              'enterprise': { base: null, droneIncluded: false, label: 'Enterprise Corporate Package' },
+              'half-day': { base: 12000, droneIncluded: false, label: 'Half Day Event Package' },
+              'full-event': { base: 25000, droneIncluded: false, label: 'Full Event Package' },
+              'grand-event': { base: 50000, droneIncluded: true, label: 'Grand Event Package' }
+            },
+            'product': {
+              'starter': { base: 8000, droneIncluded: false, label: 'Starter Product Package' },
+              'catalogue': { base: 20000, droneIncluded: false, label: 'Catalogue Product Package' },
+              'brand-story': { base: null, droneIncluded: false, label: 'Brand Story Product Package' }
+            }
+          };
+          const droneSurcharge = 10000;
+
           const updatePackageOptions = () => {
             const cat = categorySelect.value;
             if (cat && packagesByCategory[cat]) {
@@ -984,12 +1020,77 @@
             }
           };
 
+          const updatePriceEstimate = () => {
+            const cat = categorySelect.value;
+            const pkg = packageSelect.value;
+            const droneChecked = droneCheckbox && droneCheckbox.checked;
+
+            const widget = document.getElementById('priceEstimatorWidget');
+            const priceVal = document.getElementById('estimatedPriceVal');
+            const explanation = document.getElementById('estimatorExplanation');
+
+            if (!widget || !priceVal || !explanation) return;
+
+            if (!cat) {
+              widget.style.display = 'none';
+              return;
+            }
+
+            widget.style.display = 'block';
+
+            if (!pkg) {
+              let startPrice = "";
+              if (cat === 'wedding') startPrice = "₹75,000";
+              else if (cat === 'pre-wedding') startPrice = "₹25,000";
+              else if (cat === 'corporate') startPrice = "₹12,000";
+              else if (cat === 'product') startPrice = "₹8,000";
+
+              priceVal.textContent = startPrice + " onwards";
+              explanation.textContent = "Please select a specific package option to see a detailed pricing estimate.";
+              return;
+            }
+
+            const pkgDetails = pricingTable[cat] && pricingTable[cat][pkg];
+
+            if (!pkgDetails) {
+              priceVal.textContent = "₹0";
+              explanation.textContent = "Pricing details not found.";
+              return;
+            }
+
+            if (pkgDetails.base === null) {
+              priceVal.textContent = "Custom Quote";
+              explanation.textContent = "This is a tailor-made enterprise/brand package. We will provide a bespoke quote based on your unique specifications.";
+              return;
+            }
+
+            let totalPrice = pkgDetails.base;
+            let notes = `${pkgDetails.label} base price is ₹${pkgDetails.base.toLocaleString('en-IN')}.`;
+
+            if (droneChecked) {
+              if (pkgDetails.droneIncluded) {
+                notes += " (Drone Coverage is included in this package at no extra cost).";
+              } else {
+                totalPrice += droneSurcharge;
+                notes += ` Includes +₹${droneSurcharge.toLocaleString('en-IN')} Drone Coverage add-on.`;
+              }
+            } else {
+              if (pkgDetails.droneIncluded) {
+                notes += " (Includes drone coverage as standard).";
+              }
+            }
+
+            priceVal.textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
+            explanation.textContent = `${notes} indicative quote only. Travel, accommodation & taxes are calculated during final invoice.`;
+          };
+
           // Dynamic drone checkbox label change
           const droneCheckbox = document.getElementById('bookDrone');
           const droneLabelText = document.getElementById('droneLabelText');
           if (droneCheckbox && droneLabelText) {
             droneCheckbox.addEventListener('change', () => {
               droneLabelText.textContent = droneCheckbox.checked ? 'Drone Coverage: Yes' : 'Drone Coverage: No';
+              updatePriceEstimate();
             });
           }
 
@@ -1002,6 +1103,11 @@
               vibeGroup.style.display = 'none';
               vibeSelect.value = ''; // reset
             }
+            updatePriceEstimate();
+          });
+
+          packageSelect.addEventListener('change', () => {
+            updatePriceEstimate();
           });
 
           // Auto-select based on URL parameters
@@ -1043,6 +1149,9 @@
             droneCheckbox.checked = true;
             droneLabelText.textContent = 'Drone Coverage: Yes';
           }
+
+          // Initial price calculation
+          updatePriceEstimate();
 
           // Form validation and static submission simulation
           const bookingForm = document.getElementById('bookingForm');
@@ -1201,6 +1310,7 @@
               updatePackageOptions();
               vibeGroup.style.display = 'none';
               clearValidation();
+              updatePriceEstimate();
             }, 1200);
           });
         });

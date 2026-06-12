@@ -27,6 +27,8 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 ### 3. High-End Form Fields & Interactivity
 *   **Form Inputs Focus Glow**: Programmed inputs and textareas to transition from a muted border to a gold border on focus, with a soft golden glow.
 *   **Custom Chevron Selects**: Added premium chevron-shaped indicator arrows (`data:image/svg+xml`) to the category, package, vibe, and budget dropdowns.
+*   **Live Price Estimator Widget**: Implemented a dynamic pricing estimation card right above the submit button. It calculates rates in real-time based on the packages page definitions (Wedding: ₹75,000–₹2,75,000; Pre-Wedding: ₹25,000–₹75,000; Corporate/Events: ₹12,000–₹50,000; Product: ₹8,000–₹20,000).
+*   **Smart Surcharge Logic**: The calculator checks if the drone checkbox is selected, and applies a `+₹10,000` surcharge ONLY if drone coverage isn't already included as standard in the selected package. Custom tiers (like Enterprise or Brand Story) show a tailored "Custom Quote" message.
 *   **Golden CTA Submit Button**: Restyled the "Book Now" submit button with skewed sweep shine animations on hover, scaling offsets, and golden hover shadows.
 *   **Checkboxes & Messages**: Redesigned the drone coverage selector to use a customized label layout. Success and error banners are styled in soft green/red luxury message strips.
 

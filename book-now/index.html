@@ -18,41 +18,117 @@
     /* Premium White Theme Booking Page Custom Styles */
     .booking-page {
       position: relative;
-      background: var(--light);
-      padding: 100px 0;
+      background: linear-gradient(180deg, var(--white) 0%, var(--light) 100%);
+      padding: 120px 0;
       min-height: 80vh;
+      overflow: hidden;
       display: flex;
       align-items: center;
     }
 
-    /* Fallback for devices that don't support parallax/fixed attachment nicely */
-    @media (hover: none) {
-      .booking-page {
-        background-attachment: scroll;
-      }
+    /* Subtle blurred gold accent shapes in background */
+    .booking-page::before,
+    .booking-page::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.12;
+    }
+    .booking-page::before {
+      width: 350px;
+      height: 350px;
+      background: var(--gold);
+      top: 15%;
+      left: -100px;
+    }
+    .booking-page::after {
+      width: 450px;
+      height: 450px;
+      background: var(--gold-light);
+      bottom: 10%;
+      right: -150px;
     }
 
+    /* Background texture overlay */
+    .booking-bg-texture {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=40&fm=webp');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.04;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .luxury-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.02;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Elegant decorative floral vector shapes */
+    .floral-decor {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      color: var(--gold);
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .decor-top-left {
+      top: 4%;
+      left: -80px;
+    }
+    .decor-bottom-right {
+      bottom: 4%;
+      right: -80px;
+    }
+
+    /* Grid layout */
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr; /* 40% (Info) and 60% (Form) */
+      gap: 3.5rem;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Info & Form container */
+    .booking-info,
     .booking-form-container {
-      background: var(--light-2);
-      padding: 4.5rem 3.5rem;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(153, 120, 82, 0.1);
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      width: 100%;
+      background: var(--light-2) !important;
+      padding: 4.5rem 3.5rem !important;
+      border-radius: 8px !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
+      border: 1px solid rgba(153, 120, 82, 0.1) !important;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      position: relative;
     }
 
+    .booking-info:hover,
     .booking-form-container:hover {
-      border-color: var(--gold-dark);
-      box-shadow: 0 20px 45px rgba(204, 166, 119, 0.15);
+      border-color: var(--gold-dark) !important;
+      box-shadow: 0 20px 45px rgba(204, 166, 119, 0.15) !important;
       transform: translateY(-4px);
     }
 
-    .booking-form-container .form-group {
+    .booking-form-container .form-group,
+    .booking-info .form-group {
       margin-bottom: 2rem;
     }
 
-    .booking-form-container .form-group label {
+    .booking-form-container .form-group label,
+    .booking-info .form-group label {
       display: block;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
@@ -64,71 +140,320 @@
 
     .booking-form-container .form-control {
       width: 100%;
-      background: var(--white);
-      border: 1px solid rgba(153, 120, 82, 0.2);
-      color: var(--dark);
-      padding: 1.1rem 1.25rem;
-      font-family: var(--font-sans);
-      font-size: 0.95rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      outline: none;
+      background: var(--white) !important;
+      border: 1px solid rgba(153, 120, 82, 0.2) !important;
+      color: var(--dark) !important;
+      padding: 1.1rem 1.25rem !important;
+      font-family: var(--font-sans) !important;
+      font-size: 0.95rem !important;
+      border-radius: 6px !important;
+      transition: all 0.3s ease !important;
+      outline: none !important;
+      height: auto !important;
     }
 
     .booking-form-container .form-control:focus {
-      border-color: var(--gold-dark);
-      background: var(--white);
-      box-shadow: 0 0 10px rgba(153, 120, 82, 0.1);
+      border-color: var(--gold-dark) !important;
+      background: var(--white) !important;
+      box-shadow: 0 0 10px rgba(153, 120, 82, 0.15) !important;
     }
 
     .booking-form-container .form-control::placeholder {
       color: rgba(18, 16, 14, 0.45);
     }
 
-    .booking-form-container .form-select option {
-      background: var(--white);
-      color: var(--dark);
+    .booking-form-container .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
     }
 
     .booking-form-container .field-error {
-      min-height: 1rem;
+      min-height: 1.2rem;
       margin-top: 0.4rem;
       font-size: 0.8rem;
       color: #dc2626;
     }
 
     .booking-form-container .form-control.error {
-      border-color: #dc2626;
-      box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.15);
+      border-color: #dc2626 !important;
+      box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.15) !important;
     }
 
     .booking-form-container .form-control.error:focus {
-      border-color: #dc2626;
-      box-shadow: 0 0 10px rgba(220, 38, 38, 0.25);
+      border-color: #dc2626 !important;
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.25) !important;
     }
 
-    .booking-form-container .checkbox-group {
-      margin-bottom: 2rem;
-      color: var(--dark-3);
+    /* Custom select chevron logic */
+    .booking-form-container select.form-control {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 2.5rem !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23997852' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 1.25rem center !important;
+      background-size: 15px !important;
     }
 
-    /* Primary button white-theme adjustments */
-    .booking-form-container .btn-primary {
-      background: var(--gold);
-      color: var(--dark);
-      border: 1px solid var(--gold);
+    /* Left panel elements */
+    .booking-left-hero {
+      margin-bottom: 2.2rem;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(153, 120, 82, 0.15);
+      position: relative;
+    }
+
+    .booking-left-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 240px;
+    }
+
+    .booking-left-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .booking-left-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18, 16, 14, 0.15) 0%, rgba(18, 16, 14, 0.75) 100%);
+    }
+
+    .booking-left-hero-text {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      color: var(--white);
+    }
+
+    .booking-left-hero-text h3 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.25;
+      margin: 0 0 0.4rem 0;
+      color: var(--white) !important;
+    }
+
+    .booking-left-hero-text h3 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .booking-left-hero-text p {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Booking Process steps */
+    .booking-process {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .process-step .step-num {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--gold-dark);
       font-weight: 600;
+      line-height: 1.1;
+      width: 25px;
+    }
+
+    .process-step .step-content h5 {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin: 0 0 0.2rem 0;
+      letter-spacing: 0.05em;
+    }
+
+    .process-step .step-content p {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--grey);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Studio Standards checklist */
+    .booking-standards {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .standard-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--dark-3);
+      font-weight: 500;
+    }
+
+    .standard-check {
+      color: var(--gold-dark);
+      font-weight: 700;
+    }
+
+    /* Testimonial Card */
+    .booking-testimonial-card {
+      background: var(--white);
+      border: 1px solid rgba(153, 120, 82, 0.12);
+      padding: 1.5rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--dark-3);
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+    }
+
+    .testimonial-stars {
+      color: var(--gold-dark);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .testimonial-author {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--grey);
+      margin: 0;
+    }
+
+    /* Social Connect */
+    .booking-social-connect {
+      border-top: 1px solid rgba(153, 120, 82, 0.12);
+      padding-top: 1.5rem;
+    }
+
+    .booking-social-connect h5 {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      font-size: 0.85rem;
-      padding: 1.1rem 2.5rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-      width: 100%;
+      color: var(--gold-dark);
+      margin-bottom: 0.85rem;
+      font-weight: 600;
     }
 
-    .white-theme .booking-form-container .btn-primary:hover,
+    .social-links-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .social-links-grid a {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--dark-3);
+      text-decoration: none;
+      border: 1px solid rgba(153, 120, 82, 0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links-grid a:hover {
+      background: var(--gold-dark);
+      color: var(--white);
+      border-color: var(--gold-dark);
+    }
+
+    /* Drone checkbox container redesign */
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .checkbox-container input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold-dark);
+      cursor: pointer;
+    }
+
+    .checkbox-container span {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dark-3);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Submit button custom style */
+    .booking-form-container .btn-primary {
+      background: var(--gold) !important;
+      color: var(--dark) !important;
+      border: 1px solid var(--gold) !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.15em !important;
+      text-transform: uppercase !important;
+      font-size: 0.85rem !important;
+      padding: 1.1rem 2.5rem !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      width: 100% !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-form-container .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: skewX(-30deg);
+      transition: 0.75s;
+      opacity: 0;
+    }
+
+    .booking-form-container .btn-primary:hover::after {
+      left: 120%;
+      opacity: 1;
+    }
+
     .booking-form-container .btn-primary:hover {
       background: var(--gold-dark) !important;
       color: var(--white) !important;
@@ -137,9 +462,212 @@
       box-shadow: 0 10px 20px rgba(153, 120, 82, 0.2) !important;
     }
 
-    @media (max-width: 768px) {
+    /* Privacy and submission status messages */
+    .form-message {
+      margin-top: 1.2rem;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      text-align: center;
+      display: none;
+    }
+
+    .form-message.error {
+      display: block;
+      background: rgba(220, 38, 38, 0.08);
+      color: #dc2626;
+      border: 1px solid rgba(220, 38, 38, 0.2);
+    }
+
+    .form-message.success {
+      display: block;
+      background: rgba(37, 211, 102, 0.08);
+      color: #15803d;
+      border: 1px solid rgba(37, 211, 102, 0.2);
+    }
+
+    /* Page Hero custom styles */
+    .page-hero {
+      position: relative;
+      height: 60vh;
+      min-height: 420px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: 1;
+      animation: slowZoom 25s linear infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      0% { transform: scale(1.01); }
+      100% { transform: scale(1.10); }
+    }
+
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(31, 31, 31, 0.45) 0%, rgba(31, 31, 31, 0.8) 100%);
+      z-index: 2;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .page-hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      color: var(--white);
+    }
+
+    .page-hero-content h1 em {
+      font-style: italic;
+      font-family: var(--font-serif);
+      font-weight: 300;
+      color: var(--gold-light);
+    }
+
+    .hero-tagline-sub {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    /* Bottom Trust Bar styling */
+    .bottom-trust-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      background: var(--white);
+      border: 1px solid rgba(153, 120, 82, 0.12);
+      border-radius: 8px;
+      padding: 1.8rem 2.2rem;
+      margin-top: 4rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      position: relative;
+      z-index: 2;
+    }
+
+    .bottom-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+
+    .bottom-trust-item:not(:last-child) {
+      border-right: 1px solid rgba(153, 120, 82, 0.12);
+      padding-right: 0.8rem;
+    }
+
+    .trust-check {
+      color: var(--gold-dark);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .trust-text {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dark-3);
+    }
+
+    /* Map Section Styling */
+    .map-section-new {
+      background: transparent;
+      padding: 60px 0 100px 0;
+    }
+
+    .map-frame-wrapper {
+      position: relative;
+      border: 1px solid rgba(153, 120, 82, 0.15);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      transition: all 0.5s ease;
+    }
+
+    .map-frame-wrapper:hover {
+      border-color: var(--gold-dark);
+      box-shadow: 0 20px 45px rgba(204, 166, 119, 0.15);
+    }
+
+    .map-overlay-tint {
+      position: absolute;
+      inset: 0;
+      background: rgba(153, 120, 82, 0.02);
+      pointer-events: none;
+      transition: all 0.4s ease;
+    }
+
+    .map-frame-wrapper:hover .map-overlay-tint {
+      opacity: 0;
+    }
+
+    /* Responsive overrides */
+    @media (max-width: 1100px) {
+      .booking-grid {
+        grid-template-columns: 1fr 1.1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .booking-info,
       .booking-form-container {
-        padding: 3rem 2.5rem;
+        padding: 3rem 2.2rem !important;
+      }
+      .bottom-trust-bar {
+        grid-template-columns: 1fr 1fr;
+        padding: 1.8rem;
+        gap: 1.2rem;
+      }
+      .bottom-trust-item:nth-child(2) {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .booking-info,
+      .booking-form-container {
+        padding: 2.2rem 1.5rem !important;
+      }
+      .booking-form-container .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .bottom-trust-bar {
+        grid-template-columns: 1fr;
+      }
+      .bottom-trust-item {
+        border-right: none !important;
+        justify-content: flex-start;
       }
     }
   </style>
@@ -157,121 +685,247 @@
   <div class="cursor-circle" id="cursorCircle"></div>
 
   <script src="../js/header.js"></script>
-
   <section class="page-hero" id="pageHero">
     <div class="page-hero-bg"
       style="background-image: url('https://images.unsplash.com/photo-1486916856992-e4db22c8df33?w=1920&q=80')"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
-      <!-- <span class="section-label">Reserve Your Date</span> -->
-      <h1>Book Now</h1>
+      <h1>Book Your <em>Date</em></h1>
+      <p class="hero-tagline-sub">Let's craft your stories into timeless frames</p>
       <p class="breadcrumb"><a href="../">Home</a> / Book Now</p>
     </div>
   </section>
 
   <!-- BOOKING FORM SECTION -->
   <section class="booking-page" id="bookingSection">
-    <div class="container" style="max-width: 680px;">
+    <div class="booking-bg-texture"></div>
+    <div class="luxury-grain"></div>
+    <svg class="floral-decor decor-top-left" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+      <path d="M10,90 Q30,70 50,80 T90,60" />
+      <path d="M50,80 Q40,60 30,65" />
+      <path d="M70,70 Q60,50 50,55" />
+      <path d="M30,65 C25,60 20,60 25,65 C30,70 35,70 30,65 Z" />
+      <path d="M50,55 C45,50 40,50 45,55 C50,60 55,60 50,55 Z" />
+      <path d="M70,70 C65,65 60,65 65,70 C70,75 75,75 70,70 Z" />
+    </svg>
+    <svg class="floral-decor decor-bottom-right" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+      <path d="M90,10 Q70,30 50,20 T10,40" />
+      <path d="M50,20 Q60,40 70,35" />
+      <path d="M30,30 Q40,50 50,45" />
+      <path d="M70,35 C75,40 80,40 75,35 C70,30 65,30 70,35 Z" />
+      <path d="M50,45 C55,50 60,50 55,45 C50,40 45,40 50,45 Z" />
+      <path d="M30,30 C35,35 40,35 35,30 C30,25 25,25 30,30 Z" />
+    </svg>
 
-      <div class="booking-form-container reveal-up">
-        <div class="form-header-new" style="margin-bottom: 3rem;">
-          <span
-            style="font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">ENQUIRE
-            NOW</span>
-          <h2 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--dark); margin: 0; font-weight: 500;">
-            Book Online</h2>
+    <div class="container">
+      <div class="booking-grid">
+
+        <!-- Left details panel -->
+        <div class="booking-info reveal-left">
+          <div class="booking-left-hero">
+            <div class="booking-left-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80" alt="Timeless Love Stories" />
+              <div class="booking-left-overlay"></div>
+              <div class="booking-left-hero-text">
+                <h3>Your Timeless Story,<br><em>Beautifully</em> Framed</h3>
+                <p>Reserve your wedding or lifestyle session with Yash Raj Motion Picture Ahmedabad.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Booking Process Timeline -->
+          <div class="form-group">
+            <label>Our Booking Journey</label>
+            <div class="booking-process">
+              <div class="process-step">
+                <span class="step-num">01</span>
+                <div class="step-content">
+                  <h5>Submit Enquiry</h5>
+                  <p>Fill out your details on the right with your date and category.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <span class="step-num">02</span>
+                <div class="step-content">
+                  <h5>Creative Consult</h5>
+                  <p>We'll discuss your style, schedule, vibe, and coordinate packages.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <span class="step-num">03</span>
+                <div class="step-content">
+                  <h5>Lock the Date</h5>
+                  <p>Secure the booking with a customized deposit structure.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <span class="step-num">04</span>
+                <div class="step-content">
+                  <h5>The Celebration</h5>
+                  <p>Our creative crew executes your shoot with premium gear and lighting.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Standards Checklist -->
+          <div class="form-group">
+            <label>Studio Standards</label>
+            <div class="booking-standards">
+              <div class="standard-item">
+                <span class="standard-check">✓</span>
+                <span class="standard-text">Fully Insured & DGCA Licensed Drones</span>
+              </div>
+              <div class="standard-item">
+                <span class="standard-check">✓</span>
+                <span class="standard-text">Dual Card Backups & Secure Server Storage</span>
+              </div>
+              <div class="standard-item">
+                <span class="standard-check">✓</span>
+                <span class="standard-text">Full-Frame Flagship Sony/Red Cameras</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial quotes -->
+          <div class="booking-testimonial-card">
+            <p class="testimonial-quote">"They captured our wedding like an absolute movie! Best decision we made for our big day."</p>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-author">- Priya &amp; Arjun</p>
+          </div>
+          
+          <!-- Social Link strip -->
+          <div class="booking-social-connect">
+            <h5>Direct Inquiries</h5>
+            <div class="social-links-grid">
+              <a href="https://wa.me/919876543210" target="_blank" rel="noopener">WhatsApp Chat</a>
+              <a href="https://www.instagram.com/yashraj_motion_picturez/" target="_blank" rel="noopener">Instagram DM</a>
+            </div>
+          </div>
         </div>
-        <form id="bookingForm" novalidate>
-          <div class="form-group">
-            <label for="bookName">Your Name *</label>
-            <input type="text" id="bookName" name="yourName" class="form-control" placeholder="Your full name"
-              required />
-            <div class="field-error" id="bookNameError" aria-live="polite"></div>
+
+        <!-- Right form panel -->
+        <div class="booking-form-container reveal-right">
+          <div class="form-header-new" style="margin-bottom: 2.5rem;">
+            <span
+              style="font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">ENQUIRE
+              NOW</span>
+            <h2 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--dark); margin: 0 0 0.5rem 0; font-weight: 500;">
+              Book Online</h2>
+            <p style="font-family: var(--font-sans); font-size: 0.9rem; color: var(--grey); margin: 0;">Specify your event details and let's craft your memories.</p>
           </div>
-          <div class="form-row">
+          <form id="bookingForm" novalidate>
             <div class="form-group">
-              <label for="bookEmail">Email Address *</label>
-              <input type="email" id="bookEmail" name="email" class="form-control" placeholder="your@email.com"
+              <label for="bookName">Your Name *</label>
+              <input type="text" id="bookName" name="yourName" class="form-control" placeholder="Your full name"
                 required />
-              <div class="field-error" id="bookEmailError" aria-live="polite"></div>
+              <div class="field-error" id="bookNameError" aria-live="polite"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookEmail">Email Address *</label>
+                <input type="email" id="bookEmail" name="email" class="form-control" placeholder="your@email.com"
+                  required />
+                <div class="field-error" id="bookEmailError" aria-live="polite"></div>
+              </div>
+              <div class="form-group">
+                <label for="bookPhone">WhatsApp / Phone *</label>
+                <input type="tel" id="bookPhone" name="phone" class="form-control" placeholder="+91 XXXXX XXXXX"
+                  required />
+                <div class="field-error" id="bookPhoneError" aria-live="polite"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookDate">Event Date *</label>
+                <input type="date" id="bookDate" name="eventDate" class="form-control" required />
+                <div class="field-error" id="bookDateError" aria-live="polite"></div>
+              </div>
+              <div class="form-group">
+                <label for="bookCity">Event City *</label>
+                <input type="text" id="bookCity" name="eventCity" class="form-control" placeholder="e.g. Ahmedabad, Surat"
+                  required />
+                <div class="field-error" id="bookCityError" aria-live="polite"></div>
+              </div>
             </div>
             <div class="form-group">
-              <label for="bookPhone">WhatsApp / Phone *</label>
-              <input type="tel" id="bookPhone" name="phone" class="form-control" placeholder="+91 XXXXX XXXXX"
-                required />
-              <div class="field-error" id="bookPhoneError" aria-live="polite"></div>
+              <label for="bookCategory">Category *</label>
+              <select id="bookCategory" name="category" class="form-control form-select" required>
+                <option value="">Select a category...</option>
+                <option value="wedding">Wedding Photography</option>
+                <option value="pre-wedding">Pre-Wedding Shoots</option>
+                <option value="corporate">Corporate & Events</option>
+                <option value="product">Product & Fashion</option>
+              </select>
+              <div class="field-error" id="bookCategoryError" aria-live="polite"></div>
             </div>
-          </div>
-          <div class="form-row">
+            <!-- Package dropdown (shown when category is selected) -->
+            <div class="form-group" id="packageWrapper" style="display: none;">
+              <label for="bookPackage">Package</label>
+              <select id="bookPackage" name="package" class="form-control form-select">
+                <option value="">Select a package...</option>
+              </select>
+            </div>
+            <div class="form-group" id="vibeGroup" style="display: none;">
+              <label for="bookVibe">Pre-Wedding Vibe</label>
+              <select id="bookVibe" name="vibe" class="form-control form-select">
+                <option value="">Select a vibe...</option>
+                <option value="romantic-classic">Romantic Classic</option>
+                <option value="vintage-heritage">Vintage Heritage</option>
+                <option value="adventure-outdoor">Adventure Outdoor</option>
+                <option value="fun-candid">Fun &amp; Candid</option>
+              </select>
+            </div>
+            <div class="form-group checkbox-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="bookDrone" name="drone" value="yes" />
+                <span id="droneLabelText">Drone Coverage: No</span>
+              </label>
+            </div>
             <div class="form-group">
-              <label for="bookDate">Event Date *</label>
-              <input type="date" id="bookDate" name="eventDate" class="form-control" required />
-              <div class="field-error" id="bookDateError" aria-live="polite"></div>
+              <label for="bookBudget">Approximate Budget</label>
+              <select id="bookBudget" name="budget" class="form-control form-select">
+                <option value="">Select budget range...</option>
+                <option value="under25k">Under ₹25,000</option>
+                <option value="25-50k">₹25,000 – ₹50,000</option>
+                <option value="50-1L">₹50,000 – ₹1,00,000</option>
+                <option value="1-2L">₹1,00,000 – ₹2,00,000</option>
+                <option value="2-3L">₹2,00,000 – ₹3,00,000</option>
+                <option value="3L+">₹3,00,000+</option>
+                <option value="custom">Custom / To be discussed</option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="bookCity">Event City *</label>
-              <input type="text" id="bookCity" name="eventCity" class="form-control" placeholder="e.g. Ahmedabad, Surat"
-                required />
-              <div class="field-error" id="bookCityError" aria-live="polite"></div>
+              <label for="bookMessage">Tell Us More</label>
+              <textarea id="bookMessage" name="message" class="form-control"
+                placeholder="Tell us about your event, venue, style preferences..."></textarea>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="bookCategory">Category *</label>
-            <select id="bookCategory" name="category" class="form-control form-select" required>
-              <option value="">Select a category...</option>
-              <option value="wedding">Wedding Photography</option>
-              <option value="pre-wedding">Pre-Wedding Shoots</option>
-              <option value="corporate">Corporate & Events</option>
-              <option value="product">Product & Fashion</option>
-            </select>
-            <div class="field-error" id="bookCategoryError" aria-live="polite"></div>
-          </div>
-          <!-- Package dropdown (shown when category is selected) -->
-          <div class="form-group" id="packageWrapper" style="display: none;">
-            <label for="bookPackage">Package</label>
-            <select id="bookPackage" name="package" class="form-control form-select">
-              <option value="">Select a package...</option>
-            </select>
-          </div>
-          <div class="form-group" id="vibeGroup" style="display: none;">
-            <label for="bookVibe">Pre-Wedding Vibe</label>
-            <select id="bookVibe" name="vibe" class="form-control form-select">
-              <option value="">Select a vibe...</option>
-              <option value="romantic-classic">Romantic Classic</option>
-              <option value="vintage-heritage">Vintage Heritage</option>
-              <option value="adventure-outdoor">Adventure Outdoor</option>
-              <option value="fun-candid">Fun &amp; Candid</option>
-            </select>
-          </div>
-          <div class="form-group checkbox-group">
-            <label class="checkbox-container">
-              <input type="checkbox" id="bookDrone" name="drone" value="yes" />
-              <span id="droneLabelText">Drone Coverage: No</span>
-            </label>
-          </div>
-          <div class="form-group">
-            <label for="bookBudget">Approximate Budget</label>
-            <select id="bookBudget" name="budget" class="form-control form-select">
-              <option value="">Select budget range...</option>
-              <option value="under25k">Under ₹25,000</option>
-              <option value="25-50k">₹25,000 – ₹50,000</option>
-              <option value="50-1L">₹50,000 – ₹1,00,000</option>
-              <option value="1-2L">₹1,00,000 – ₹2,00,000</option>
-              <option value="2-3L">₹2,00,000 – ₹3,00,000</option>
-              <option value="3L+">₹3,00,000+</option>
-              <option value="custom">Custom / To be discussed</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="bookMessage">Tell Us More</label>
-            <textarea id="bookMessage" name="message" class="form-control"
-              placeholder="Tell us about your event, venue, style preferences..."></textarea>
-          </div>
-          <div class="form-submit">
-            <button type="submit" class="btn-primary" id="bookSubmitBtn" style="width:100%;">Book Now</button>
-          </div>
-          <div id="bookFormMessage" class="form-message"></div>
-        </form>
+            <div class="form-submit">
+              <button type="submit" class="btn-primary" id="bookSubmitBtn" style="width:100%;">Book Now</button>
+            </div>
+            <div id="bookFormMessage" class="form-message"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom Trust Bar -->
+      <div class="bottom-trust-bar reveal-up" style="margin-top: 5rem;">
+        <div class="bottom-trust-item">
+          <span class="trust-check">✓</span>
+          <span class="trust-text">Response Within 12 Hours</span>
+        </div>
+        <div class="bottom-trust-item">
+          <span class="trust-check">✓</span>
+          <span class="trust-text">Personalized Consultation</span>
+        </div>
+        <div class="bottom-trust-item">
+          <span class="trust-check">✓</span>
+          <span class="trust-text">Available Across India</span>
+        </div>
+        <div class="bottom-trust-item">
+          <span class="trust-check">✓</span>
+          <span class="trust-text">Premium Client Experience</span>
+        </div>
       </div>
 
       <script>
@@ -552,6 +1206,20 @@
         });
       </script>
 
+    </div>
+  </section>
+
+  <!-- GOOGLE MAP -->
+  <section class="map-section-new" id="mapSection">
+    <div class="container">
+      <div class="map-frame-wrapper">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14689.012085932248!2d72.5046!3d23.0225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848abad45ebd%3A0xb7f8a2a71c2f3b4a!2sPrahladnagar%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000"
+          width="100%" height="400" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Yash Raj Motion Picture Studio Location, Ahmedabad">
+        </iframe>
+        <div class="map-overlay-tint"></div>
+      </div>
     </div>
   </section>
 

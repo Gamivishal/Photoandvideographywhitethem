@@ -187,6 +187,16 @@ ul {
   animation: pulse 1.5s ease infinite;
 }
 
+.loader-logo img {
+  height: 250px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+}
+
 .loader-bar {
   width: 200px;
   height: 2px;

@@ -62,3 +62,21 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **Simulated Submission Verified**: Successfully tested simulated submissions which trigger the submission loading state, reset the form controls, and show the custom checkmark success confirmation.
 *   **Responsive Framework**: Verified that all columns align, stack, and fit neatly across mobile, tablet, and widescreen layouts.
 
+---
+
+## Latest Layout & Form Updates (June 12, 2026)
+
+### 1. Universal Footer Harmonization
+*   **Removed Contact Page Overrides**: Deleted page-specific `<style>` overrides inside `contact/index.html` for `.footer`, `.footer-grid`, `.footer-col`, `.footer-contact`, `.footer-bottom`, and `.social-link`.
+*   **Perfect Identicality**: All inner pages now render the exact same footer visual design as the homepage (`index.html`) using the global styles in `css/style.css` (e.g. background theme, gold contact boxes, logo sizes, column margins, social gradient link tags, and mobile responsive grid properties).
+
+### 2. Form Field Addition (Partner's Name)
+*   **Optional Input Field**: Added a new "Partner's Name (Optional)" input field side-by-side with "Your Name *" inside a responsive `.form-row` on the Booking page (`book-now/index.html`).
+*   **Validation & Submission Handling**: Updated the script in `book-now/index.html` to automatically clear validation error class elements for the new input upon reset, and included `partnerName` in the dynamic `formData` JSON object sent on submission.
+
+### 3. Loader Logo Visibility Fix
+*   **Prevented Stretching & Cropping**: Added explicit `.loader-logo img` rules in `css/style.css` specifying `height: 90px !important`, `width: auto !important`, and `object-fit: contain !important` to override the global `img` block-fill rule (`width: 100%; height: 100%`) which was causing the logo to stretch horizontally.
+*   **Clean Centering & Overflow**: Maintained vertical/horizontal alignment using text-align centering and block auto-margins, while keeping the luxury pulse animation and progress loading bar exactly as designed.
+
+
+

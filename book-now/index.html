@@ -815,11 +815,18 @@
             <p style="font-family: var(--font-sans); font-size: 0.9rem; color: var(--grey); margin: 0;">Specify your event details and let's craft your memories.</p>
           </div>
           <form id="bookingForm" novalidate>
-            <div class="form-group">
-              <label for="bookName">Your Name *</label>
-              <input type="text" id="bookName" name="yourName" class="form-control" placeholder="Your full name"
-                required />
-              <div class="field-error" id="bookNameError" aria-live="polite"></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookName">Your Name *</label>
+                <input type="text" id="bookName" name="yourName" class="form-control" placeholder="Your full name"
+                  required />
+                <div class="field-error" id="bookNameError" aria-live="polite"></div>
+              </div>
+              <div class="form-group">
+                <label for="bookPartnerName">Partner's Name (Optional)</label>
+                <input type="text" id="bookPartnerName" name="partnerName" class="form-control" placeholder="Partner's full name" />
+                <div class="field-error" id="bookPartnerNameError" aria-live="polite"></div>
+              </div>
             </div>
             <div class="form-row">
               <div class="form-group">
@@ -1210,6 +1217,14 @@
               if (input) input.setAttribute('aria-invalid', 'false');
               if (error) error.textContent = '';
             });
+            const partnerInput = document.getElementById('bookPartnerName');
+            const partnerError = document.getElementById('bookPartnerNameError');
+            if (partnerInput) {
+              partnerInput.classList.remove('error');
+              partnerInput.setAttribute('aria-invalid', 'false');
+            }
+            if (partnerError) partnerError.textContent = '';
+
             if (formMessage) formMessage.className = 'form-message';
             if (formMessage) formMessage.textContent = '';
           };
@@ -1282,6 +1297,7 @@
             // Collect form data
             const formData = {
               name: document.getElementById('bookName').value,
+              partnerName: document.getElementById('bookPartnerName').value,
               email: document.getElementById('bookEmail').value,
               phone: document.getElementById('bookPhone').value,
               eventDate: document.getElementById('bookDate').value,

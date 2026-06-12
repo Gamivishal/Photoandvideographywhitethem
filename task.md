@@ -9,3 +9,5 @@
 - [x] 7. Improve logo visibility (subtle drop-shadow, warm gold glow, and contrast adjustments) in the white theme scrolled header, pre-loader, and footer.
 - [x] 8. Adjust footer logo size to be larger on desktop (160px) and scale proportionally on smaller screens.
 - [x] 9. Resolve header logo clipping and centering issues globally, aligning it with navigation links and removing top boundary overlaps.
+- [x] 10. Remove the drone intro image from `drone-photography/index.html` and center the "See Your World From Above" text section.
+

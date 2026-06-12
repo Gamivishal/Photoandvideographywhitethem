@@ -49,6 +49,10 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **Adjusted Footer Logo Size**: Increased the default height of the footer logo to `160px` (up from `120px`) on desktop, and set up a clean, proportional responsive scale (`140px` for tablets, `120px` for mobile viewports) so that it stands out without affecting the surrounding textual description block or positioning.
 *   **Header Logo Alignment & Clipping fixes**: Removed `overflow: hidden` from the navigation logo wrapper container (`.nav-logo`) to prevent any vertical cropping on the logo image. Optimized heights (`55px` on desktop, `50px` on tablets, and `45px` on mobile) and adjusted image height definitions while removing legacy margins to guarantee vertical centering and align it with navbar menu items without touching the top decorative line.
 
+### 7. Drone Photography Layout Cleanups
+*   **Drone Intro Image Removal**: Removed the drone image element situated before the "Aerial Cinematic / See Your World From Above" text section in `drone-photography/index.html`.
+*   **Centered Text Layout**: Repositioned and centered the text intro container inside `#droneIntro` to align it elegantly as a full-width header/intro section on the page. Removed `<br />` breaks from the heading for better readability on desktop, constrained its width to `800px`, and removed background/padding cards that are no longer needed, making the section clean and minimal.
+
 ---
 
 ## Verification & Integrity Safeguards
@@ -57,3 +61,4 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **DOM Validation Intact**: The validation arrays, event listeners (`input`, `blur`, `change`), URL parameter autofills (e.g., `?service=wedding&drone=yes`), and date reservation exclusions (like checking if a date is fully booked) remain fully functional.
 *   **Simulated Submission Verified**: Successfully tested simulated submissions which trigger the submission loading state, reset the form controls, and show the custom checkmark success confirmation.
 *   **Responsive Framework**: Verified that all columns align, stack, and fit neatly across mobile, tablet, and widescreen layouts.
+

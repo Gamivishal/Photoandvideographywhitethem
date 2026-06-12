@@ -41,6 +41,14 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **Bottom Trust Bar**: Positioned a full-width client-guarantee strip below the form grid: *Response Within 12 Hours*, *Personalized Consultation*, *Available Across India*, *Premium Client Experience*.
 *   **Map Block**: Embeds the studio's Prahladnagar, Ahmedabad location inside a custom inset frame with fine borders and a soft gold hover overlay.
 
+### 6. Header & Footer Logo Visibility Improvements
+*   **Subtle drop-shadow**: Implemented `drop-shadow(0 1px 2px rgba(18, 16, 14, 0.12))` to add a fine dark silhouette, lifting the logo elements off the light background without creating thick borders.
+*   **Soft gold glow**: Added `drop-shadow(0 0 8px rgba(153, 120, 82, 0.15))` to cast a low-opacity gold glow, matching the warm luxury aesthetic.
+*   **Increased contrast**: Applied `contrast(1.08)` to enhance color definition, preventing the gold textures from looking washed out on light scrolled backgrounds.
+*   **Universal alignment**: Overrides apply seamlessly to the White Theme scrolled Navbar, page Pre-loaders, and Footer sections.
+*   **Adjusted Footer Logo Size**: Increased the default height of the footer logo to `160px` (up from `120px`) on desktop, and set up a clean, proportional responsive scale (`140px` for tablets, `120px` for mobile viewports) so that it stands out without affecting the surrounding textual description block or positioning.
+*   **Header Logo Alignment & Clipping fixes**: Removed `overflow: hidden` from the navigation logo wrapper container (`.nav-logo`) to prevent any vertical cropping on the logo image. Optimized heights (`55px` on desktop, `50px` on tablets, and `45px` on mobile) and adjusted image height definitions while removing legacy margins to guarantee vertical centering and align it with navbar menu items without touching the top decorative line.
+
 ---
 
 ## Verification & Integrity Safeguards

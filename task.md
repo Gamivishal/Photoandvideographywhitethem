@@ -6,3 +6,6 @@
 - [x] 4. Polish Right Booking Form Column in `book-now/index.html` (wrap form controls beautifully, ensure zero modifications to inputs, placeholders, name/id attributes, validation errors).
 - [x] 5. Add Bottom Trust Bar & Google Map Section in `book-now/index.html`.
 - [x] 6. Verify form logic, validation, category-select package populator, date picker constraints, simulated submission, and responsiveness.
+- [x] 7. Improve logo visibility (subtle drop-shadow, warm gold glow, and contrast adjustments) in the white theme scrolled header, pre-loader, and footer.
+- [x] 8. Adjust footer logo size to be larger on desktop (160px) and scale proportionally on smaller screens.
+- [x] 9. Resolve header logo clipping and centering issues globally, aligning it with navigation links and removing top boundary overlaps.

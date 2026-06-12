@@ -3463,6 +3463,7 @@ body.white-theme {
   background: transparent !important;
 }
 
+/* Extra add menuly */
 @media (max-width: 768px) {
 
   .portfolio-grid {
@@ -3484,6 +3485,28 @@ body.white-theme {
   .portfolio-img img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .about-story .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-story .about-image,
+  .about-story .parallax-img {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .about-story .parallax-img img {
+    width: 100%;
+    height: auto !important;
+    display: block;
     object-fit: cover;
   }
 }

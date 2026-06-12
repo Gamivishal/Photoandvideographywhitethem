@@ -95,21 +95,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close when clicking the overlay backdrop
     navOverlay.addEventListener('click', closeMenu);
 
-    // Dropdown toggle on mobile
+    // Dropdown toggle on mobile (only when clicking the arrow specifically)
     const dropdownTriggers = navLinks.querySelectorAll('.nav-has-dropdown > a');
     dropdownTriggers.forEach(trigger => {
       trigger.addEventListener('click', (e) => {
         if (window.matchMedia('(max-width: 1024px)').matches) {
-          e.preventDefault(); // Stop navigating to services index
-          const parent = trigger.parentElement;
-          const dropdown = parent.querySelector('.nav-dropdown');
-          const arrow = parent.querySelector('.nav-arrow');
-          if (dropdown) {
-            dropdown.classList.toggle('active');
-            if (dropdown.classList.contains('active')) {
-              if (arrow) arrow.textContent = '▴';
-            } else {
-              if (arrow) arrow.textContent = '▾';
+          // If the click is specifically on the nav-arrow icon, toggle dropdown.
+          // Otherwise, allow navigating to the Services page.
+          const isArrowClick = e.target.classList.contains('nav-arrow') || e.target.closest('.nav-arrow');
+          if (isArrowClick) {
+            e.preventDefault();
+            e.stopPropagation();
+            const parent = trigger.parentElement;
+            const dropdown = parent.querySelector('.nav-dropdown');
+            const arrow = parent.querySelector('.nav-arrow');
+            if (dropdown) {
+              dropdown.classList.toggle('active');
+              if (dropdown.classList.contains('active')) {
+                if (arrow) arrow.textContent = '▴';
+              } else {
+                if (arrow) arrow.textContent = '▾';
+              }
             }
           }
         }

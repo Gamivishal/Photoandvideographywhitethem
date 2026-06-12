@@ -11,6 +11,7 @@
     <div class="nav-container">
       <a href="${root}" class="nav-logo"><img src="${root}Staticdata/images/Logo-removebg-preview.png" alt="Yash Raj Motion Picture"></a>
       <ul class="nav-links" id="navLinks">
+        <li class="mobile-logo-item"><a href="${root}" class="mobile-logo-link"><img src="${root}Staticdata/images/Logo-removebg-preview.png" alt="Yash Raj Motion Picture"></a></li>
         <li><a href="${root}" class="nav-link">Home</a></li>
         <li><a href="${root}about/" class="nav-link">About</a></li>
         <li class="nav-has-dropdown"><a href="${root}services/" class="nav-link">Services <span class="nav-arrow">▾</span></a>

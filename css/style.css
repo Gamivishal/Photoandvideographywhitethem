@@ -2233,8 +2233,10 @@ ul {
   }
 
   .mobile-logo-link img {
-    height: 60px !important;
+    height: 100px !important;
     width: auto !important;
+    transform: scale(1.5);
+    transform-origin: center;
     object-fit: contain !important;
     display: block;
   }

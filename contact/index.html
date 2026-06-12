@@ -35,6 +35,7 @@
       pointer-events: none;
       opacity: 0.12;
     }
+
     .contact-page::before {
       width: 350px;
       height: 350px;
@@ -42,6 +43,7 @@
       top: 15%;
       left: -100px;
     }
+
     .contact-page::after {
       width: 450px;
       height: 450px;
@@ -73,10 +75,12 @@
       pointer-events: none;
       z-index: 0;
     }
+
     .decor-top-left {
       top: 4%;
       left: -80px;
     }
+
     .decor-bottom-right {
       bottom: 4%;
       right: -80px;
@@ -85,7 +89,8 @@
     /* Contact Grid */
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1.5fr; /* 40% (Info) and 60% (Form) */
+      grid-template-columns: 1fr 1.5fr;
+      /* 40% (Info) and 60% (Form) */
       gap: 3.5rem;
       align-items: flex-start;
       position: relative;
@@ -194,6 +199,7 @@
       gap: 0.75rem;
       margin-top: 0.5rem;
     }
+
     .category-card {
       background: var(--white);
       border: 1px solid rgba(153, 120, 82, 0.2);
@@ -207,22 +213,26 @@
       gap: 0.5rem;
       transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
+
     .category-card:hover {
       border-color: var(--gold-dark);
       background: rgba(153, 120, 82, 0.03);
       transform: translateY(-2px);
     }
+
     .category-card.active {
       border-color: var(--gold-dark);
       background: rgba(153, 120, 82, 0.08);
       box-shadow: 0 5px 15px rgba(153, 120, 82, 0.1);
     }
+
     .category-card .category-icon {
       width: 20px;
       height: 20px;
       color: var(--gold-dark);
       stroke-width: 1.2;
     }
+
     .category-card span {
       font-family: var(--font-sans);
       font-size: 0.68rem;
@@ -274,21 +284,25 @@
       border: 1px solid rgba(153, 120, 82, 0.15);
       position: relative;
     }
+
     .contact-left-img-wrapper {
       position: relative;
       width: 100%;
       height: 240px;
     }
+
     .contact-left-img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .contact-left-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(18, 16, 14, 0.15) 0%, rgba(18, 16, 14, 0.75) 100%);
     }
+
     .contact-left-hero-text {
       position: absolute;
       bottom: 1.5rem;
@@ -296,6 +310,7 @@
       right: 1.5rem;
       color: var(--white);
     }
+
     .contact-left-hero-text h3 {
       font-family: var(--font-serif);
       font-size: 1.6rem;
@@ -304,10 +319,12 @@
       margin: 0 0 0.4rem 0;
       color: var(--white) !important;
     }
+
     .contact-left-hero-text h3 em {
       font-style: italic;
       color: var(--gold-light);
     }
+
     .contact-left-hero-text p {
       font-family: var(--font-sans);
       font-size: 0.82rem;
@@ -322,6 +339,7 @@
       flex-direction: column;
       gap: 0.8rem;
     }
+
     .why-us-item {
       display: flex;
       align-items: center;
@@ -331,6 +349,7 @@
       color: var(--dark-3);
       font-weight: 500;
     }
+
     .why-us-check {
       color: var(--gold-dark);
       font-weight: 700;
@@ -342,16 +361,19 @@
       flex-direction: column;
       gap: 1.8rem;
     }
+
     .info-details-item {
       display: flex;
       gap: 0.8rem;
       align-items: flex-start;
     }
+
     .info-details-icon {
       font-size: 1.1rem;
       line-height: 1;
       color: var(--gold-dark);
     }
+
     .info-details-content h5 {
       font-family: var(--font-sans);
       font-size: 0.7rem;
@@ -361,6 +383,7 @@
       margin-bottom: 0.25rem;
       font-weight: 600;
     }
+
     .info-details-content p,
     .info-details-content a {
       font-family: var(--font-sans);
@@ -370,6 +393,7 @@
       text-decoration: none;
       line-height: 1.4;
     }
+
     .info-details-content a:hover {
       color: var(--gold-dark);
     }
@@ -379,6 +403,7 @@
       border-top: 1px solid rgba(153, 120, 82, 0.12);
       padding-top: 1.5rem;
     }
+
     .contact-social-connect h5 {
       font-family: var(--font-sans);
       font-size: 0.7rem;
@@ -388,11 +413,13 @@
       margin-bottom: 0.85rem;
       font-weight: 600;
     }
+
     .social-links-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
     }
+
     .social-links-grid a {
       font-family: var(--font-sans);
       font-size: 0.78rem;
@@ -403,6 +430,7 @@
       border-radius: 4px;
       transition: all 0.3s ease;
     }
+
     .social-links-grid a:hover {
       background: var(--gold-dark);
       color: var(--white);
@@ -416,6 +444,7 @@
       border-radius: 6px;
       margin-top: 1.5rem;
     }
+
     .testimonial-quote {
       font-family: var(--font-serif);
       font-size: 1rem;
@@ -425,6 +454,7 @@
       margin-bottom: 0.5rem;
       margin-top: 0;
     }
+
     .testimonial-stars {
       color: var(--gold-dark);
       font-size: 0.9rem;
@@ -441,6 +471,7 @@
       align-items: center;
       justify-content: center;
     }
+
     .page-hero-bg {
       position: absolute;
       inset: 0;
@@ -450,37 +481,48 @@
       z-index: 1;
       animation: slowZoom 25s linear infinite alternate;
     }
+
     @keyframes slowZoom {
-      0% { transform: scale(1.01); }
-      100% { transform: scale(1.10); }
+      0% {
+        transform: scale(1.01);
+      }
+
+      100% {
+        transform: scale(1.10);
+      }
     }
+
     .page-hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(31, 31, 31, 0.45) 0%, rgba(31, 31, 31, 0.8) 100%);
       z-index: 2;
     }
+
     .page-hero-content {
       position: relative;
       z-index: 3;
       text-align: center;
       padding: 0 1.5rem;
     }
+
     .page-hero-content h1 {
       font-family: var(--font-display);
       font-size: clamp(3rem, 7vw, 5.5rem);
       font-weight: 300;
       letter-spacing: -0.01em;
       margin-bottom: 0.5rem;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       color: var(--white);
     }
+
     .page-hero-content h1 em {
       font-style: italic;
       font-family: var(--font-serif);
       font-weight: 300;
       color: var(--gold-light);
     }
+
     .hero-tagline-sub {
       font-family: var(--font-serif);
       font-size: 1.25rem;
@@ -505,21 +547,25 @@
       position: relative;
       z-index: 2;
     }
+
     .bottom-trust-item {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       justify-content: center;
     }
+
     .bottom-trust-item:not(:last-child) {
       border-right: 1px solid rgba(153, 120, 82, 0.12);
       padding-right: 0.8rem;
     }
+
     .trust-check {
       color: var(--gold-dark);
       font-weight: 700;
       font-size: 1rem;
     }
+
     .trust-text {
       font-family: var(--font-sans);
       font-size: 0.82rem;
@@ -532,6 +578,7 @@
       background: transparent;
       padding: 60px 0 100px 0;
     }
+
     .map-frame-wrapper {
       position: relative;
       border: 1px solid rgba(153, 120, 82, 0.15);
@@ -540,10 +587,12 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
       transition: all 0.5s ease;
     }
+
     .map-frame-wrapper:hover {
       border-color: var(--gold-dark);
       box-shadow: 0 20px 45px rgba(204, 166, 119, 0.15);
     }
+
     .map-overlay-tint {
       position: absolute;
       inset: 0;
@@ -551,6 +600,7 @@
       pointer-events: none;
       transition: all 0.4s ease;
     }
+
     .map-frame-wrapper:hover .map-overlay-tint {
       opacity: 0;
     }
@@ -561,11 +611,13 @@
       border-top: 1px solid rgba(153, 120, 82, 0.12) !important;
       padding: 90px 0 0 !important;
     }
+
     .footer-grid {
       grid-template-columns: 1.5fr 1fr 1fr 1fr !important;
       gap: 3.5rem !important;
       margin-bottom: 3.5rem !important;
     }
+
     .footer-col h4 {
       font-family: var(--font-serif) !important;
       font-weight: 600 !important;
@@ -575,19 +627,23 @@
       margin-bottom: 1.6rem !important;
       text-transform: none !important;
     }
+
     .footer-col ul li {
       margin-bottom: 0.85rem !important;
     }
+
     .footer-col ul li a {
       font-family: var(--font-sans) !important;
       font-size: 0.85rem !important;
       color: var(--dark-3) !important;
       transition: all 0.3s ease !important;
     }
+
     .footer-col ul li a:hover {
       color: var(--gold-dark) !important;
       padding-left: 5px;
     }
+
     .footer-contact li {
       display: flex !important;
       align-items: center !important;
@@ -596,22 +652,27 @@
       color: var(--dark-3) !important;
       margin-bottom: 0.85rem !important;
     }
+
     .footer-contact .contact-icon {
       font-size: 1rem !important;
       color: var(--gold-dark) !important;
     }
+
     .footer-bottom {
       border-top: 1px solid rgba(153, 120, 82, 0.12) !important;
       padding: 2.2rem 0 !important;
       margin-top: 2.5rem !important;
     }
+
     .footer-bottom p {
       font-size: 0.8rem !important;
       color: var(--grey) !important;
     }
+
     .footer .social-links {
       margin-top: 1.5rem !important;
     }
+
     .footer .social-link {
       width: 38px !important;
       height: 38px !important;
@@ -624,10 +685,12 @@
       color: var(--dark-3) !important;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
+
     .footer .social-link svg {
       width: 15px !important;
       height: 15px !important;
     }
+
     .footer .social-link:hover {
       background: var(--gold-dark) !important;
       color: #ffffff !important;
@@ -649,18 +712,22 @@
         grid-template-columns: 1fr;
         gap: 3rem;
       }
+
       .contact-info,
       .contact-form-container {
         padding: 3rem 2.2rem !important;
       }
+
       .bottom-trust-bar {
         grid-template-columns: 1fr 1fr;
         padding: 1.8rem;
         gap: 1.2rem;
       }
+
       .bottom-trust-item:nth-child(2) {
         border-right: none;
       }
+
       .footer-grid {
         grid-template-columns: 1fr 1fr !important;
         gap: 2.5rem !important;
@@ -668,24 +735,30 @@
     }
 
     @media (max-width: 600px) {
+
       .contact-info,
       .contact-form-container {
         padding: 2.2rem 1.5rem !important;
       }
+
       .contact-form-container .form-row {
         grid-template-columns: 1fr;
         gap: 0;
       }
+
       .contact-info-details {
         gap: 1.4rem;
       }
+
       .bottom-trust-bar {
         grid-template-columns: 1fr;
       }
+
       .bottom-trust-item {
         border-right: none !important;
         justify-content: flex-start;
       }
+
       .footer-grid {
         grid-template-columns: 1fr !important;
         gap: 2rem !important;
@@ -739,7 +812,8 @@
       <path d="M50,55 C45,50 40,50 45,55 C50,60 55,60 50,55 Z" />
       <path d="M70,70 C65,65 60,65 65,70 C70,75 75,75 70,70 Z" />
     </svg>
-    <svg class="floral-decor decor-bottom-right" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+    <svg class="floral-decor decor-bottom-right" viewBox="0 0 100 100" fill="none" stroke="currentColor"
+      stroke-width="0.5">
       <path d="M90,10 Q70,30 50,20 T10,40" />
       <path d="M50,20 Q60,40 70,35" />
       <path d="M30,30 Q40,50 50,45" />
@@ -756,7 +830,8 @@
           <!-- Large Premium Image with Text Overlay -->
           <div class="contact-left-hero">
             <div class="contact-left-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Let's Create Something Beautiful Together" />
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
+                alt="Let's Create Something Beautiful Together" />
               <div class="contact-left-overlay"></div>
               <div class="contact-left-hero-text">
                 <h3>Let's Create Something<br><em>Beautiful</em> Together</h3>
@@ -827,16 +902,19 @@
           <div class="contact-social-connect">
             <h5>Social Connect</h5>
             <div class="social-links-grid">
-              <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+              <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener"
+                aria-label="Instagram">Instagram</a>
               <a href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
-              <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+              <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener"
+                aria-label="Facebook">Facebook</a>
               <a href="https://youtube.com/yourprofile" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
             </div>
           </div>
 
           <!-- Premium Testimonial Card -->
           <div class="contact-testimonial-card">
-            <p class="testimonial-quote">"From the first conversation to the final delivery, the experience was exceptional."</p>
+            <p class="testimonial-quote">"From the first conversation to the final delivery, the experience was
+              exceptional."</p>
             <div class="testimonial-stars">★★★★★</div>
           </div>
         </div>
@@ -844,20 +922,27 @@
         <!-- Right Form Card -->
         <div class="contact-form-container reveal-right">
           <div class="form-header-new" style="margin-bottom: 2.5rem;">
-            <span style="font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">ENQUIRE NOW</span>
-            <h2 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--dark); margin: 0 0 0.5rem 0; font-weight: 500;">Tell Us About Your Celebration</h2>
-            <p style="font-family: var(--font-sans); font-size: 0.9rem; color: var(--grey); margin: 0;">Share your event details and we'll get back to you shortly.</p>
+            <span
+              style="font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; display: block; margin-bottom: 0.5rem;">ENQUIRE
+              NOW</span>
+            <h2
+              style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--dark); margin: 0 0 0.5rem 0; font-weight: 500;">
+              Tell Us About Your Celebration</h2>
+            <p style="font-family: var(--font-sans); font-size: 0.9rem; color: var(--grey); margin: 0;">Share your event
+              details and we'll get back to you shortly.</p>
           </div>
           <form id="contactForm" novalidate>
             <div class="form-group">
               <label for="yourName">Full Name *</label>
-              <input type="text" id="yourName" name="yourName" class="form-control" placeholder="Your full name" required />
+              <input type="text" id="yourName" name="yourName" class="form-control" placeholder="Your full name"
+                required />
               <div class="field-error" id="yourNameError" aria-live="polite"></div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required />
+                <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com"
+                  required />
                 <div class="field-error" id="emailError" aria-live="polite"></div>
               </div>
               <div class="form-group">
@@ -874,13 +959,15 @@
               </div>
               <div class="form-group">
                 <label for="eventCity">Event Location *</label>
-                <input type="text" id="eventCity" name="eventCity" class="form-control" placeholder="e.g. Ahmedabad, Surat" required />
+                <input type="text" id="eventCity" name="eventCity" class="form-control"
+                  placeholder="e.g. Ahmedabad, Surat" required />
                 <div class="field-error" id="eventCityError" aria-live="polite"></div>
               </div>
             </div>
 
             <!-- Hidden Native Select (Synchronized with visual cards) -->
-            <select id="categorySelect" name="category" required style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
+            <select id="categorySelect" name="category" required
+              style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
               <option value="">Select a category...</option>
               <option value="wedding">Wedding</option>
               <option value="pre-wedding">Pre‑Wedding</option>
@@ -917,13 +1004,15 @@
                 </div>
                 <div class="category-card" data-value="events">
                   <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                    <path
+                      d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
                   </svg>
                   <span>Events</span>
                 </div>
                 <div class="category-card" data-value="product">
                   <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <path
+                      d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                   </svg>
                   <span>Product Shoot</span>
                 </div>
@@ -958,13 +1047,14 @@
 
             <div class="form-group">
               <label for="message">Message Box</label>
-              <textarea id="message" name="message" class="form-control" rows="4" placeholder="Tell us about your event, venue, style preferences..."></textarea>
+              <textarea id="message" name="message" class="form-control" rows="4"
+                placeholder="Tell us about your event, venue, style preferences..."></textarea>
             </div>
-            
+
             <div class="form-submit">
               <button type="submit" class="btn-primary" id="submitBtn">Send Your Enquiry</button>
             </div>
-            
+
             <p class="privacy-note">Your information is safe and will never be shared.</p>
             <div id="formMessage" class="form-message"></div>
           </form>
@@ -1018,30 +1108,30 @@
     document.addEventListener('DOMContentLoaded', () => {
       const categorySelect = document.getElementById('categorySelect');
       const cards = document.querySelectorAll('.category-card');
-      
+
       if (categorySelect && cards.length > 0) {
         cards.forEach(card => {
           card.addEventListener('click', () => {
             // Clear active classes
             cards.forEach(c => c.classList.remove('active'));
-            
+
             // Add active to current
             card.classList.add('active');
-            
+
             // Update select value
             const val = card.dataset.value;
             categorySelect.value = val;
-            
+
             // Dispatch change event to trigger package updates in js/main.js
             categorySelect.dispatchEvent(new Event('change'));
-            
+
             // If there was an error showing for category, clear it
             const catError = document.getElementById('categoryError');
             if (catError) catError.textContent = '';
             categorySelect.classList.remove('error');
           });
         });
-        
+
         // Watch for resets on the form to clear active card styling
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {

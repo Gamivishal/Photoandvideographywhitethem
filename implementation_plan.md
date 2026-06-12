@@ -1,55 +1,51 @@
-# Premium Booking Page Redesign Implementation Plan
+# Mobile Responsiveness Enhancements Implementation Plan
 
-This plan details the steps required to transform the Yash Raj Motion Picture Booking Page (`book-now/index.html`) from a standard template layout into an ultra-premium, luxury studio booking experience. 
-
-The goal is to elevate the styling, layout, visual storytelling, and user experience, while keeping all underlying form input elements, IDs, name attributes, and JavaScript validation logic fully intact.
+This plan outlines the layout, styling, and design updates required to make the Yash Raj Motion Picture website fully responsive and visually stunning on mobile and tablet viewports.
 
 ---
 
-## Proposed Architectural & Aesthetic Changes
+## Proposed Changes
 
-### 1. Split-Grid Layout (Desktop)
-*   **The Issue:** The current booking form is centered and spans a single column, which feels sparse and lacks storytelling.
-*   **Premium Solution:** We will introduce a luxury two-column grid (`.booking-grid`) on desktop viewports:
-    *   **Left Column (Studio Info & Process - 40%):** A curated details panel showing the booking journey (Steps 1 to 4), a high-end couple portrait background overlay, why to choose Yash Raj Motion Picture, and social connect links.
-    *   **Right Column (Form Panel - 60%):** The redesigned booking form container with floating card effects, gold borders, and refined typography.
+### 1. Fix About Us Grid Overlaps on Tablet & Mobile
+*   **The Issue:** On screens under `900px` wide, the `.about-grid` (using `.editorial-grid`) changes its template columns to `1fr` but does not reset the column/row assignments of `.about-image` (`grid-column: 1 / 8; grid-row: 1`) and `.about-text` (`grid-column: 7 / 13; grid-row: 1`). This causes the elements to overlap on a single row and break the layout.
+*   **Solution:** In `css/pages.css`, under the `@media (max-width: 900px)` media query:
+    *   Set `.editorial-grid` to `grid-template-columns: 1fr` and `gap: 2rem`.
+    *   Set `.about-image` and `.about-text` to `grid-column: 1 / -1;` and `grid-row: auto;`.
+    *   Optimize padding on `.about-text` to `3rem 2rem` so it fits small viewports perfectly.
 
-### 2. Luxury Aesthetics & Overlays
-*   **Background Enhancements:** Soft cream-to-white gradient background. Plus, dynamic blurred golden glow shapes in the background (`::before` and `::after` page overlays) and a luxury grain texture overlay.
-*   **Decorative Vectors:** Insert subtle, high-end floral outlines in the background (SVGs) matching the Contact page's luxury theme.
+### 2. Make the Founder Editorial Grid Fully Responsive
+*   **The Issue:** The founder biography section (`.founder-editorial-grid`) lacks responsive overrides. On screens under `900px`, `.founder-text` and `.founder-image-wrapper` overlap inside a 12-column grid.
+*   **Solution:** In `css/pages.css`, under `@media (max-width: 900px)`:
+    *   Set `.founder-editorial-grid` to `grid-template-columns: 1fr` and `gap: 2rem`.
+    *   Set `.founder-text` and `.founder-image-wrapper` to `grid-column: 1 / -1;` and `grid-row: auto;`.
+    *   Scale the `.founder-image-wrapper` height to `450px` (or `min-height: auto;`) and padding on `.founder-text` to `0` or minimal values to look clean.
 
-### 3. Elevated Hero Section
-*   **Slow Zoom Animation:** Apply a subtle, immersive Ken Burns scale animation to the hero background image.
-*   **Luxury Typography:** Change the header title to *Book Your <em style="font-family: var(--font-serif); font-style: italic; color: var(--gold-light);">Date</em>* using elegant playfair/garamond serif fonts.
-*   **Tagline:** Add a premium description text: *"Let's plan your masterpiece. Reserve your photography session with Ahmedabad's leading visual studio."*
+### 3. Redesign the Award Timeline for Small Screens
+*   **The Issue:** The timeline is hard-coded to a two-column desktop layout (`.timeline-content { width: 45%; }` with `.timeline-track { left: 50%; }`). On tablet and mobile viewports, this severely squeezes the text and images into narrow vertical strips.
+*   **Solution:** In `css/pages.css`, under a new responsive override section:
+    *   Shift the `.timeline-track` line to the left (`left: 20px; transform: none;`).
+    *   Change `.timeline-item` layout to stack vertically (`flex-direction: column !important; align-items: flex-start; margin-left: 40px; margin-bottom: 4rem;`).
+    *   Move `.timeline-dot` to align with the left-aligned track (`left: 20px; top: 25px; transform: translate(-50%, -50%);`).
+    *   Allow the `.timeline-content` to span full width (`width: 100% !important; flex-direction: column !important; align-items: flex-start !important; text-align: left !important; gap: 1rem !important;`).
+    *   Constrain `.timeline-image` sizing on mobile to scale naturally with a `width: 100%; max-width: 320px;`.
 
-### 4. Interactive & High-End Form Elements (Without changing inputs)
-*   **Form Controls:** Apply custom CSS styling for inputs, dates, and textareas: a fine border (`1px solid rgba(153, 120, 82, 0.2)`) that transitions to gold on focus, accompanied by a soft golden drop shadow.
-*   **Custom Select Elements:** Add custom dropdown container styles with a golden chevron arrow.
-*   **Submit Button:** Add a sweep shine effect and hover scale translations.
-
-### 5. Google Map & Bottom Trust Badges
-*   **Trust Badges:** Add a premium horizontal trust section highlighting key client service standards (e.g. *Response Within 12 Hours*, *Personalized Consultation*, etc.).
-*   **Map Frame:** Embed a beautiful, fine-bordered Google Map showing the studio's physical location at Ahmedabad, styled with a soft gold overlay.
+### 4. Optimize Navbar and Logo Proportions on Small Screens
+*   **The Issue:** The scrolled header logo might clip or overlap navigation links and toggles when resized.
+*   **Solution:** Make sure the mobile navbar is neat and tidy. Ensure `.btn-book` and `#navToggle` are spaced properly and do not overlap on narrow viewports (e.g. `320px` to `480px`).
 
 ---
 
 ## Modified Files
 
-### [MODIFY] [book-now/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/book-now/index.html)
-*   Overwrite the CSS `<style>` block to introduce premium styling variable overrides, keyframe animations, responsive grid styles, and custom focus visual styles.
-*   Restructure the page content from line 173 to include the two-column layout (`.booking-grid`), left-hand info panel, and right-hand form container.
-*   Keep all original inputs (`#bookName`, `#bookEmail`, `#bookPhone`, `#bookDate`, `#bookCity`, `#bookCategory`, `#bookPackage`, `#bookVibe`, `#bookDrone`, `#bookBudget`, `#bookMessage`), form container, error elements, and the interactive javascript validation block fully intact.
-*   Append the luxury trust badges and Google Map block.
+### [MODIFY] [css/pages.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/pages.css)
+*   Add responsive grid resets for `.about-image`, `.about-text`, `.founder-text`, and `.founder-image-wrapper` under `@media (max-width: 900px)`.
+*   Add mobile timeline rules for `.award-timeline` under `@media (max-width: 768px)`.
 
 ---
 
 ## Verification Plan
 
 ### Manual Verification
-1.  **Visual Polish Check:** Verify that the page matches the premium white theme of Yash Raj Motion Picture, with elegant golden transitions, floral vectors, and clean, luxury fonts.
-2.  **Form Validation Verification:** Submit the form with empty values to check that validation errors still fire properly and focus on the first invalid field.
-3.  **Dynamic Package Options:** Select a category (e.g. "Wedding Photography") and verify that the packages dropdown fades in and populates options correctly. Select "Pre-Wedding Shoots" and confirm that the "Pre-Wedding Vibe" dropdown appears.
-4.  **Date Validation:** Select date `2026-06-15` or `2026-07-01` to check that the validation blocks submission and displays the custom fully-booked message.
-5.  **Simulated Form Submission:** Complete the form and click "Book Now". Verify that the button switches to "Submitting...", waits 1.2s, and successfully displays the success message.
-6.  **Responsive Layout Check:** Resize the browser window to verify the layout stacks beautifully on tablets and mobile screens.
+1.  **About Page Verification:** Load `about/index.html` and verify that the "The Studio Story" and "Yash Raj Founder" sections stack beautifully and vertically without overlays on tablet and mobile resolutions.
+2.  **Award Timeline Verification:** Scroll down on `about/index.html` to the Awards section and check that the timeline cards stack cleanly on mobile viewports.
+3.  **Header Responsiveness Check:** Resize the screen to check the navbar layout on various widths (desktop, tablet, mobile).

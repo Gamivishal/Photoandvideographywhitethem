@@ -77,6 +77,8 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 ### 3. Loader Logo Visibility Fix
 *   **Prevented Stretching & Cropping**: Added explicit `.loader-logo img` rules in `css/style.css` specifying `height: 90px !important`, `width: auto !important`, and `object-fit: contain !important` to override the global `img` block-fill rule (`width: 100%; height: 100%`) which was causing the logo to stretch horizontally.
 *   **Clean Centering & Overflow**: Maintained vertical/horizontal alignment using text-align centering and block auto-margins, while keeping the luxury pulse animation and progress loading bar exactly as designed.
-
-
+### 4. Instagram Grid Mobile Layout Fix
+*   **Grid Stretching & Safari Bug Fix**: Replaced the native `aspect-ratio` and buggy `padding-bottom` direct-element rules with a bulletproof `::after` pseudo-element padding hack (`padding-top: 100%`). This resolves a known issue where older mobile browsers and specific devices would mistakenly calculate grid item heights against the viewport, causing images (like portrait ones) to stretch excessively into tall, narrow cards. 
+*   **Icon Centering**: Updated the `.insta-icon` camera overlay to use absolute positioning with transforms (`top: 50%`, `left: 50%`) ensuring perfect centering regardless of the container's rendering mode.
+*   **Grid Rebalancing**: Adjusted the mobile media query (`max-width: 768px`) for `.instagram-grid` to force exactly `2` columns instead of `3`. This guarantees that the 10 Instagram images break cleanly into a balanced 5-row, 2-column layout on both tablets and smartphones without orphaned items.
 

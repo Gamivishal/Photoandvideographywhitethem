@@ -55,5 +55,11 @@
     </div>
   </div>
 </footer>`;
-  document.write(footerHTML);
+  const currentScript = document.currentScript;
+  if (currentScript) {
+    currentScript.insertAdjacentHTML('beforebegin', footerHTML);
+  } else {
+    // Fallback if currentScript is somehow null (e.g., defer/async)
+    document.write(footerHTML);
+  }
 })();

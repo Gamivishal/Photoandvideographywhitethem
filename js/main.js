@@ -6,19 +6,26 @@
 // ---- LOADER ----
 const loader = document.getElementById('loader');
 const hideLoader = () => {
-  setTimeout(() => {
-    if (loader) loader.classList.add('hidden');
-  }, 200);
+  if (loader) loader.classList.add('hidden');
 };
 
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  hideLoader();
+const initLoader = () => {
+  const cinematicVideo = document.getElementById('cinematicVideo');
+  if (cinematicVideo && cinematicVideo.readyState < 3) {
+    // Wait for video to be ready enough to play
+    cinematicVideo.addEventListener('canplay', hideLoader, { once: true });
+    // Fallback if video takes too long
+    setTimeout(hideLoader, 3000);
+  } else {
+    hideLoader();
+  }
+};
+
+if (document.readyState === 'complete') {
+  initLoader();
 } else {
-  document.addEventListener('DOMContentLoaded', hideLoader);
-  window.addEventListener('load', hideLoader);
+  window.addEventListener('load', initLoader);
 }
-// Fallback in case load event gets missed
-setTimeout(hideLoader, 800);
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -439,12 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         input: document.getElementById('eventDate'),
         error: document.getElementById('eventDateError'),
-        message: 'This date is fully booked (max 2 bookings per day). Please choose another date.',
-        customValidate: (val) => {
-          if (!val) return true; // Date is optional on Contact page
-          const fullyBookedDates = ['2026-06-15', '2026-07-01', '2026-12-25'];
-          return !fullyBookedDates.includes(val);
-        }
+        message: 'Please enter a valid date.'
       }
     ];
 
@@ -518,9 +520,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // If the form has an action, let it submit natively
+      if (contactForm.getAttribute('action')) {
+        return; // Allow the browser to proceed
+      }
+
+      // Otherwise, prevent default and show a generic success (since there's no backend specified)
+      e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
-      // Simulate a short delay (no real API)
       setTimeout(() => {
         if (formMessage) {
           formMessage.className = 'form-message success';
@@ -683,5 +691,56 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('[YRMP] WhatsApp CTA clicked');
     });
   });
+
+  // ---- MARQUEE HOVER EFFECTS ----
+  const marqueeContainer = document.querySelector('.logo-marquee-container');
+  if (marqueeContainer) {
+    const track = marqueeContainer.querySelector('.logo-marquee-track');
+    marqueeContainer.addEventListener('mouseover', () => {
+      marqueeContainer.style.opacity = '1';
+      if (track) track.style.animationPlayState = 'paused';
+    });
+     marqueeContainer.addEventListener('mouseout', () => {
+      marqueeContainer.style.opacity = '0.6';
+      if (track) track.style.animationPlayState = 'running';
+    });
+  }
+
+  // ---- CINEMATIC LIGHT PARTICLES ----
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    const particleCount = 20; // Subtle
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'cinematic-particle';
+      const size = Math.random() * 4 + 2;
+      const posX = Math.random() * 100;
+      const posY = Math.random() * 100;
+      const delay = Math.random() * 5;
+      const duration = Math.random() * 10 + 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}%`;
+      particle.style.top = `${posY}%`;
+      particle.style.animationDelay = `${delay}s`;
+      particle.style.animationDuration = `${duration}s`;
+      
+      heroSection.appendChild(particle);
+    }
+  }
+
+  // ---- SCROLL PARALLAX EFFECT ----
+  const parallaxImages = document.querySelectorAll('.intro-img-main img, .intro-img-side img');
+  if (parallaxImages.length > 0) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      parallaxImages.forEach((img, index) => {
+        const speed = index === 0 ? 0.05 : -0.03; // Main img down, side img up
+        const yPos = -(scrolled * speed);
+        img.style.transform = `translateY(${yPos}px) scale(1.08)`;
+      });
+    }, { passive: true });
+  }
 
 });

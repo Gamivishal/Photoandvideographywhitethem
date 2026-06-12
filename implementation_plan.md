@@ -1,36 +1,57 @@
-# Implementation Plan — Portfolio Hover & Lightbox Upgrades & Contact Form White Background Styling
+# Premium Contact Page Redesign Implementation Plan
 
-This plan outlines the design and code enhancements to:
-1. Resolve the overlapping hover text on the portfolio page grid items.
-2. Implement a premium, unified fullscreen lightbox for images/videos with glassmorphism captions.
-3. Update the contact page form card to feature a gorgeous white textured background image with highly legible dark/gold contrast styling.
+This plan details the steps required to transform the Yash Raj Motion Picture Contact Page (`contact/index.html`) from a standard template layout into an ultra-premium, luxury studio booking experience. 
 
-## Proposed Changes
+The goal is to elevate the styling, interactive form elements, and visual storytelling to feel high-end and state-of-the-art, while keeping the underlying JavaScript validation in `js/main.js` fully intact and functional.
 
-### 1. Style Corrections & Enhancements
+---
 
-#### [MODIFY] [pages.css](file:///c:/Users/Admin/source/repos/Photoandvideography/css/pages.css)
-- **Portfolio Hover Text**: Set `.masonry-info` to `opacity: 0` and `pointer-events: none` by default, transitioning to `opacity: 1` on hover.
-- **Lightbox Styling**: Add styling for `.lightbox-content` (flex alignment), `.lightbox-video` (sizing), and `.lightbox-caption` (semi-transparent blur backdrop with gold accents, gold titles, and light gray subtitles).
+## Proposed Architectural & Aesthetic Changes
 
-#### [MODIFY] [contact/index.html](file:///c:/Users/Admin/source/repos/Photoandvideography/contact/index.html)
-- **Contact Form White Background**:
-  - Set the background of `.contact-form-container` to a high-end white marble background image overlaid with a semi-transparent white gradient (`rgba(255, 255, 255, 0.92)`).
-  - Update headers, form labels, input placeholders, select dropdowns, and button colors within the form card to be dark (e.g. `#13100E`) and gold, creating a beautiful and highly readable contrast.
+### 1. Interactive Category Selector (Visual Cards)
+*   **The Issue:** The current category selector is a standard, plain dropdown list.
+*   **Premium Solution:** We will hide the select element visually (but keep it in the DOM) and replace it with a **visual grid of premium category cards**.
+*   **Details:** 
+    *   Five cards representing Wedding, Pre‑Wedding, Corporate, Events, and Product.
+    *   Each card features a hand-crafted minimal SVG icon, a clean typography label, and dynamic hover scaling.
+    *   Clicking a card dynamically updates the hidden `#categorySelect` element and programmatically triggers its `change` event. This seamlessly integrates with the existing logic in `js/main.js` to reveal and populate the dynamic packages dropdown.
 
-### 2. JavaScript Unified Lightbox Controller
+### 2. Luxury Typography & Hero Section
+*   **Hero Section:** Add a sophisticated slow zoom (Ken Burns) animation to the hero background image. Enhance the title from "Contact Us" to `Contact <em>Us</em>` using elegant Cormorant Garamond serif fonts with italic accents.
+*   **Sub-Header:** Add a premium tagline: *"Let's capture your moments in timeless frames. Reach out to Yash Raj Motion Picture."*
 
-#### [MODIFY] [main.js](file:///c:/Users/Admin/source/repos/Photoandvideography/js/main.js)
-- Upgrade the `#lightbox` element setup. Dynamically create/inject a container that houses both `<img>` and `<video>` tags along with the caption area.
-- Add unified click listeners to support opening any `.masonry-item` (both images and videos on the Portfolio page), `.gallery-item`, or standard `[data-lightbox]` element in the lightbox.
-- Extract caption text (title/subtitle) from `.masonry-info` tags or image `alt` attributes.
-- Ensure video playbacks pause/reset correctly when the lightbox is closed so audio doesn't continue in the background.
+### 3. Contact Info Card Refinement (Left Panel)
+*   **SVG Icons:** Replace standard emojis (📍, 📞, ✉️, 📅) with minimalist, elegant golden SVG icons.
+*   **Visual Polish:** Use a softer cream gradient background, a very fine double-line border design, and a soft glow shadow on hover.
+*   **Social Link Strip:** Add a dedicated, highly styled social links section at the bottom of the card ("Connect with our social journal") to allow direct engagement.
+
+### 4. High-End Form Inputs (Right Panel)
+*   **Floating Border Effects:** Implement modern input lines with a fine `1px solid rgba(153, 120, 82, 0.2)` border. On focus, the border transitions to a rich gold color, accompanied by a soft golden drop shadow.
+*   **Custom Select Elements:** Add custom container styling with a golden arrow indicator for the package and budget selects.
+*   **Submit Button:** Add a premium hover sweep shine effect and translate transitions.
+
+### 5. Interactive Google Map Layout
+*   Embed the map within a luxury frame featuring a fine border and a subtle golden overlay that disappears when the user hovers over it.
+
+---
+
+## Modified Files
+
+### [MODIFY] [contact/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/contact/index.html)
+*   Overwrite the custom `<style>` block to introduce premium CSS variables, visual card selectors, floating animations, and custom select styles.
+*   Update the page markup to include visual selector cards, custom SVG icons, and a social links strip.
+*   Add inline interactive scripting at the bottom of the HTML to bind the visual cards to the hidden `#categorySelect` dropdown.
 
 ---
 
 ## Verification Plan
 
 ### Manual Verification
-1. **Portfolio Hover**: Hover over portfolio grid items and check that text overlay appears smoothly.
-2. **Lightbox Captions & Videos**: Click a portfolio image and video. Verify that the media loads in fullscreen, showing the title and location at the bottom. Closing the video must stop the audio immediately.
-3. **Contact Form Style**: Open `/contact/` and verify the form container now has a luxurious white marble textured background. Check that all label text, inputs, and the submit button are highly legible and look clean.
+1.  Open the Contact Page in the browser.
+2.  Verify the visual layout looks clean, luxurious, and follows the white theme colors.
+3.  Click through the visual category cards (Wedding, Pre-Wedding, etc.) and check that:
+    *   The clicked card highlights with a glowing golden border.
+    *   The dynamic packages dropdown fades in automatically with corresponding packages.
+4.  Submit the form with missing required fields to verify that validation messages still fire correctly.
+5.  Fill in the form and submit it to verify the success state triggers.
+6.  Test responsiveness on mobile, tablet, and desktop viewports.

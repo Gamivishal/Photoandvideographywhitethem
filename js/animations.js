@@ -117,4 +117,40 @@
     });
   });
 
+  // ---- ABOUT PAGE CINEMATIC REVEALS ----
+  const cinematicElements = document.querySelectorAll('.mask-reveal-wrap, .image-mask-reveal, .fade-up-reveal, .draw-signature');
+  if (cinematicElements.length > 0) {
+    const cinematicObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+    
+    cinematicElements.forEach(el => cinematicObserver.observe(el));
+  }
+
+  // ---- TIMELINE DRAW EFFECT ----
+  const timelineTrack = document.getElementById('timelineTrack');
+  const awardSection = document.getElementById('awardSection');
+  if (timelineTrack && awardSection) {
+    window.addEventListener('scroll', () => {
+      const rect = awardSection.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      const windowHeight = window.innerHeight;
+      
+      if (sectionTop < windowHeight && sectionTop > -sectionHeight) {
+        let progress = (windowHeight - sectionTop) / (windowHeight + sectionHeight) * 1.5;
+        if (progress > 1) progress = 1;
+        if (progress < 0) progress = 0;
+        
+        timelineTrack.style.height = `100%`;
+        timelineTrack.style.background = `linear-gradient(to bottom, var(--gold) ${progress * 100}%, rgba(0,0,0,0.1) ${progress * 100}%)`;
+      }
+    }, { passive: true });
+  }
+
 })();

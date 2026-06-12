@@ -32,5 +32,11 @@
     </div>
   </nav>
   `;
-  document.write(headerHTML);
+  const currentScript = document.currentScript;
+  if (currentScript) {
+    currentScript.insertAdjacentHTML('beforebegin', headerHTML);
+  } else {
+    // Fallback if currentScript is somehow null (e.g., defer/async)
+    document.write(headerHTML);
+  }
 })();

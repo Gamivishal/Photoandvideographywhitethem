@@ -79,15 +79,27 @@
   <section class="hero" id="hero">
     <div class="hero-bg">
       <div class="hero-overlay"></div>
-      <div class="hero-slide active" id="heroSlide1" style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=50&fm=webp&quot;);
-          "></div>
-      <div class="hero-slide" id="heroSlide2" style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1200&q=50&fm=webp&quot;);
-          "></div>
-      <div class="hero-slide" id="heroSlide3" style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1200&q=50&fm=webp&quot;);
-          "></div>
+      <div class="hero-slide active" id="heroSlide1">
+        <picture>
+          <source media="(max-width: 768px)" srcset="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=50&fm=webp">
+          <source media="(min-width: 769px)" srcset="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&q=70&fm=webp">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=50&fm=webp" alt="Wedding Couple Hero" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </picture>
+      </div>
+      <div class="hero-slide" id="heroSlide2">
+        <picture>
+          <source media="(max-width: 768px)" srcset="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=50&fm=webp">
+          <source media="(min-width: 769px)" srcset="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1920&q=70&fm=webp">
+          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1200&q=50&fm=webp" alt="Cinematic Wedding Details" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </picture>
+      </div>
+      <div class="hero-slide" id="heroSlide3">
+        <picture>
+          <source media="(max-width: 768px)" srcset="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=50&fm=webp">
+          <source media="(min-width: 769px)" srcset="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1920&q=70&fm=webp">
+          <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1200&q=50&fm=webp" alt="Drone Aerial View" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </picture>
+      </div>
     </div>
     <div class="hero-content">
       <p class="hero-tagline reveal-up">Ahmedabad's Premier Visual Studio</p>
@@ -105,9 +117,9 @@
       </div>
     </div>
     <div class="hero-dots">
-      <button class="dot active" onclick="goToSlide(0)" id="dot0"></button>
-      <button class="dot" onclick="goToSlide(1)" id="dot1"></button>
-      <button class="dot" onclick="goToSlide(2)" id="dot2"></button>
+      <button class="dot active" onclick="goToSlide(0)" id="dot0" aria-label="Go to slide 1"></button>
+      <button class="dot" onclick="goToSlide(1)" id="dot1" aria-label="Go to slide 2"></button>
+      <button class="dot" onclick="goToSlide(2)" id="dot2" aria-label="Go to slide 3"></button>
     </div>
   </section>
 
@@ -381,9 +393,7 @@
             opacity: 0.6;
             filter: grayscale(100%);
             transition: opacity 0.3s ease;
-          "
-        onmouseover="this.style.opacity = '1'; this.querySelector('.logo-marquee-track').style.animationPlayState = 'paused';"
-        onmouseout="this.style.opacity = '0.6'; this.querySelector('.logo-marquee-track').style.animationPlayState = 'running';">
+          ">
         <div class="logo-marquee-track" style="
               display: flex;
               width: max-content;
@@ -391,39 +401,39 @@
               align-items: center;
               animation: scrollMarquee 20s linear infinite;
               padding-right: 6rem;
-            ">
+            " aria-hidden="true">
           <!-- Set 1 -->
-          <h3
+          <div
             style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--dark); cursor: pointer; margin: 0;">
-            VOGUE</h3>
-          <h3
+            VOGUE</div>
+          <div
             style="font-family: var(--font-sans); font-size: 1.8rem; letter-spacing: 0.3em; font-weight: 700; color: var(--dark); cursor: pointer; margin: 0;">
-            WEDMEGOOD</h3>
-          <h3
+            WEDMEGOOD</div>
+          <div
             style="font-family: var(--font-serif); font-size: 2.2rem; font-style: italic; color: var(--dark); cursor: pointer; margin: 0;">
-            ShaadiSaga</h3>
-          <h3
+            ShaadiSaga</div>
+          <div
             style="font-family: var(--font-display); font-size: 2.8rem; color: var(--dark); cursor: pointer; margin: 0;">
-            The Knot</h3>
-          <h3
+            The Knot</div>
+          <div
             style="font-family: var(--font-sans); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dark); cursor: pointer; margin: 0;">
-            Weddingsutra</h3>
+            Weddingsutra</div>
           <!-- Set 2 -->
-          <h3
+          <div
             style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--dark); cursor: pointer; margin: 0;">
-            VOGUE</h3>
-          <h3
+            VOGUE</div>
+          <div
             style="font-family: var(--font-sans); font-size: 1.8rem; letter-spacing: 0.3em; font-weight: 700; color: var(--dark); cursor: pointer; margin: 0;">
-            WEDMEGOOD</h3>
-          <h3
+            WEDMEGOOD</div>
+          <div
             style="font-family: var(--font-serif); font-size: 2.2rem; font-style: italic; color: var(--dark); cursor: pointer; margin: 0;">
-            ShaadiSaga</h3>
-          <h3
+            ShaadiSaga</div>
+          <div
             style="font-family: var(--font-display); font-size: 2.8rem; color: var(--dark); cursor: pointer; margin: 0;">
-            The Knot</h3>
-          <h3
+            The Knot</div>
+          <div
             style="font-family: var(--font-sans); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dark); cursor: pointer; margin: 0;">
-            Weddingsutra</h3>
+            Weddingsutra</div>
         </div>
       </div>
     </div>
@@ -459,7 +469,7 @@
           <source src="Staticdata/video/CinematicHome.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <button id="cinematicStop" class="btn-outline" style="margin-top: 1rem">Pause</button>
+        <button id="cinematicStop" class="btn-outline" style="margin-top: 1rem" aria-label="Pause Cinematic Video">Pause</button>
         <script>
           // Play / Pause button
           document.getElementById("cinematicStop").addEventListener("click", function () {

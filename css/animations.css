@@ -112,3 +112,256 @@
   pointer-events: none;
   transition: background 0.2s ease;
 }
+
+/* ---- Ken Burns Effect ---- */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.hero-slide.active img {
+  animation: kenBurns 15s ease-out forwards;
+}
+
+/* ---- Luxury Border Glow ---- */
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---- Film Letterbox ---- */
+.cinematic-bars::before, .cinematic-bars::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0;
+/* ============================================================
+   YASH RAJ MOTION PICTURE — Animations CSS
+   ============================================================ */
+
+/* ---- Reveal Animations ---- */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+.delay-4 { transition-delay: 0.6s; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* ---- Shimmer Effect ---- */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--dark-3) 25%, var(--dark-4) 50%, var(--dark-3) 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* ---- Float Animation ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.float { animation: float 4s ease-in-out infinite; }
+
+/* ---- Gradient Text ---- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradientShift 4s ease infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ---- Page Transition ---- */
+.page-enter { animation: pageEnter 0.6s ease forwards; }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Parallax Image ---- */
+.parallax-img { will-change: transform; }
+
+/* ---- Hover Glow ---- */
+.glow-hover {
+  transition: box-shadow 0.3s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(201,169,110,0.3);
+}
+
+/* ---- 3D Tilt Effect for Location Cards ---- */
+.location-card {
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+.location-card:hover {
+  box-shadow: 0 0 30px rgba(201,169,110,0.4);
+}
+
+/* Spotlights for 3D card hover */
+.location-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.location-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 70%);
+  pointer-events: none;
+  transition: background 0.2s ease;
+}
+
+/* ---- Ken Burns Effect ---- */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.hero-slide.active img {
+  animation: kenBurns 15s ease-out forwards;
+}
+
+/* ---- Luxury Border Glow ---- */
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---- Film Letterbox ---- */
+.cinematic-bars::before, .cinematic-bars::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #000;
+  z-index: 10;
+  transition: height 1s cubic-bezier(0.85, 0, 0.15, 1);
+}
+.cinematic-bars::before { top: 0; }
+.cinematic-bars::after { bottom: 0; }
+.cinematic-bars.active-bars::before, .cinematic-bars.active-bars::after {
+  height: 12%;
+}
+
+/* ---- Cinematic Particles ---- */
+.cinematic-particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(212,175,55,0.4) 40%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+}
+
+/* ---- About Page Cinematic Animations ---- */
+.mask-reveal-wrap {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.mask-reveal-text {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+}
+
+.mask-reveal-wrap.visible .mask-reveal-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.image-mask-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.4s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.image-mask-reveal.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+.fade-up-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fade-up-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.draw-signature {
+  background: linear-gradient(to right, var(--dark) 0%, var(--dark) 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: background-size 1.5s ease-out;
+}
+
+.draw-signature.visible {
+  background-size: 100% 100%;
+}
+
+.zoom-bg {
+  animation: slowZoom 25s linear infinite alternate;
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.12); }
+}

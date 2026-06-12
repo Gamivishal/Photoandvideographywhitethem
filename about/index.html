@@ -35,38 +35,48 @@
 
   <script src="../js/header.js"></script>
 
-  <section class="page-hero" id="pageHero">
-    <div class="page-hero-bg"
+  <!-- ========== CINEMATIC HERO ========== -->
+  <section class="page-hero cinematic-hero" id="pageHero">
+    <div class="page-hero-bg parallax-bg zoom-bg"
       style="background-image:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1920&q=80')"></div>
     <div class="page-hero-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
     <div class="page-hero-content">
-      <!-- <span class="section-label">Our Story</span> -->
-      <h1>About Us</h1>
-      <p class="breadcrumb"><a href="../">Home</a> / About</p>
+      <div class="mask-reveal-wrap">
+        <h1 class="mask-reveal-text">About Us</h1>
+      </div>
+      <div class="mask-reveal-wrap delay-2">
+        <p class="breadcrumb mask-reveal-text"><a href="../">Home</a> / About</p>
+      </div>
     </div>
   </section>
 
+  <!-- ========== THE STUDIO STORY ========== -->
   <section class="about-story section-pad" id="aboutStory">
     <div class="container">
-      <div class="about-grid">
-        <div class="about-image reveal-left">
-          <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=900&q=80"
-            alt="Yash Raj Motion Picture Team" loading="lazy" />
+      <div class="about-grid editorial-grid">
+        <div class="about-image image-mask-reveal">
+          <div class="parallax-img">
+            <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=900&q=80"
+              alt="Yash Raj Motion Picture Team" loading="lazy" />
+          </div>
         </div>
-        <div class="about-text reveal-right">
+        <div class="about-text fade-up-reveal">
           <span class="section-label">Since 2017</span>
           <h2 class="section-title">Capturing Gujarat's<br />Finest Moments</h2>
+          <blockquote class="luxury-quote">
+            "We believe that a great photograph isn't just seen; it's felt. That's why we pour our heart into every frame we capture."
+          </blockquote>
           <p>Yash Raj Motion Picture was founded with a single mission — to tell love stories through the lens of art.
             Based in Ahmedabad, we have grown into one of Gujarat's most trusted and sought-after visual studios.</p>
           <p>Over the years, we have documented more than 700 beautiful events, ranging from intimate home ceremonies to
             grand 5-day destination weddings. Our style is a perfect blend of documentary photojournalism and fine-art
             portraiture.</p>
-          <p>We believe that a great photograph isn't just seen; it's felt. That's why we pour our heart into every
-            frame we capture.</p>
+          
           <div class="awards-strip">
-            <div class="award-item"><span class="award-icon">🏆</span><span class="award-text">Award Winning</span>
+            <div class="award-item glow-hover"><span class="award-icon">🏆</span><span class="award-text">Award Winning</span>
             </div>
-            <div class="award-item"><span class="award-icon">⭐</span><span class="award-text">500+ 5-Star Reviews</span>
+            <div class="award-item glow-hover"><span class="award-icon">⭐</span><span class="award-text">500+ 5-Star Reviews</span>
             </div>
           </div>
         </div>
@@ -77,138 +87,196 @@
   <!-- ========== MISSION VISION VALUES ========== -->
   <section class="core-values section-pad" id="coreValues">
     <div class="container">
-      <div class="section-header center">
+      <div class="section-header center fade-up-reveal">
         <span class="section-label">Our Philosophy</span>
         <h2 class="section-title">Mission, Vision & Values</h2>
       </div>
       <div class="values-grid">
-        <div class="value-card reveal-up" id="val1">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <circle cx="12" cy="12" r="6"></circle>
-              <circle cx="12" cy="12" r="2"></circle>
-            </svg>
+        <div class="value-card luxury-philosophy-card fade-up-reveal" id="val1">
+          <div class="luxury-card-inner">
+            <div class="value-icon luxury-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
+            <h3>Our Mission</h3>
+            <p>To capture the authentic, raw emotions of your special moments and preserve them as timeless pieces of art
+              that you will cherish forever.</p>
+            <div class="gold-accent-line"></div>
           </div>
-          <h3>Our Mission</h3>
-          <p>To capture the authentic, raw emotions of your special moments and preserve them as timeless pieces of art
-            that you will cherish forever.</p>
         </div>
-        <div class="value-card reveal-up delay-1" id="val2">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-              <circle cx="12" cy="12" r="3"></circle>
-            </svg>
+        <div class="value-card luxury-philosophy-card fade-up-reveal delay-1" id="val2">
+          <div class="luxury-card-inner">
+            <div class="value-icon luxury-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <h3>Our Vision</h3>
+            <p>To be the most trusted visual storytelling studio in Gujarat, renowned for our fine-art approach,
+              innovation, and unparalleled dedication to our craft.</p>
+            <div class="gold-accent-line"></div>
           </div>
-          <h3>Our Vision</h3>
-          <p>To be the most trusted visual storytelling studio in Gujarat, renowned for our fine-art approach,
-            innovation, and unparalleled dedication to our craft.</p>
         </div>
-        <div class="value-card reveal-up delay-2" id="val3">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 3h12l4 6-10 12L2 9z"></path>
-            </svg>
+        <div class="value-card luxury-philosophy-card fade-up-reveal delay-2" id="val3">
+          <div class="luxury-card-inner">
+            <div class="value-icon luxury-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3h12l4 6-10 12L2 9z"></path>
+              </svg>
+            </div>
+            <h3>Our Values</h3>
+            <p>Integrity, Creativity, and Excellence. We believe in treating every story as unique, delivering premium
+              quality, and creating an unforgettable experience.</p>
+            <div class="gold-accent-line"></div>
           </div>
-          <h3>Our Values</h3>
-          <p>Integrity, Creativity, and Excellence. We believe in treating every story as unique, delivering premium
-            quality, and creating an unforgettable experience.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== FOUNDER BIO ========== -->
-  <section class="founder-bio section-pad" id="founderBio" style="background: var(--light);">
+  <!-- ========== FOUNDER BIO (LUXURY EDITORIAL) ========== -->
+  <section class="founder-bio section-pad" id="founderBio">
     <div class="container">
-      <div class="about-grid" style="align-items: center;">
-        <div class="about-text reveal-left" style="padding-right: 3rem;">
+      <div class="founder-editorial-grid">
+        <div class="founder-text fade-up-reveal">
           <span class="section-label">Meet the Artist</span>
           <h2 class="section-title">Yash Raj</h2>
-          <h3
-            style="font-family: var(--font-sans); letter-spacing: 0.2em; font-size: 0.9rem; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 1.5rem;">
-            Founder & Lead Photographer</h3>
-          <p>With over a decade of experience behind the lens, Yash Raj has mastered the art of capturing raw, authentic
+          <h3 class="founder-subtitle">Founder & CEO</h3>
+          <p class="founder-para">With over a decade of experience behind the lens, Yash Raj has mastered the art of capturing raw, authentic
             emotion. His journey began with a simple camera and a profound love for storytelling, which quickly evolved
             into one of Ahmedabad's most prestigious photography studios.</p>
-          <p>Yash believes that wedding photography is not about staging perfect poses, but about documenting the
+          <p class="founder-para">Yash believes that wedding photography is not about staging perfect poses, but about documenting the
             perfectly imperfect moments that make each love story unique. His fine-art approach ensures that every album
             feels like a cinematic masterpiece.</p>
-          <div style="margin-top: 1.5rem; border-top: 1px solid rgba(204, 166, 119, 0.25); padding-top: 1.5rem;">
-            <span
-              style="font-family: 'Dancing Script', cursive; font-size: 2.6rem; color: var(--gold-dark); font-weight: 600; letter-spacing: 0.05em; display: inline-block;">Yash
-              Raj</span>
+          <div class="founder-signature-block">
+            <span class="signature-text draw-signature">Yash Raj</span>
           </div>
         </div>
-        <div class="about-image reveal-right">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80" alt="Yash Raj - Founder"
-            loading="lazy" style="border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" />
+        <div class="founder-image-wrapper image-mask-reveal">
+          <div class="parallax-img">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1000&q=80" alt="Yash Raj - Founder"
+              loading="lazy" />
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ========== TEAM SECTION (ARTIST SHOWCASE) ========== -->
   <section class="team-section section-pad" id="teamSection">
     <div class="container">
-      <div class="section-header center">
+      <div class="section-header center fade-up-reveal">
         <span class="section-label light">The Artists</span>
         <h2 class="section-title light">Meet Our Team</h2>
       </div>
       <div class="team-grid">
-        <div class="team-card reveal-up" id="team1">
-          <div class="team-photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80"
-              alt="Founder" loading="lazy" /></div>
-          <h3>Yash Raj</h3><span>Founder & Lead Photographer</span>
+        <div class="team-card artist-poster fade-up-reveal" id="team1">
+          <div class="team-photo">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80" alt="Founder" loading="lazy" />
+            <div class="artist-overlay">
+              <div class="artist-info">
+                <h3>Yash Raj</h3>
+                <div class="artist-line"></div>
+                <span>Founder & CEO</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="team-card reveal-up delay-1" id="team2">
-          <div class="team-photo"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80"
-              alt="Cinematographer" loading="lazy" /></div>
-          <h3>Priya Sharma</h3><span>Chief Cinematographer</span>
+        <div class="team-card artist-poster fade-up-reveal delay-1" id="team2">
+          <div class="team-photo">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80" alt="Cinematographer" loading="lazy" />
+            <div class="artist-overlay">
+              <div class="artist-info">
+                <h3>Priya Sharma</h3>
+                <div class="artist-line"></div>
+                <span>Chief Cinematographer</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="team-card reveal-up delay-2" id="team3">
-          <div class="team-photo"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80"
-              alt="Drone Pilot" loading="lazy" /></div>
-          <h3>Rohan Mehta</h3><span>DGCA Certified Drone Pilot</span>
+        <div class="team-card artist-poster fade-up-reveal delay-2" id="team3">
+          <div class="team-photo">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80" alt="Drone Pilot" loading="lazy" />
+            <div class="artist-overlay">
+              <div class="artist-info">
+                <h3>Rohan Mehta</h3>
+                <div class="artist-line"></div>
+                <span>DGCA Certified Drone Pilot</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="award-ceremony section-pad" id="awardSection" style="background: var(--white); color: var(--dark-2);">
+  <!-- ========== AWARDS & RECOGNITION (PRESTIGIOUS TIMELINE) ========== -->
+  <section class="award-ceremony section-pad" id="awardSection">
     <div class="container">
-      <div class="section-header center">
-        <span class="section-label" style="color: var(--gold-dark);">Recognition</span>
-        <h2 class="section-title" style="color: var(--dark);">Award Ceremony</h2>
+      <div class="section-header center fade-up-reveal">
+        <span class="section-label">Recognition</span>
+        <h2 class="section-title">Award Ceremony</h2>
+        <p class="section-desc center" style="margin: 1.5rem auto 3rem;">
+          Honored at the Gujarat Photography Awards 2024, receiving the "Best Wedding Photography Studio" award for excellence in storytelling and creativity.
+        </p>
       </div>
-      <p class="section-text" style="color: #555;">
-        Yash Raj Motion Picture was honored at the Gujarat Photography Awards 2024, receiving the “Best Wedding
-        Photography Studio” award for excellence in storytelling and creativity.
-      </p>
-      <div class="award-image" style="text-align:center; margin-top:2rem;">
-        <div class="award-gallery zig-zag-gallery">
-          <picture class="zig-zag-item">
-            <source srcset="../Staticdata/images/Award/download%20(1).avif" type="image/avif">
-            <source srcset="../Staticdata/images/Award/download%20(1).webp" type="image/webp">
-            <img src="../Staticdata/images/Award/download%20(1).jpg" alt="Award ceremony 1" />
-          </picture>
-          <picture class="zig-zag-item">
-            <source srcset="../Staticdata/images/Award/download%20(2).avif" type="image/avif">
-            <source srcset="../Staticdata/images/Award/download%20(2).webp" type="image/webp">
-            <img src="../Staticdata/images/Award/download%20(2).jpg" alt="Award ceremony 2" />
-          </picture>
-          <picture class="zig-zag-item">
-            <source srcset="../Staticdata/images/Award/download%20(3).avif" type="image/avif">
-            <source srcset="../Staticdata/images/Award/download%20(3).webp" type="image/webp">
-            <img src="../Staticdata/images/Award/download%20(3).jpg" alt="Award ceremony 3" />
-          </picture>
-          <picture class="zig-zag-item">
-            <source srcset="../Staticdata/images/Award/download.avif" type="image/avif">
-            <source srcset="../Staticdata/images/Award/download.webp" type="image/webp">
-            <img src="../Staticdata/images/Award/download.jpg" alt="Award ceremony 4" />
-          </picture>
+      
+      <div class="award-timeline">
+        <div class="timeline-track" id="timelineTrack"></div>
+        
+        <div class="timeline-item right fade-up-reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-image image-mask-reveal">
+              <picture>
+                <source srcset="../Staticdata/images/Award/download%20(2).avif" type="image/avif">
+                <img src="../Staticdata/images/Award/download%20(2).jpg" alt="Award 2" />
+              </picture>
+            </div>
+            <div class="timeline-text">
+              <h4>Best Studio 2024</h4>
+              <p>Recognized for excellence in cinematic wedding storytelling across Gujarat.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item left fade-up-reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-text">
+              <h4>Team Victory</h4>
+              <p>A celebration of our dedicated artists and editors who make magic happen.</p>
+            </div>
+            <div class="timeline-image image-mask-reveal">
+              <picture>
+                <source srcset="../Staticdata/images/Award/download%20(1).avif" type="image/avif">
+                <img src="../Staticdata/images/Award/download%20(1).jpg" alt="Award 1" />
+              </picture>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right fade-up-reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-image image-mask-reveal">
+              <picture>
+                <source srcset="../Staticdata/images/Award/download%20(3).avif" type="image/avif">
+                <img src="../Staticdata/images/Award/download%20(3).jpg" alt="Award 3" />
+              </picture>
+            </div>
+            <div class="timeline-text">
+              <h4>Plaque of Honor</h4>
+              <p>Awarded by the most prestigious visual arts committee in Ahmedabad.</p>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 

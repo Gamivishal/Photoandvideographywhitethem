@@ -46,17 +46,18 @@
 }
 
 .page-hero-content h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 400;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
   color: var(--white);
   margin-top: 0.5rem;
 }
 
 .page-hero-content .breadcrumb {
   margin-top: 1rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-wide);
   color: var(--grey);
   text-transform: uppercase;
 }
@@ -125,9 +126,9 @@
 }
 
 .luxury-quote {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  line-height: 1.4;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
   color: var(--gold-dark);
   margin: 3rem 0;
   padding-left: 2rem;
@@ -151,9 +152,9 @@
 .drone-reel-section .section-desc,
 .masonry-info p,
 .location-sub {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
 }
 
 /* Awards Strip */
@@ -619,27 +620,28 @@
 /* Meta Labels & Typography Hierarchy */
 .timeline-meta {
   display: block;
-  font-size: 0.75rem;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--ls-wide);
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 
 .timeline-text h4 {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
   color: var(--dark);
   margin-bottom: 0.75rem;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .timeline-text p {
+  font-family: var(--font-body);
   color: #666;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
 }
 
 /* ---- Portfolio Page ---- */
@@ -1034,21 +1036,22 @@
 }
 
 .package-name {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
   color: var(--light);
   margin-bottom: 0.5rem;
 }
 
 .package-price {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
   color: var(--gold);
   margin: 1rem 0;
 }
 
 .package-price span {
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
   color: var(--grey);
 }
 
@@ -1061,7 +1064,8 @@
   display: flex;
   gap: 0.75rem;
   color: var(--grey-light);
-  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -1082,7 +1086,8 @@
 }
 
 .pkg-tab {
-  font-size: 0.72rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   border: none;
@@ -1281,8 +1286,8 @@
 }
 
 .contact-info h3 {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
   color: var(--dark);
   margin-bottom: 2rem;
 }
@@ -1307,7 +1312,8 @@
 }
 
 .contact-item h4 {
-  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--grey);
@@ -1316,8 +1322,9 @@
 
 .contact-item p,
 .contact-item a {
+  font-family: var(--font-body);
   color: var(--dark);
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 
 /* WhatsApp CTA on contact */
@@ -1523,8 +1530,8 @@ textarea.form-control {
 }
 
 .tc-text {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
   font-style: italic;
   color: var(--grey-light);
   line-height: 1.7;
@@ -1552,13 +1559,15 @@ textarea.form-control {
 }
 
 .tc-name {
-  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
   color: var(--light);
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 
 .tc-occasion {
-  font-size: 0.72rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
   color: var(--grey);
 }
 
@@ -1663,10 +1672,10 @@ textarea.form-control {
 }
 
 .blog-card h3 {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
   color: var(--light);
-  line-height: 1.4;
+  line-height: var(--lh-heading);
   margin-bottom: 0.75rem;
 }
 
@@ -1816,9 +1825,9 @@ textarea.form-control {
 }
 
 .drone-cap h4 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   color: var(--light);
-  font-size: 1.25rem;
+  font-size: var(--fs-h3);
   margin-bottom: 0.75rem;
   letter-spacing: 0.02em;
 }

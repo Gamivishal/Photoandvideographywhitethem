@@ -1,206 +1,120 @@
-# Implementation Plan — Mobile Award Ceremony Timeline Premium Iteration
+# Implementation Plan — Global Responsive Typography Standardization
 
-This plan outlines the mobile-first CSS updates to transform the Award Ceremony timeline into an ultra-premium, luxury wedding studio showcase on mobile devices (screens 320px to 414px) while leaving the desktop layout intact.
+This plan outlines the steps to perform a complete typography audit and standardize all text styles across the website (Home, About, Services, Portfolio, Packages, Contact, Testimonials, Footer, and timelines) to deliver a consistent, luxury brand experience.
 
 ---
 
 ## User Review Required
 
-Please review the proposed mobile improvements and let me know if you would like to adjust the accents, shadows, or spacing variables.
+Please review the proposed responsive typography scale, font choices, and standard line heights/spacings.
 
-> [!NOTE]
-> All changes are restricted to the `@media (max-width: 768px)` query block in `css/pages.css`, ensuring the desktop layout remains unchanged.
-
----
-
-## Mobile Showcase Features
-
-### 1. Dashed Gold Thread Line
-*   **Design**: Replace the solid vertical line on mobile with a subtle dashed gold thread line (`border-left: 1px dashed rgba(212, 175, 55, 0.45)`). This evokes fine-art lace or metallic wedding fabrics.
-*   **Concentric Dots**: Style dots as a target aperture (`width: 14px; height: 14px; background: var(--gold); border: 3px solid #fff; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);`).
-
-### 2. High-End Editorial Cards
-*   **Elevation**: Soft, diffuse shadows (`box-shadow: 0 12px 30px rgba(18, 16, 14, 0.03)`) and subtle border lines (`1px solid rgba(212, 175, 55, 0.08)`).
-*   **Corners**: Rounded card shapes with `14px` border-radius.
-*   **Full-Width Image Layout**: Card padding is set to `0`, and images span 100% width of the card. The card's `overflow: hidden` automatically clips the top corners of the image.
-*   **Text Block Padding**: Internal padding is focused on the text section below the photo (`padding: 1.75rem 1.5rem`).
-
-### 3. Gold Accent Elements
-*   **Laurel Star Accent**: Add a gold star (`✦`) pseudo-element before the category text `.timeline-meta`.
-*   **Decorative Divider**: Add a delicate gold accent divider line (`width: 30px; height: 1.5px; background: var(--gold); margin-bottom: 0.75rem;`) directly above the text contents.
-
-### 4. Alternating Card Colorways
-*   **Card 1 & 3 (Light Gold Accent)**: Left border is solid gold (`border-left: 3px solid var(--gold)`) and background has a warm cream tint (`#fffdfb`).
-*   **Card 2 (Ivory Accent)**: Left border is ivory-bronze (`border-left: 3px solid #d4cfc3`) and background has a soft ivory tint (`#fafaf8`).
-
-### 5. Transition & Reveal Animations
-*   Override reveal classes to fade/slide up over exactly `0.7s` using a custom cubic-bezier timing function (`cubic-bezier(0.25, 0.46, 0.45, 0.94)`).
+> [!IMPORTANT]
+> To preserve the luxury photography brand aesthetic, we will standardize on:
+> *   **Heading Font**: `"Playfair Display"`, serif (or `"Cormorant Garamond"` where appropriate for fine-art contexts, but mapped cleanly).
+> *   **Body Font**: `"Montserrat"`, sans-serif.
+> *   We will utilize CSS Custom Properties inside `:root` to control the font sizes dynamically. This makes the entire codebase easier to maintain and fully responsive.
 
 ---
 
-## Proposed CSS Overrides
+## Proposed Typography Scale
 
-Inside `css/pages.css` under `@media (max-width: 768px)`:
+We will define the following variables inside `:root` in `css/style.css`:
 
 ```css
+:root {
+  /* Font Families */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Montserrat", sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif; /* Maintained for specific luxury details */
+
+  /* Global Typographic Scales (Desktop defaults) */
+  --fs-h1: clamp(2.5rem, 6vw, 4.5rem);      /* Main Hero Titles */
+  --fs-h2: clamp(2rem, 4.5vw, 3rem);        /* Section Titles */
+  --fs-h3: clamp(1.35rem, 2.5vw, 1.75rem);  /* Card / Mid Titles */
+  --fs-h4: clamp(1.1rem, 2vw, 1.3rem);      /* Small Titles / Cards */
+  --fs-h5: 1rem;                            /* Badges / Micro Titles */
+  --fs-body: 1rem;                          /* Default body/paragraph text */
+  --fs-body-sm: 0.875rem;                   /* Small description / captions */
+  --fs-label: 0.75rem;                      /* Subtitles / Metadata labels */
+
+  /* Font Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Line Heights */
+  --lh-heading: 1.25;
+  --lh-body: 1.75;
+
+  /* Letter Spacing */
+  --ls-normal: 0;
+  --ls-wide: 0.08em;
+  --ls-widest: 0.25em;
+}
+```
+
+### Responsive Scale Overrides
+We will adjust the custom properties on smaller screens to ensure readability and prevent overflow:
+
+```css
+/* Tablet (max-width: 992px) */
+@media (max-width: 992px) {
+  :root {
+    --fs-h1: clamp(2.2rem, 5vw, 3.5rem);
+    --fs-h2: clamp(1.8rem, 4vw, 2.5rem);
+    --fs-h3: clamp(1.2rem, 2.5vw, 1.5rem);
+    --fs-h4: 1.15rem;
+    --fs-body: 0.95rem;
+  }
+}
+
+/* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
-  /* Scroll reveal durations */
-  .timeline-item.reveal-left, 
-  .timeline-item.reveal-right {
-    opacity: 0;
-    transform: translateY(30px) !important;
-    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-  }
-  
-  .timeline-item.reveal-left.visible, 
-  .timeline-item.reveal-right.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-
-  .award-ceremony .container {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-
-  /* Dashed Gold Thread line */
-  .timeline-track {
-    left: 20px !important;
-    width: 0 !important;
-    background: none !important;
-    border-left: 1px dashed rgba(212, 175, 55, 0.45) !important;
-    transform: none !important;
-  }
-
-  .timeline-item {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
-    padding-left: 44px !important; /* Spacing from the track */
-    margin-left: 0 !important;
-    margin-bottom: 4.5rem !important; /* Spacious breathing room */
-    width: 100% !important;
-  }
-
-  .timeline-item:last-child {
-    margin-bottom: 0 !important;
-  }
-
-  .timeline-item.right {
-    flex-direction: row !important;
-  }
-
-  /* Concentric target-dots */
-  .timeline-dot {
-    left: 20px !important;
-    top: 28px !important;
-    width: 14px !important;
-    height: 14px !important;
-    background: var(--gold) !important;
-    border: 3px solid var(--white) !important;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3) !important;
-    transform: translate(-50%, -50%) !important;
-  }
-  
-  .timeline-dot::after {
-    display: none !important; /* Hide desktop aperture inner element */
-  }
-
-  /* Full-width image editorial cards */
-  .timeline-content {
-    width: 100% !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    text-align: left !important;
-    padding: 0 !important; /* Removed outer padding for full-width photo */
-    border-radius: 14px !important;
-    border: 1px solid rgba(212, 175, 55, 0.08) !important;
-    box-shadow: 0 12px 30px rgba(18, 16, 14, 0.03) !important;
-    overflow: hidden; /* Clips top photo corners to matches card radius */
-  }
-
-  /* Alternating Card Styles */
-  .timeline-item:nth-of-type(1) .timeline-content,
-  .timeline-item:nth-of-type(3) .timeline-content {
-    border-left: 4px solid var(--gold) !important;
-    background: #fffdfb !important; /* Light gold tint */
-  }
-
-  .timeline-item:nth-of-type(2) .timeline-content {
-    border-left: 4px solid #d4cfc3 !important; /* Ivory accent */
-    background: #fafaf8 !important; /* Ivory tint */
-  }
-
-  .timeline-item.left .timeline-content {
-    text-align: left !important;
-    flex-direction: column !important; /* Force photo on top, text on bottom */
-  }
-
-  .timeline-image {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    padding: 0 !important; /* Photo reaches edge */
-    border: none !important;
-  }
-
-  .timeline-text {
-    padding: 1.75rem 1.5rem !important; /* Added internal padding to text area */
-  }
-
-  /* Small gold accent divider line inside cards */
-  .timeline-text::before {
-    content: "";
-    display: block;
-    width: 30px;
-    height: 1.5px;
-    background: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  /* Laurel star accent before category subtitle */
-  .timeline-meta {
-    font-size: 0.78rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.12em !important;
-    color: var(--gold) !important;
-    margin-bottom: 0.4rem !important;
-    display: flex !important;
-    align-items: center !important;
-  }
-
-  .timeline-meta::before {
-    content: "✦" !important;
-    font-size: 0.75rem !important;
-    margin-right: 6px !important;
-    color: var(--gold) !important;
-    display: inline-block !important;
-  }
-
-  .timeline-text h4 {
-    font-size: clamp(20px, 4.8vw, 23px) !important;
-    margin-bottom: 0.6rem !important;
-  }
-
-  .timeline-text p {
-    font-size: 14px !important;
-    line-height: 1.55 !important;
+  :root {
+    --fs-h1: clamp(1.8rem, 7vw, 2.8rem);
+    --fs-h2: clamp(1.5rem, 6vw, 2.2rem);
+    --fs-h3: 1.25rem;
+    --fs-h4: 1.1rem;
+    --fs-body: 0.9rem;
+    --fs-body-sm: 0.825rem;
+    --fs-label: 0.7rem;
   }
 }
 ```
 
 ---
 
+## Proposed Changes
+
+We will group changes into `css/style.css` and clean up overrides in `css/pages.css`.
+
+### [Component: CSS Variables & Resets]
+#### [MODIFY] [style.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/style.css)
+*   Define core typography CSS variables in `:root`.
+*   Standardize base `body` text configurations (using `--font-body`, `--fs-body`, `--fw-light`, `--lh-body`).
+*   Map elements `h1`, `h2`, `h3`, `h4`, `h5`, `h6` to the new variables.
+*   Enforce a clean reset for consistent line-heights and margin spacing.
+*   Update global section headers (`.section-label`, `.section-title`, `.section-desc`) to use variables instead of hardcoded font-sizes.
+*   Standardize global button typography (`.btn-primary`, `.btn-outline`, `.btn-text-link`).
+
+### [Component: Pages CSS Audit & Cleanup]
+#### [MODIFY] [pages.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/pages.css)
+*   Audit and clean up page-specific components to utilize the new variables.
+*   Standardize `.page-hero-content h1` to map directly to `--fs-h1` or `--fs-h2` as appropriate.
+*   Standardize testimonial texts, card structures, packages details, and timeline paragraphs.
+*   Remove redundant font family declarations (e.g. duplicating serif vs display).
+
+---
+
 ## Verification Plan
 
+### Automated Build & Lint Check
+*   Ensure the CSS loads correctly, checking for syntax errors or broken braces.
+
 ### Manual Verification
-1.  Verify that desktop viewports render the alternating two-column layouts with hover effects unchanged.
-2.  Use responsiveness simulator to audit viewports:
-    *   **320px** (iPhone SE)
-    *   **375px** (iPhone X/12 Mini)
-    *   **390px** (iPhone 13/14)
-    *   **414px** (iPhone 8 Plus/11)
-3.  Ensure that images are cropped neatly with rounded corners on top, that left borders alternate colors cleanly, and that the text slide-up duration is smooth and visual.
+1.  Open major pages (`index.html`, `about/index.html`, `wedding-photography/index.html`, `contact/index.html`, `portfolio/index.html`) on desktop and mobile.
+2.  Inspect heading elements to confirm they follow the unified custom property scale.
+3.  Check layout alignment and line-heights to ensure text flows beautifully without overflowing or text wrapping awkwardly.
+4.  Verify that font sizes scale smoothly across Desktop, Tablet, and Mobile.

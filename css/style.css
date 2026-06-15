@@ -17,16 +17,79 @@
   --grey: #8c8c8c;
   --grey-light: #cccccc;
   --green-wa: #25d366;
+
+  /* Standardized Font Families */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Montserrat", sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-display: "Playfair Display", serif;
+  /* Fallback mapping */
   --font-sans: "Montserrat", sans-serif;
-  --copy-size: 1rem;
-  --copy-line-height: 1.8;
+  /* Fallback mapping */
+
+  /* Desktop Typographic Scales */
+  --fs-h1: clamp(2.5rem, 6vw, 4.5rem);
+  /* Main Hero Titles */
+  --fs-h2: clamp(2rem, 4.5vw, 3rem);
+  /* Section Titles */
+  --fs-h3: clamp(1.35rem, 2.5vw, 1.75rem);
+  /* Card / Mid Titles */
+  --fs-h4: clamp(1.1rem, 2vw, 1.3rem);
+  /* Small Titles / Cards */
+  --fs-h5: 1rem;
+  /* Badges / Micro Titles */
+  --fs-body: 1rem;
+  /* Default body/paragraph text */
+  --fs-body-sm: 0.875rem;
+  /* Small description / captions */
+  --fs-label: 0.75rem;
+  /* Subtitles / Metadata labels */
+
+  /* Font Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Line Heights */
+  --lh-heading: 1.25;
+  --lh-body: 1.75;
+
+  /* Letter Spacings */
+  --ls-normal: 0;
+  --ls-wide: 0.08em;
+  --ls-widest: 0.25em;
+
   --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.2);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
   --glow-gold: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Tablet (max-width: 992px) Responsive Typography Scale */
+@media (max-width: 992px) {
+  :root {
+    --fs-h1: clamp(2.2rem, 5vw, 3.5rem);
+    --fs-h2: clamp(1.8rem, 4vw, 2.5rem);
+    --fs-h3: clamp(1.2rem, 2.5vw, 1.5rem);
+    --fs-h4: 1.15rem;
+    --fs-body: 0.95rem;
+  }
+}
+
+/* Mobile (max-width: 768px) Responsive Typography Scale */
+@media (max-width: 768px) {
+  :root {
+    --fs-h1: clamp(1.8rem, 7vw, 2.8rem);
+    --fs-h2: clamp(1.5rem, 6vw, 2.2rem);
+    --fs-h3: 1.25rem;
+    --fs-h4: 1.1rem;
+    --fs-body: 0.9rem;
+    --fs-body-sm: 0.825rem;
+    --fs-label: 0.7rem;
+  }
 }
 
 /* ---- Reset & Base ---- */
@@ -47,10 +110,50 @@ html {
 body {
   background-color: var(--dark);
   color: var(--light);
-  font-family: var(--font-sans);
-  font-weight: 300;
-  line-height: 1.7;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-body);
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+  color: var(--white);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+h4 {
+  font-size: var(--fs-h4);
+}
+
+h5 {
+  font-size: var(--fs-h5);
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-light);
 }
 
 a {
@@ -112,9 +215,9 @@ ul {
 .service-card p,
 .portfolio-info p,
 .testimonial-text {
-  font-family: var(--font-sans);
-  font-size: var(--copy-size);
-  line-height: var(--copy-line-height);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
 }
 
 /* Full Width AI Drone Image */
@@ -674,19 +777,20 @@ ul {
 }
 
 .hero-tagline {
-  font-size: 0.75rem;
-  letter-spacing: 0.4em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-widest);
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1.5rem;
+  font-weight: var(--fw-semibold);
 }
 
 .hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  /* Normal, smaller size */
-  font-weight: 300;
-  line-height: 1.2;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
   color: var(--white);
   margin-bottom: 1.5rem;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -695,12 +799,13 @@ ul {
 .hero-title em {
   font-style: italic;
   color: var(--gold);
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .hero-sub {
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  letter-spacing: var(--ls-wide);
   text-transform: uppercase;
   color: var(--light-2);
   margin-bottom: 3rem;
@@ -798,9 +903,10 @@ ul {
   display: inline-block;
   background: var(--gold);
   color: var(--dark);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
   text-transform: uppercase;
   padding: 1.1rem 2.8rem;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -835,16 +941,17 @@ ul {
 
 .btn-primary.large {
   padding: 1.2rem 3rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-body-sm);
 }
 
 .btn-outline {
   display: inline-block;
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: var(--white);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-widest);
   text-transform: uppercase;
   padding: 1.1rem 2.8rem;
   transition: all 0.4s ease;
@@ -863,8 +970,9 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-wide);
   text-transform: uppercase;
   color: var(--gold);
   border-bottom: 1px solid var(--gold);
@@ -881,13 +989,14 @@ ul {
    ============================================================ */
 .section-label {
   display: block;
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-widest);
   text-transform: uppercase;
   color: var(--gold-dark);
   /* Darker gold for white background contrast */
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 .section-label.light {
@@ -895,10 +1004,10 @@ ul {
 }
 
 .section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.2;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
   color: var(--dark);
 }
 
@@ -907,6 +1016,9 @@ ul {
 }
 
 .section-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: var(--grey);
   margin-top: 1rem;
 }
@@ -2970,8 +3082,8 @@ body.white-theme {
   }
 
   .white-theme .nav-logo img {
-    height: 100px;
-    margin-top: 0;
+    height: 133px;
+    margin-top: 9px;
   }
 }
 

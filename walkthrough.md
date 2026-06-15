@@ -100,6 +100,13 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
     *   **Spacious Breathing Room**: Added `4.5rem` gaps between items and increased internal text padding (`padding: 1.75rem 1.5rem`) to maximize card depth.
     *   **Vertical Slide Reveal**: Adjusted animation timings to a smooth `0.7s` vertical translate fade-up (`reveal-up`) with cubic-bezier transition curves.
 
+### 6. Global Typography Standardization & Preloader Optimization (June 15, 2026)
+*   **Central Custom Properties System**: Created standard properties inside `:root` in `css/style.css` defining the heading font (`"Playfair Display"`), body font (`"Montserrat"`), weights, line heights, letter spacings, and responsive size scales (H1, H2, H3, H4, H5, body, body-sm, label).
+*   **Responsive Typography Scales**: Scaled font sizes dynamically via media queries (Tablet: max-width 992px; Mobile: max-width 768px) inside `css/style.css` so that headings and copy size down beautifully, preventing text overlaps or wrapping issues on smaller screens.
+*   **Clean Element Refactoring**: Mapped the global `body`, headers (`h1` to `h5`), paragraphs (`p`), section titles (`.section-title`, `.section-desc`, `.section-label`), hero sections (`.hero-title`, `.hero-tagline`, `.hero-sub`), and buttons (`.btn-primary`, `.btn-outline`, `.btn-text-link`) to reference CSS custom variables instead of hardcoded values.
+*   **Audited & Cleaned Pages Overrides**: Refactored `css/pages.css` to clean up old, inconsistent typography properties on timeline text, cards, packages, testimonial items, blogs, product labels, contact grids, and FAQ accordions.
+*   **Fast Preloader Load Speed**: Changed the event listener in `js/main.js` from `window.load` to `DOMContentLoaded` and added fallback timers. This ensures the website preloader hides instantly when the page structure is parsed, rather than hanging for 10 seconds while loading heavy background images/videos.
+
 
 
 

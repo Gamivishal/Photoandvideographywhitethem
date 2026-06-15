@@ -15,17 +15,15 @@ const initLoader = () => {
     // Wait for video to be ready enough to play
     cinematicVideo.addEventListener('canplay', hideLoader, { once: true });
     // Fallback if video takes too long
-    setTimeout(hideLoader, 3000);
+    setTimeout(hideLoader, 1500);
   } else {
-    hideLoader();
+    // Small delay for a smooth fadeout transition
+    setTimeout(hideLoader, 400);
   }
 };
 
-if (document.readyState === 'complete') {
-  initLoader();
-} else {
-  window.addEventListener('load', initLoader);
-}
+// Use DOMContentLoaded to prevent waiting for heavy images and videos to load
+document.addEventListener('DOMContentLoaded', initLoader);
 
 document.addEventListener('DOMContentLoaded', () => {
 

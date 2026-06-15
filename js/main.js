@@ -218,6 +218,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- STATS COUNTER ----
   const statNums = document.querySelectorAll('.stat-num');
   if (statNums.length > 0 && 'IntersectionObserver' in window) {
+    // Reset to 0 initially only if JS executes and IntersectionObserver is supported
+    statNums.forEach(el => {
+      el.textContent = '0';
+    });
+
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -225,12 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
           statsObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.15 }); // Trigger when 15% of element is in viewport (optimized for mobile/desktop layout)
     statNums.forEach(el => statsObserver.observe(el));
   }
 
   function animateCounter(el) {
     const target = parseInt(el.dataset.count, 10);
+    if (isNaN(target)) return;
     const duration = 1800;
     const start = performance.now();
     function update(now) {

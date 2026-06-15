@@ -107,6 +107,16 @@ html {
   overflow-x: hidden;
 }
 
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 3px !important;
+}
+
 body {
   background-color: var(--dark);
   color: var(--light);
@@ -2602,11 +2612,13 @@ ul {
 
   .portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
+    grid-auto-rows: 280px;
+    gap: 1.25rem;
   }
 
-  .portfolio-item.large {
-    grid-row: span 1;
+  .portfolio-grid>* {
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
 
   .stats-grid {

@@ -12,7 +12,7 @@
     heroSlides.forEach(slide => {
       slide.style.transform = `translateY(${scrollY * 0.3}px)`;
     });
-  });
+  }, { passive: true });
 
   // ---- ADD REVEAL CLASSES dynamically on scroll ----
   const sections = document.querySelectorAll('section');
@@ -89,6 +89,7 @@
   const tiltCards = document.querySelectorAll('.service-card, .team-card, .portfolio-item, .gallery-item, .vibe-card, .location-card, .value-card');
   tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;

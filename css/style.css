@@ -2675,6 +2675,10 @@ body.white-theme {
     border-bottom-color: rgba(153, 120, 82, 0.2) !important;
   }
 
+  .white-theme .mobile-logo-link img {
+    filter: drop-shadow(0 1px 2px rgba(18, 16, 14, 0.12)) drop-shadow(0 0 8px rgba(153, 120, 82, 0.15)) contrast(1.08) !important;
+  }
+
   .white-theme .nav-arrow {
     color: var(--gold-dark) !important;
   }
@@ -2935,7 +2939,7 @@ body.white-theme {
 }
 
 .white-theme .nav-logo img {
-  height: 14x0px;
+  height: 150px;
   margin-top: 0;
   filter: drop-shadow(0 1px 2px rgba(18, 16, 14, 0.12)) drop-shadow(0 0 8px rgba(153, 120, 82, 0.15)) contrast(1.08) !important;
 }
@@ -2955,7 +2959,7 @@ body.white-theme {
   }
 
   .white-theme .nav-logo img {
-    height: 90px;
+    height: 120px;
     margin-top: 0;
   }
 }
@@ -2966,7 +2970,7 @@ body.white-theme {
   }
 
   .white-theme .nav-logo img {
-    height: 80px;
+    height: 100px;
     margin-top: 0;
   }
 }

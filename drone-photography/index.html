@@ -756,6 +756,7 @@
         
         // Hover state interactions (play/pause optimization & flash trigger)
         card.addEventListener('mouseenter', () => {
+          if (!window.matchMedia('(pointer: fine)').matches) return;
           // Play video dynamically on hover to minimize rendering cost
           videoBg.play().catch(() => {});
           
@@ -767,6 +768,7 @@
         });
         
         card.addEventListener('mouseleave', () => {
+          if (!window.matchMedia('(pointer: fine)').matches) return;
           // Pause video when mouse leaves to save resources
           videoBg.pause();
         });

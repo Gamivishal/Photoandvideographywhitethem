@@ -129,7 +129,7 @@
         }
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
-    
+
     cinematicElements.forEach(el => cinematicObserver.observe(el));
   }
 
@@ -142,12 +142,12 @@
       const sectionTop = rect.top;
       const sectionHeight = rect.height;
       const windowHeight = window.innerHeight;
-      
+
       if (sectionTop < windowHeight && sectionTop > -sectionHeight) {
         let progress = (windowHeight - sectionTop) / (windowHeight + sectionHeight) * 1.5;
         if (progress > 1) progress = 1;
         if (progress < 0) progress = 0;
-        
+
         timelineTrack.style.height = `100%`;
         timelineTrack.style.background = `linear-gradient(to bottom, var(--gold) ${progress * 100}%, rgba(0,0,0,0.1) ${progress * 100}%)`;
       }

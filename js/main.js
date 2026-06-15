@@ -141,15 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---- HERO SLIDER (Ken Burns Fade) ----
   const slides = document.querySelectorAll('.hero-slide');
-  const dots   = document.querySelectorAll('.dot');
+  const dots = document.querySelectorAll('.dot');
   let currentSlide = 0;
 
   function goToSlide(index) {
     slides[currentSlide] && slides[currentSlide].classList.remove('active');
-    dots[currentSlide]   && dots[currentSlide].classList.remove('active');
-    
+    dots[currentSlide] && dots[currentSlide].classList.remove('active');
+
     currentSlide = ((index % slides.length) + slides.length) % slides.length;
-    
+
     if (slides[currentSlide]) {
       slides[currentSlide].classList.add('active');
     }
@@ -187,23 +187,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       // Spotlight glow
       card.style.setProperty('--mouse-x', `${x}px`);
       card.style.setProperty('--mouse-y', `${y}px`);
-      
+
       // 3D Tilt calculation (max 10 degrees)
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       const tiltX = ((y - centerY) / centerY) * -10;
       const tiltY = ((x - centerX) / centerX) * 10;
-      
+
       // We keep the transition to 0s during movement so it tracks instantly,
       // but smooth out the entry/exit using a small transition in CSS or via class
       card.style.transition = 'transform 0.1s ease';
       card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
     });
-    
+
     card.addEventListener('mouseleave', () => {
       card.style.transition = 'transform 0.5s ease';
       card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.className = 'lightbox';
     document.body.appendChild(lightbox);
   }
-  
+
   // Re-build inner HTML of lightbox to ensure all elements exist on all pages
   lightbox.innerHTML = `
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxVideo.style.display = 'none';
     lightboxVideo.pause();
     lightboxVideo.src = '';
-    
+
     if (type === 'video') {
       lightboxVideo.src = src;
       lightboxVideo.style.display = 'block';
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       const src = el.dataset.lightbox || el.getAttribute('href');
       const isVideo = src && (src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg'));
-      
+
       let title = '';
       let desc = '';
       const info = el.querySelector('.masonry-info') || el.closest('.masonry-item')?.querySelector('.masonry-info') || el.querySelector('.gallery-overlay') || el.closest('.gallery-item')?.querySelector('.gallery-overlay');
@@ -377,17 +377,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.tagName === 'VIDEO' && e.target.hasAttribute('controls')) {
         return;
       }
-      
+
       e.preventDefault();
       e.stopPropagation();
-      
+
       const img = item.querySelector('img');
       const video = item.querySelector('video');
       const source = video ? video.querySelector('source') : null;
-      
+
       let src = '';
       let type = 'image';
-      
+
       if (video && source) {
         src = source.src;
         type = 'video';
@@ -395,13 +395,13 @@ document.addEventListener('DOMContentLoaded', () => {
         src = item.dataset.lightbox || img.src;
         type = 'image';
       }
-      
+
       if (!src) return;
-      
+
       const info = item.querySelector('.masonry-info') || item.querySelector('.gallery-overlay');
       let title = '';
       let desc = '';
-      
+
       if (info) {
         title = info.querySelector('h4')?.textContent || '';
         desc = info.querySelector('p')?.textContent || '';
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!title && img) {
         title = img.getAttribute('alt') || '';
       }
-      
+
       openLightbox(src, type, title, desc);
     });
   });
@@ -421,14 +421,14 @@ document.addEventListener('DOMContentLoaded', () => {
       closeLightbox();
     });
   }
-  
-  lightbox.addEventListener('click', e => { 
+
+  lightbox.addEventListener('click', e => {
     if (e.target === lightbox || e.target.classList.contains('lightbox-content') || e.target.id === 'lightbox') {
-      closeLightbox(); 
-    } 
+      closeLightbox();
+    }
   });
-  document.addEventListener('keydown', e => { 
-    if (e.key === 'Escape') closeLightbox(); 
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
   });
 
   // ---- CONTACT FORM (static simulation) ----
@@ -557,29 +557,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const categorySelect = document.getElementById('categorySelect');
   const packagesByCategory = {
     'wedding': [
-      {value: 'silver', text: 'Silver'},
-      {value: 'gold', text: 'Gold'},
-      {value: 'platinum', text: 'Platinum'}
+      { value: 'silver', text: 'Silver' },
+      { value: 'gold', text: 'Gold' },
+      { value: 'platinum', text: 'Platinum' }
     ],
     'pre-wedding': [
-      {value: 'basic', text: 'Basic'},
-      {value: 'signature', text: 'Signature'},
-      {value: 'destination', text: 'Destination'}
+      { value: 'basic', text: 'Basic' },
+      { value: 'signature', text: 'Signature' },
+      { value: 'destination', text: 'Destination' }
     ],
     'corporate': [
-      {value: 'starter', text: 'Starter'},
-      {value: 'business', text: 'Business'},
-      {value: 'enterprise', text: 'Enterprise'}
+      { value: 'starter', text: 'Starter' },
+      { value: 'business', text: 'Business' },
+      { value: 'enterprise', text: 'Enterprise' }
     ],
     'events': [
-      {value: 'half-day', text: 'Half Day'},
-      {value: 'full-event', text: 'Full Event'},
-      {value: 'grand-event', text: 'Grand Event'}
+      { value: 'half-day', text: 'Half Day' },
+      { value: 'full-event', text: 'Full Event' },
+      { value: 'grand-event', text: 'Grand Event' }
     ],
     'product': [
-      {value: 'starter', text: 'Starter'},
-      {value: 'catalogue', text: 'Catalogue'},
-      {value: 'brand-story', text: 'Brand Story'}
+      { value: 'starter', text: 'Starter' },
+      { value: 'catalogue', text: 'Catalogue' },
+      { value: 'brand-story', text: 'Brand Story' }
     ]
   };
   const updatePackageOptions = () => {
@@ -709,7 +709,7 @@ document.addEventListener('DOMContentLoaded', () => {
       marqueeContainer.style.opacity = '1';
       if (track) track.style.animationPlayState = 'paused';
     });
-     marqueeContainer.addEventListener('mouseout', () => {
+    marqueeContainer.addEventListener('mouseout', () => {
       marqueeContainer.style.opacity = '0.6';
       if (track) track.style.animationPlayState = 'running';
     });
@@ -727,14 +727,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const posY = Math.random() * 100;
       const delay = Math.random() * 5;
       const duration = Math.random() * 10 + 10;
-      
+
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${posX}%`;
       particle.style.top = `${posY}%`;
       particle.style.animationDelay = `${delay}s`;
       particle.style.animationDuration = `${duration}s`;
-      
+
       heroSection.appendChild(particle);
     }
   }

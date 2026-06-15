@@ -129,6 +129,15 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **Award Timeline Lazy-Loading**: Applied lazy-loading properties (`loading="lazy"`) to all image assets on the Studio Story award timeline in `about/index.html`.
 *   **Final Checklist Pass**: Confirmed all optimization markers are up-to-date and fully checked off in `task.md`.
 
+### 10. Lighthouse Performance & Accessibility Optimization Pass (June 15, 2026)
+*   **Asynchronous Font Loading**: Added automated support in `scripts/optimize-assets.js` to translate all Google Fonts `<link>` stylesheet imports across 14 pages into asynchronous preloaded loaders, eliminating critical render-blocking penalties.
+*   **Color Contrast Enhancements**: Redefined the light-theme `--gold-dark` CSS variable to `#825e36` inside `body.white-theme` styling in `css/style.css`, resolving color contrast checks for gold headers and text on light backdrops to meet WCAG AA 4.5:1 ratio targets.
+*   **Mobile Custom Cursor Exclusions**: Added a media query to suppress `.cursor-dot` and `.cursor-circle` trackers on touch screens and screens under `1024px`, reducing scripting lag and DOM redraw operations on mobile.
+*   **Discernible Links for Screen Readers**: Added explicit `aria-label` tags to all 10 background-image based Instagram grid links in `index.html`, eliminating the "Links do not have a discernible name" audit warning.
+*   **Gallery Video Preload Optimization**: Removed bandwidth-heavy `autoplay` tags from the 4 video assets in the drone-photography gallery, set `preload="none"`, and attached poster image thumbnails. Also, updated the wedding-photography short film video with optimized `preload="metadata"` settings and a poster image.
+*   **Universal Image Conversion Script**: Prepared `scripts/optimize-assets.js` using Node.js and the `sharp` compression library to generate `.webp` formats for all JPEGs and PNGs in `Staticdata/images` recursively, compress original resources, and translate extension paths automatically.
+
+
 
 
 

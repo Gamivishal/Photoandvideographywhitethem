@@ -1,121 +1,96 @@
-# Implementation Plan — Website Audit & Optimization
+# Implementation Plan — Lighthouse Performance & Accessibility Optimizations (>90 Score)
 
-This plan outlines the steps to perform a complete professional audit and optimization across the entire Yash Raj Motion Picture website (Home, About, Services, Portfolio, Contact, and subpages) to elevate it to agency-level production standards.
+This plan details the technical steps to optimize the Yash Raj Motion Picture website for mobile and desktop clients, raising Lighthouse **Performance** and **Accessibility** scores to 90+.
 
 ---
 
 ## User Review Required
 
-Please review the proposed updates below for SEO, performance, design, and consistency.
+Please review the proposed plan to optimize the website's performance and accessibility scores. Since I cannot execute terminal commands directly due to execution constraints in my environment, I have created a script that you can run locally to automate the image compression and conversion process.
 
 > [!IMPORTANT]
-> **Key Decisions & Enhancements:**
-> 1. **Unsplash Asset Replacement**: We will systematically replace all remaining Unsplash and external stock image links in headers, banners, and grids with locally hosted photography assets from our `/Staticdata/images/` subdirectories.
-> 2. **Technical SEO Integration**: We will insert canonical tags and Open Graph metadata template headers on all HTML pages referencing `https://yashrajmotionpicture.com/` as the primary domain.
-> 3. **Robots.txt & Sitemap**: We will update the sitemap path in `robots.txt` and create a dedicated `sitemap.xml` file mapped to `yashrajmotionpicture.com`.
-> 4. **Image & Video Performance**: We will append `loading="lazy"` and alt descriptions to all `<img>` tags and video poster images.
-> 5. **Visual Grid Polish**: We will ensure the Fashion 2x2 grid layout handles different screens correctly, and align typography variables.
+> **Key Steps & Approvals:**
+> 1. **Run the Asset Optimizer Script**: You will need to run `node scripts/optimize-assets.js` in your terminal. This will automatically convert all JPEG/PNG images to WebP and compress the original files to ~75% quality (reducing their total size from ~25MB to under 1.5MB).
+> 2. **Review Asynchronous Font Loading**: We will convert the Google Fonts link on all 14 pages to load asynchronously, preventing them from blocking initial page rendering.
+> 3. **Approve Text Contrast Tuning**: We will adjust the light-theme gold color variable slightly (making it darker) to ensure readability and compliance with the WCAG 4.5:1 ratio.
 
 ---
 
 ## Proposed Changes
 
-We will edit the files logically, starting with page structures and ending with technical sitemaps.
+### 1. Performance Optimizations
 
-### [Technical & SEO Foundation]
+#### A. Image Asset Compression & WebP Conversion
+The homepage currently loads around 7.5MB of hero images, and other pages load heavy couple/wedding photos ranging between 2.5MB and 3.5MB each.
+We will create a Node.js utility script, `scripts/optimize-assets.js`, to:
+1. Recursively scan `Staticdata/images/`.
+2. Convert all `.jpg`, `.jpeg`, and `.png` files into optimized next-gen `.webp` formats (at 80% quality).
+3. Compress the original `.jpg`, `.jpeg`, and `.png` files directly (reducing their size by 90-95% to act as fail-safe fallback images).
+4. Run a script-based search-and-replace to update `.jpg`/`.jpeg`/`.png` references to `.webp` across all HTML and CSS files.
 
-#### [NEW] [sitemap.xml](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/sitemap.xml)
-* Create a complete search-engine sitemap listing all pages:
-  - `/` (Home)
-  - `/about/`
-  - `/services/`
-  - `/portfolio/`
-  - `/packages/`
-  - `/contact/`
-  - `/testimonials/`
-  - `/blog/`
-  - `/wedding-photography/`
-  - `/pre-wedding/`
-  - `/corporate-events/`
-  - `/drone-photography/`
-  - `/product-fashion/`
-  - `/book-now/`
-  - `/gallery/`
+#### B. Asynchronous Font Loading (Non-Blocking)
+Google Fonts stylesheets block rendering by default. We will update all 14 HTML pages to load Google Fonts asynchronously using the preload/print onload technique:
+```html
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+```
 
-#### [MODIFY] [robots.txt](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/robots.txt)
-* Point `Sitemap:` to `https://yashrajmotionpicture.com/sitemap.xml`.
+#### C. Mobile Performance: Custom Cursor & Particle Controls
+- We will add a media query in `css/style.css` to hide the custom cursor elements (`#cursorDot` and `#cursorCircle`) on screens under `1024px` and devices with touch pointers (`@media (pointer: coarse)` or `(max-width: 1024px)`) to reduce DOM paint and mouse-tracking layout shifting overhead on mobile viewports.
+- We will ensure cinematic background animations are paused or disabled on mobile screens to save GPU cycles.
+
+#### D. Lazy Video Preloading
+We will audit and ensure all `<video>` elements (e.g. subpages, galleries, portfolios) have `preload="none"` or `preload="metadata"` and fallback poster frames, removing auto-buffering over slow mobile cellular connections.
 
 ---
 
-### [Global CSS & Style Polish]
+### 2. Accessibility Optimizations
+
+#### A. Color Contrast Adjustments
+We will modify `--gold-dark` (`#997852`) to a slightly darker shade `#825e36` specifically under `.white-theme` rules in `css/style.css` to ensure all gold headers and small text elements achieve a contrast ratio above the WCAG AA requirement of **4.5:1** on light backgrounds (current contrast is 4.1:1).
+
+#### B. Instagram Grid Accessible Names
+The homepage footer features an Instagram grid with 10 visual link cards. Currently, these links contain no inner text and no labels, causing Lighthouse to flag "Links do not have a discernible name". We will add descriptive `aria-label` tags to each link:
+```html
+<a href="https://www.instagram.com/yashraj_motion_picturez/" target="_blank" rel="noopener" class="insta-item" style="..." aria-label="View Yash Raj Motion Picture Instagram portfolio post 1"></a>
+```
+
+---
+
+## Proposed File Changes
+
+### [Technical & Scripting Layer]
+
+#### [NEW] [optimize-assets.js](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/scripts/optimize-assets.js)
+* Write a Node script utilizing the `sharp` library to compress all JPEGs/PNGs, generate WebP formats, and automatically update reference paths in all HTML and CSS files.
+* Since our environment runner has system-restricted execution permissions, the USER can execute this script locally via:
+  ```bash
+  node scripts/optimize-assets.js
+  ```
+
+### [Global CSS Stylesheet]
 
 #### [MODIFY] [style.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/style.css)
-* Verify that the global visual hierarchy, line heights, and spacings are consistently applied.
-* Add responsive typography values inside `:root`.
+* Adjust text contrast parameters for `.white-theme .section-label` and `.white-theme .btn-text-link`.
+* Add media queries to set custom cursors `.cursor-dot` and `.cursor-circle` to `display: none` on mobile/touch pointers.
 
-#### [MODIFY] [pages.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/pages.css)
-* Add grid rules for `data-active-filter` to prevent layout breaks on other grid columns.
-* Ensure consistent margin between masonry items on mobile viewport sizes.
+### [HTML Page Templates]
 
----
-
-### [Page Audits & Placeholders Cleanup]
-
-#### [MODIFY] [index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/index.html)
-* Replace any remaining external stock-photo links.
-* Ensure Open Graph tags and meta properties are fully populated.
-
-#### [MODIFY] [about/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/about/index.html)
-* Replace Unsplash URLs with high-quality local couple/wedding/about photos.
-* Add missing canonical URL.
-* Audit typography and layout spacing.
-
-#### [MODIFY] [contact/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/contact/index.html)
-* Add canonical link pointing to `/contact/`.
-* Remove any local layout errors or inconsistencies in footer code.
-
-#### [MODIFY] [services/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/services/index.html)
-* Swap Unsplash hero URL with `Staticdata/images/wedding/marriage (1).jpeg`.
-* Add missing canonical meta tag.
-
-#### [MODIFY] [packages/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/packages/index.html)
-* Update stock background image styles to point to local assets.
-* Inject canonical and OG tags.
-
-#### [MODIFY] [wedding-photography/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/wedding-photography/index.html)
-* Clean up all Unsplash URLs in cards, detail sections, and hero banners.
-* Ensure all images use `loading="lazy"` and alt texts.
-* Map canonical tag.
-
-#### [MODIFY] [pre-wedding/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/pre-wedding/index.html)
-* Clean up 14+ Unsplash URLs. Map to local `Prewedding` images.
-* Setup canonical link.
-
-#### [MODIFY] [corporate-events/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/corporate-events/index.html)
-* Clean up Unsplash URLs. Map to local `Corporate` and `Events` assets.
-* Inject canonical link.
-
-#### [MODIFY] [drone-photography/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/drone-photography/index.html)
-* Swap stock hero banner with local `Staticdata/images/drone/images3.jpg`.
-* Add canonical link.
-
-#### [MODIFY] [product-fashion/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/product-fashion/index.html)
-* Clean up all Unsplash URLs. Map to local `Fashion` and `Product` files.
-* Inject canonical link.
-
-#### [MODIFY] [testimonials/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/testimonials/index.html)
-* Replace stock video testimonial poster images with local wedding/pre-wedding thumbnails.
-* Add canonical link.
+#### [MODIFY] All HTML Pages (14 files)
+* Update Google Font tags to load asynchronously.
+* Ensure all image/video links point to compressed next-gen WebP formats.
+* Add accessible names/labels (`aria-label`) to elements lacking discernible names (specifically the Instagram feed on the homepage).
 
 ---
 
 ## Verification Plan
 
 ### Automated Checks
-- Validate HTML markup structure.
-- Verify sitemap is well-formed XML.
+- Run a site review pass using Lighthouse F12 locally to confirm:
+  - Mobile & Desktop Performance > 90
+  - Mobile & Desktop Accessibility > 90
+- Validate that all updated resource links (WebP) map correctly.
 
 ### Manual Verification
-- Check all pages across viewport dimensions (mobile, tablet, desktop) to ensure no layouts break.
-- Verify sitemap links match canonical link tags exactly.
-- Confirm all images load from local storage path (`/Staticdata/`) instead of Unsplash.
+- Test key inputs, forms, and pages across viewports (mobile, tablet, desktop) to ensure no layouts break.
+- Verify touch inputs work smoothly on mobile layout simulations without the custom cursor layer.

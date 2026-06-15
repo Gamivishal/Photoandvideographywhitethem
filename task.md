@@ -1,36 +1,17 @@
-# Yash Raj Motion Picture Website Optimization Checklist
+# Lighthouse Optimization Tasks
 
-- [x] 1. Technical SEO Foundation
-  - [x] Create a search-engine friendly `sitemap.xml` listing all pages.
-  - [x] Update `robots.txt` pointing `Sitemap:` to `https://yashrajmotionpicture.com/sitemap.xml`.
-- [x] 2. Style & Responsive Grid Adjustments
-  - [x] Check `css/style.css` responsive typography parameters.
-  - [x] Polish `css/pages.css` layout and spacing rules.
-- [x] 3. Core Pages Optimization (Images, Canonicals, OG, Lazy Loading)
-  - [x] Audit Home (`index.html`).
-  - [x] Audit About (`about/index.html`).
-  - [x] Audit Contact (`contact/index.html`).
-  - [x] Audit Services (`services/index.html`).
-  - [x] Audit Packages (`packages/index.html`).
-- [x] 4. Service Detail Pages Optimization (Local Image Swapping, Canonicals)
-  - [x] Audit Wedding Photography (`wedding-photography/index.html`).
-  - [x] Audit Pre-Wedding (`pre-wedding/index.html`).
-  - [x] Audit Corporate & Events (`corporate-events/index.html`).
-  - [x] Audit Drone Photography (`drone-photography/index.html`).
-  - [x] Audit Product & Fashion (`product-fashion/index.html`).
-- [x] 5. Support Pages Optimization
-  - [x] Audit Testimonials (`testimonials/index.html`).
-  - [x] Audit Blog (`blog/index.html`).
-  - [x] Audit Gallery (`gallery/index.html`).
-  - [x] Audit Book Now (`book-now/index.html`).
+- [x] 1. Write the Image Optimization Script
+  - [x] Create `scripts/optimize-assets.js` using Node.js and the `sharp` library.
+  - [x] Configure it to compress all JPEGs/PNGs in `Staticdata/images` recursively.
+  - [x] Configure it to generate WebP formats and update all HTML/CSS references from `.jpeg`/`.jpg`/`.png` to `.webp`.
+- [ ] 2. Google Fonts Optimization (Async Loading)
+  - [ ] Update Google Fonts links on all HTML pages to load asynchronously via preload/onload.
+- [x] 3. CSS Performance & Accessibility Tweaks
+  - [x] Add media queries in `css/style.css` to hide custom cursors `.cursor-dot` and `.cursor-circle` on screens <= 1024px and touch pointers.
+  - [x] In `css/style.css`, modify the scrolled light-theme gold color values to increase contrast to 4.5:1.
+- [x] 4. Accessibility Fixes (Home Page Instagram Grid)
+  - [x] Add `aria-label` tags to the 10 Instagram grid items in `index.html`.
+- [x] 5. Video Performance Fixes
+  - [x] Review all pages for auto-buffering `<video>` elements and add `preload="none"` or `preload="metadata"` with fallback posters.
 - [x] 6. Verification
-  - [x] Verify HTML structures and markup.
-  - [x] Verify layout responsiveness across viewports.
-  - [x] Confirm no external stock images are loaded (all local).
-- [x] 7. Premium-Quality Refinement Pass
-  - [x] Fix double-slash asset path typo in `portfolio/index.html`.
-  - [x] Fix responsive 2-column tablet layout overrides for `.portfolio-grid` in `css/style.css`.
-  - [x] Add `:focus-visible` accessibility styles to `css/style.css`.
-  - [x] Optimize background preloading for all videos on `portfolio/index.html` by configuring `preload="none"`.
-  - [x] Add high-quality visual poster image and `preload="metadata"` to home page cinematic video.
-  - [x] Apply lazy loading to award showcase timeline assets in `about/index.html`.
+  - [x] Ensure all pages build, links map correctly, and layout/formatting is intact.

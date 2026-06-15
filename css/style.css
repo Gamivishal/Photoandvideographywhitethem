@@ -457,6 +457,13 @@ ul {
   background: rgba(201, 169, 110, 0.1);
 }
 
+@media (max-width: 1024px), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-circle {
+    display: none !important;
+  }
+}
+
 /* ============================================================
    NAVBAR
    ============================================================ */
@@ -2839,6 +2846,7 @@ ul {
 body.white-theme {
   background-color: var(--light);
   color: var(--dark);
+  --gold-dark: #825e36;
 }
 
 .white-theme .loader {

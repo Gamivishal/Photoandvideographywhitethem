@@ -1,7 +1,29 @@
-# Typography Standardization Checklist
+# Yash Raj Motion Picture Website Optimization Checklist
 
-- [x] 1. Define typography variables in `:root` inside `css/style.css` (font-families, sizes, line heights, letter spacings, weights)
-- [x] 2. Define tablet and mobile overrides for these typography variables inside `css/style.css`
-- [x] 3. Apply standard variables to global elements (`body`, `h1` to `h5`, paragraphs, section-title, buttons) inside `css/style.css`
-- [x] 4. Audit and clean up ad-hoc typography declarations in `css/pages.css`
-- [x] 5. Verify the typography on all pages (Home, About, Wedding, services, portfolio, packages, contact) on both desktop and mobile
+- [x] 1. Technical SEO Foundation
+  - [x] Create a search-engine friendly `sitemap.xml` listing all pages.
+  - [x] Update `robots.txt` pointing `Sitemap:` to `https://yashrajmotionpicture.com/sitemap.xml`.
+- [x] 2. Style & Responsive Grid Adjustments
+  - [x] Check `css/style.css` responsive typography parameters.
+  - [x] Polish `css/pages.css` layout and spacing rules.
+- [x] 3. Core Pages Optimization (Images, Canonicals, OG, Lazy Loading)
+  - [x] Audit Home (`index.html`).
+  - [x] Audit About (`about/index.html`).
+  - [x] Audit Contact (`contact/index.html`).
+  - [x] Audit Services (`services/index.html`).
+  - [x] Audit Packages (`packages/index.html`).
+- [x] 4. Service Detail Pages Optimization (Local Image Swapping, Canonicals)
+  - [x] Audit Wedding Photography (`wedding-photography/index.html`).
+  - [x] Audit Pre-Wedding (`pre-wedding/index.html`).
+  - [x] Audit Corporate & Events (`corporate-events/index.html`).
+  - [x] Audit Drone Photography (`drone-photography/index.html`).
+  - [x] Audit Product & Fashion (`product-fashion/index.html`).
+- [x] 5. Support Pages Optimization
+  - [x] Audit Testimonials (`testimonials/index.html`).
+  - [x] Audit Blog (`blog/index.html`).
+  - [x] Audit Gallery (`gallery/index.html`).
+  - [x] Audit Book Now (`book-now/index.html`).
+- [x] 6. Verification
+  - [x] Verify HTML structures and markup.
+  - [x] Verify layout responsiveness across viewports.
+  - [x] Confirm no external stock images are loaded (all local).

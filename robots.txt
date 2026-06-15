@@ -6,4 +6,4 @@ Disallow: /node_modules/
 Disallow: /.env
 Disallow: /.gitignore
 
-Sitemap: https://lumierestudio.in/sitemap.xml
+Sitemap: https://yashrajmotionpicture.com/sitemap.xml

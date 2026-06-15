@@ -1,120 +1,121 @@
-# Implementation Plan — Global Responsive Typography Standardization
+# Implementation Plan — Website Audit & Optimization
 
-This plan outlines the steps to perform a complete typography audit and standardize all text styles across the website (Home, About, Services, Portfolio, Packages, Contact, Testimonials, Footer, and timelines) to deliver a consistent, luxury brand experience.
+This plan outlines the steps to perform a complete professional audit and optimization across the entire Yash Raj Motion Picture website (Home, About, Services, Portfolio, Contact, and subpages) to elevate it to agency-level production standards.
 
 ---
 
 ## User Review Required
 
-Please review the proposed responsive typography scale, font choices, and standard line heights/spacings.
+Please review the proposed updates below for SEO, performance, design, and consistency.
 
 > [!IMPORTANT]
-> To preserve the luxury photography brand aesthetic, we will standardize on:
-> *   **Heading Font**: `"Playfair Display"`, serif (or `"Cormorant Garamond"` where appropriate for fine-art contexts, but mapped cleanly).
-> *   **Body Font**: `"Montserrat"`, sans-serif.
-> *   We will utilize CSS Custom Properties inside `:root` to control the font sizes dynamically. This makes the entire codebase easier to maintain and fully responsive.
-
----
-
-## Proposed Typography Scale
-
-We will define the following variables inside `:root` in `css/style.css`:
-
-```css
-:root {
-  /* Font Families */
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Montserrat", sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif; /* Maintained for specific luxury details */
-
-  /* Global Typographic Scales (Desktop defaults) */
-  --fs-h1: clamp(2.5rem, 6vw, 4.5rem);      /* Main Hero Titles */
-  --fs-h2: clamp(2rem, 4.5vw, 3rem);        /* Section Titles */
-  --fs-h3: clamp(1.35rem, 2.5vw, 1.75rem);  /* Card / Mid Titles */
-  --fs-h4: clamp(1.1rem, 2vw, 1.3rem);      /* Small Titles / Cards */
-  --fs-h5: 1rem;                            /* Badges / Micro Titles */
-  --fs-body: 1rem;                          /* Default body/paragraph text */
-  --fs-body-sm: 0.875rem;                   /* Small description / captions */
-  --fs-label: 0.75rem;                      /* Subtitles / Metadata labels */
-
-  /* Font Weights */
-  --fw-light: 300;
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semibold: 600;
-  --fw-bold: 700;
-
-  /* Line Heights */
-  --lh-heading: 1.25;
-  --lh-body: 1.75;
-
-  /* Letter Spacing */
-  --ls-normal: 0;
-  --ls-wide: 0.08em;
-  --ls-widest: 0.25em;
-}
-```
-
-### Responsive Scale Overrides
-We will adjust the custom properties on smaller screens to ensure readability and prevent overflow:
-
-```css
-/* Tablet (max-width: 992px) */
-@media (max-width: 992px) {
-  :root {
-    --fs-h1: clamp(2.2rem, 5vw, 3.5rem);
-    --fs-h2: clamp(1.8rem, 4vw, 2.5rem);
-    --fs-h3: clamp(1.2rem, 2.5vw, 1.5rem);
-    --fs-h4: 1.15rem;
-    --fs-body: 0.95rem;
-  }
-}
-
-/* Mobile (max-width: 768px) */
-@media (max-width: 768px) {
-  :root {
-    --fs-h1: clamp(1.8rem, 7vw, 2.8rem);
-    --fs-h2: clamp(1.5rem, 6vw, 2.2rem);
-    --fs-h3: 1.25rem;
-    --fs-h4: 1.1rem;
-    --fs-body: 0.9rem;
-    --fs-body-sm: 0.825rem;
-    --fs-label: 0.7rem;
-  }
-}
-```
+> **Key Decisions & Enhancements:**
+> 1. **Unsplash Asset Replacement**: We will systematically replace all remaining Unsplash and external stock image links in headers, banners, and grids with locally hosted photography assets from our `/Staticdata/images/` subdirectories.
+> 2. **Technical SEO Integration**: We will insert canonical tags and Open Graph metadata template headers on all HTML pages referencing `https://yashrajmotionpicture.com/` as the primary domain.
+> 3. **Robots.txt & Sitemap**: We will update the sitemap path in `robots.txt` and create a dedicated `sitemap.xml` file mapped to `yashrajmotionpicture.com`.
+> 4. **Image & Video Performance**: We will append `loading="lazy"` and alt descriptions to all `<img>` tags and video poster images.
+> 5. **Visual Grid Polish**: We will ensure the Fashion 2x2 grid layout handles different screens correctly, and align typography variables.
 
 ---
 
 ## Proposed Changes
 
-We will group changes into `css/style.css` and clean up overrides in `css/pages.css`.
+We will edit the files logically, starting with page structures and ending with technical sitemaps.
 
-### [Component: CSS Variables & Resets]
+### [Technical & SEO Foundation]
+
+#### [NEW] [sitemap.xml](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/sitemap.xml)
+* Create a complete search-engine sitemap listing all pages:
+  - `/` (Home)
+  - `/about/`
+  - `/services/`
+  - `/portfolio/`
+  - `/packages/`
+  - `/contact/`
+  - `/testimonials/`
+  - `/blog/`
+  - `/wedding-photography/`
+  - `/pre-wedding/`
+  - `/corporate-events/`
+  - `/drone-photography/`
+  - `/product-fashion/`
+  - `/book-now/`
+  - `/gallery/`
+
+#### [MODIFY] [robots.txt](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/robots.txt)
+* Point `Sitemap:` to `https://yashrajmotionpicture.com/sitemap.xml`.
+
+---
+
+### [Global CSS & Style Polish]
+
 #### [MODIFY] [style.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/style.css)
-*   Define core typography CSS variables in `:root`.
-*   Standardize base `body` text configurations (using `--font-body`, `--fs-body`, `--fw-light`, `--lh-body`).
-*   Map elements `h1`, `h2`, `h3`, `h4`, `h5`, `h6` to the new variables.
-*   Enforce a clean reset for consistent line-heights and margin spacing.
-*   Update global section headers (`.section-label`, `.section-title`, `.section-desc`) to use variables instead of hardcoded font-sizes.
-*   Standardize global button typography (`.btn-primary`, `.btn-outline`, `.btn-text-link`).
+* Verify that the global visual hierarchy, line heights, and spacings are consistently applied.
+* Add responsive typography values inside `:root`.
 
-### [Component: Pages CSS Audit & Cleanup]
 #### [MODIFY] [pages.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/pages.css)
-*   Audit and clean up page-specific components to utilize the new variables.
-*   Standardize `.page-hero-content h1` to map directly to `--fs-h1` or `--fs-h2` as appropriate.
-*   Standardize testimonial texts, card structures, packages details, and timeline paragraphs.
-*   Remove redundant font family declarations (e.g. duplicating serif vs display).
+* Add grid rules for `data-active-filter` to prevent layout breaks on other grid columns.
+* Ensure consistent margin between masonry items on mobile viewport sizes.
+
+---
+
+### [Page Audits & Placeholders Cleanup]
+
+#### [MODIFY] [index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/index.html)
+* Replace any remaining external stock-photo links.
+* Ensure Open Graph tags and meta properties are fully populated.
+
+#### [MODIFY] [about/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/about/index.html)
+* Replace Unsplash URLs with high-quality local couple/wedding/about photos.
+* Add missing canonical URL.
+* Audit typography and layout spacing.
+
+#### [MODIFY] [contact/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/contact/index.html)
+* Add canonical link pointing to `/contact/`.
+* Remove any local layout errors or inconsistencies in footer code.
+
+#### [MODIFY] [services/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/services/index.html)
+* Swap Unsplash hero URL with `Staticdata/images/wedding/marriage (1).jpeg`.
+* Add missing canonical meta tag.
+
+#### [MODIFY] [packages/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/packages/index.html)
+* Update stock background image styles to point to local assets.
+* Inject canonical and OG tags.
+
+#### [MODIFY] [wedding-photography/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/wedding-photography/index.html)
+* Clean up all Unsplash URLs in cards, detail sections, and hero banners.
+* Ensure all images use `loading="lazy"` and alt texts.
+* Map canonical tag.
+
+#### [MODIFY] [pre-wedding/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/pre-wedding/index.html)
+* Clean up 14+ Unsplash URLs. Map to local `Prewedding` images.
+* Setup canonical link.
+
+#### [MODIFY] [corporate-events/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/corporate-events/index.html)
+* Clean up Unsplash URLs. Map to local `Corporate` and `Events` assets.
+* Inject canonical link.
+
+#### [MODIFY] [drone-photography/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/drone-photography/index.html)
+* Swap stock hero banner with local `Staticdata/images/drone/images3.jpg`.
+* Add canonical link.
+
+#### [MODIFY] [product-fashion/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/product-fashion/index.html)
+* Clean up all Unsplash URLs. Map to local `Fashion` and `Product` files.
+* Inject canonical link.
+
+#### [MODIFY] [testimonials/index.html](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/testimonials/index.html)
+* Replace stock video testimonial poster images with local wedding/pre-wedding thumbnails.
+* Add canonical link.
 
 ---
 
 ## Verification Plan
 
-### Automated Build & Lint Check
-*   Ensure the CSS loads correctly, checking for syntax errors or broken braces.
+### Automated Checks
+- Validate HTML markup structure.
+- Verify sitemap is well-formed XML.
 
 ### Manual Verification
-1.  Open major pages (`index.html`, `about/index.html`, `wedding-photography/index.html`, `contact/index.html`, `portfolio/index.html`) on desktop and mobile.
-2.  Inspect heading elements to confirm they follow the unified custom property scale.
-3.  Check layout alignment and line-heights to ensure text flows beautifully without overflowing or text wrapping awkwardly.
-4.  Verify that font sizes scale smoothly across Desktop, Tablet, and Mobile.
+- Check all pages across viewport dimensions (mobile, tablet, desktop) to ensure no layouts break.
+- Verify sitemap links match canonical link tags exactly.
+- Confirm all images load from local storage path (`/Staticdata/`) instead of Unsplash.

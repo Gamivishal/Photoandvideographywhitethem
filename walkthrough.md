@@ -82,3 +82,24 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **Icon Centering**: Updated the `.insta-icon` camera overlay to use absolute positioning with transforms (`top: 50%`, `left: 50%`) ensuring perfect centering regardless of the container's rendering mode.
 *   **Grid Rebalancing**: Adjusted the mobile media query (`max-width: 768px`) for `.instagram-grid` to force exactly `2` columns instead of `3`. This guarantees that the 10 Instagram images break cleanly into a balanced 5-row, 2-column layout on both tablets and smartphones without orphaned items.
 
+### 5. Award Ceremony Timeline Luxury UI/UX Redesign (June 15, 2026)
+*   **Fine-Art Gallery Matting**: Wrapped photos inside a luxurious white matting board style (`padding: 8px; background: #fff; border: 1px solid rgba(0,0,0,0.04);`) with a soft drop-shadow. Designed a smooth scale animation (`scale(1.06)`) for the image on hover, creating a high-end window parallax effect.
+*   **Luxury Editorial Cards**: Re-engineered timeline cards using a warm cream linen background (`background: #faf8f5;`), thin golden-hairline borders (`1px solid rgba(212, 175, 55, 0.12)`), generous padding, and diffuse hover shadows (`box-shadow: 0 25px 50px rgba(201, 169, 110, 0.08)`) with a subtle `translateY(-6px)` card lift.
+*   **Concentric "Camera Lens Aperture" Dots**: Redesigned timeline markers into concentric rings (outer gold circle, inner gold focus dot). Connected dots to cards via CSS hover coupling—hovering a card scales the dot by `1.35x`, glows with gold, and fills it solid gold.
+*   **Thicker Scroll Progress Line**: Increased the width of the dynamic scroll-progress line to `2px` for improved visibility, overlaying it on a subtle light gray base track.
+*   **Editorial Typography Sizing**: Added uppercase gold meta subtitles with generous letter spacing (`letter-spacing: 0.15em`) above titles. Used CSS `clamp()` scales for smooth, balanced scaling (titles: 20px–24px, paragraphs: 14px–16px) across viewports.
+*   **Alternating Desktop Reveal Animations**: Left cards slide in from the left (`reveal-left`), right cards slide in from the right (`reveal-right`) on scroll.
+*   **Premium Mobile-First Showcase (320px–414px)**:
+    *   **Dashed Gold Thread Line**: Replaced the solid left timeline line on mobile with a luxury dashed gold line (`border-left: 1px dashed rgba(212, 175, 55, 0.45)`) that resembles metallic embroidery threads.
+    *   **Concentric target dots**: Restyled indicators into aperture-target dots with white borders and solid gold cores.
+    *   **Full-Bleed Top-Rounded Photos**: Removed margins/paddings from images on mobile so they go 100% card-width, using card `overflow: hidden` to round the top-left and top-right corners naturally.
+    *   **Gold dividers & Star Icons**: Placed a delicate horizontal gold divider line (`width: 30px; height: 1.5px; margin-bottom: 0.75rem`) inside the text block, and prefixed category titles with a golden aperture star (`✦`).
+    *   **Alternating Card Accents**:
+        *   Card 1 & 3: Soft gold left border (`border-left: 4px solid var(--gold)`) and cream tinted background (`#fffdfb`).
+        *   Card 2: Ivory left border (`border-left: 4px solid #d4cfc3`) and ivory tinted background (`#fafaf8`).
+    *   **Spacious Breathing Room**: Added `4.5rem` gaps between items and increased internal text padding (`padding: 1.75rem 1.5rem`) to maximize card depth.
+    *   **Vertical Slide Reveal**: Adjusted animation timings to a smooth `0.7s` vertical translate fade-up (`reveal-up`) with cubic-bezier transition curves.
+
+
+
+

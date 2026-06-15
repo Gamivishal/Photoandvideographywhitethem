@@ -256,11 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- PORTFOLIO FILTER ----
   const filterBtns = document.querySelectorAll('.filter-btn');
   const masonryItems = document.querySelectorAll('.masonry-item');
+  const masonryContainer = document.querySelector('.portfolio-masonry');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const filter = btn.dataset.filter;
+      if (masonryContainer) {
+        masonryContainer.setAttribute('data-active-filter', filter);
+      }
       masonryItems.forEach(item => {
         const show = filter === 'all' || item.dataset.category === filter;
         item.style.display = show ? 'block' : 'none';

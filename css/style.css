@@ -3071,6 +3071,7 @@ body.white-theme {
   }
 
   .white-theme .nav-logo img {
+    margin-left: -50px;
     height: 120px;
     margin-top: 0;
   }

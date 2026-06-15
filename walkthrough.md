@@ -113,6 +113,13 @@ As requested, **zero changes were made to the form inputs, names, IDs, validatio
 *   **Portfolio Grid Responsiveness**: Configured the Fashion category grid in `css/pages.css` to render as a centered, balanced 2x2 responsive layout on desktop and single-column on mobile.
 *   **Checklist Status**: Marked all checklist items as completed in `task.md`.
 
+### 8. Home Page Hero Slider Update (June 15, 2026)
+*   **New Local Image Assets**: Configured the home page hero slider (`index.html`) to use the new premium photography assets:
+    * Slide 1: `Staticdata/images/Heroimage/Heroimage1.jpeg`
+    * Slide 2: `Staticdata/images/Heroimage/Heroimage2.png`
+    * Slide 3: `Staticdata/images/Heroimage/Heroimage3.jpeg`
+*   **Responsive Desktop/Mobile Image Option**: Leveraged HTML5 `<picture>` tags with `<source>` elements containing media query attributes (`max-width: 768px` for mobile, `min-width: 769px` for desktop) so that separate assets can be configured and served dynamically for desktop and mobile clients. Added descriptive HTML comments highlighting where to perform these overrides.
+
 
 
 

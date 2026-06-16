@@ -27,31 +27,42 @@ document.addEventListener('DOMContentLoaded', initLoader);
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ---- CUSTOM CURSOR (desktop only) ----
-  const cursorDot = document.getElementById('cursorDot');
-  const cursorCircle = document.getElementById('cursorCircle');
-  if (cursorDot && cursorCircle && window.matchMedia('(pointer: fine)').matches) {
+  // ---- CUSTOM CURSOR (desktop only - dynamically created and throttled to prevent TBT/INP) ----
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const cursorDot = document.createElement('div');
+    cursorDot.id = 'cursorDot';
+    cursorDot.className = 'cursor-dot';
+    const cursorCircle = document.createElement('div');
+    cursorCircle.id = 'cursorCircle';
+    cursorCircle.className = 'cursor-circle';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorCircle);
+
     let cx = 0, cy = 0;
+    let mouseX = 0, mouseY = 0;
+    let ticking = false;
+
     document.addEventListener('mousemove', (e) => {
-      cursorDot.style.left = e.clientX + 'px';
-      cursorDot.style.top = e.clientY + 'px';
-      cx += (e.clientX - cx) * 0.12;
-      cy += (e.clientY - cy) * 0.12;
-      cursorCircle.style.left = cx + 'px';
-      cursorCircle.style.top = cy + 'px';
-    });
-    // Smoothly animate cursor circle
-    (function animateCursor() {
-      requestAnimationFrame(animateCursor);
-    })();
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          cursorDot.style.left = mouseX + 'px';
+          cursorDot.style.top = mouseY + 'px';
+          cx += (mouseX - cx) * 0.12;
+          cy += (mouseY - cy) * 0.12;
+          cursorCircle.style.left = cx + 'px';
+          cursorCircle.style.top = cy + 'px';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
     document.querySelectorAll('a, button, .portfolio-item, .service-card, .gallery-item, .masonry-item, .package-card, .pkg-tab').forEach(el => {
-      el.addEventListener('mouseenter', () => cursorCircle.classList.add('hovered'));
-      el.addEventListener('mouseleave', () => cursorCircle.classList.remove('hovered'));
+      el.addEventListener('mouseenter', () => cursorCircle.classList.add('hovered'), { passive: true });
+      el.addEventListener('mouseleave', () => cursorCircle.classList.remove('hovered'), { passive: true });
     });
-  } else {
-    // Hide cursor elements on touch devices
-    if (cursorDot) cursorDot.style.display = 'none';
-    if (cursorCircle) cursorCircle.style.display = 'none';
   }
 
   // ---- NAVBAR SCROLL ----
@@ -66,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   if (navToggle && navLinks) {
-    // Dynamically create navOverlay backdrop if it doesn't exist
     let navOverlay = document.getElementById('navOverlay');
     if (!navOverlay) {
       navOverlay = document.createElement('div');
@@ -97,16 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close when clicking the overlay backdrop
     navOverlay.addEventListener('click', closeMenu);
 
-    // Dropdown toggle on mobile (only when clicking the arrow specifically)
     const dropdownTriggers = navLinks.querySelectorAll('.nav-has-dropdown > a');
     dropdownTriggers.forEach(trigger => {
       trigger.addEventListener('click', (e) => {
         if (window.matchMedia('(max-width: 1024px)').matches) {
-          // If the click is specifically on the nav-arrow icon, toggle dropdown.
-          // Otherwise, allow navigating to the Services page.
           const isArrowClick = e.target.classList.contains('nav-arrow') || e.target.closest('.nav-arrow');
           if (isArrowClick) {
             e.preventDefault();
@@ -127,10 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Auto close sidebar when clicking menu links (excluding dropdown toggle triggers)
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        // If it's a dropdown toggle trigger on mobile/tablet, do not close the menu
         if (window.matchMedia('(max-width: 1024px)').matches && link.parentElement.classList.contains('nav-has-dropdown')) {
           return;
         }
@@ -139,199 +143,315 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---- HERO SLIDER (Ken Burns Fade) ----
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.dot');
-  let currentSlide = 0;
+  // ---- LAZY INITIALIZATION FOR SECONDARY FEATURES (Runs inside requestIdleCallback) ----
+  const initSecondary = () => {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
-  function goToSlide(index) {
-    slides[currentSlide] && slides[currentSlide].classList.remove('active');
-    dots[currentSlide] && dots[currentSlide].classList.remove('active');
+    // A. HERO SLIDER (Desktop Only, Delayed Init)
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
 
-    currentSlide = ((index % slides.length) + slides.length) % slides.length;
-
-    if (slides[currentSlide]) {
-      slides[currentSlide].classList.add('active');
+    function goToSlide(index) {
+      if (slides.length === 0) return;
+      slides[currentSlide] && slides[currentSlide].classList.remove('active');
+      dots[currentSlide] && dots[currentSlide].classList.remove('active');
+      currentSlide = ((index % slides.length) + slides.length) % slides.length;
+      slides[currentSlide] && slides[currentSlide].classList.add('active');
+      dots[currentSlide] && dots[currentSlide].classList.add('active');
     }
-    dots[currentSlide] && dots[currentSlide].classList.add('active');
-  }
-  window.goToSlide = goToSlide;
+    window.goToSlide = goToSlide;
 
-  if (slides.length > 0) {
-    setInterval(() => goToSlide(currentSlide + 1), 6000); // 6 seconds for majestic effect
-  }
+    const loadLazySlides = () => {
+      document.querySelectorAll('.hero-slide img[data-src]').forEach(img => {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      });
+      document.querySelectorAll('.hero-slide source[data-srcset]').forEach(source => {
+        source.srcset = source.dataset.srcset;
+        source.removeAttribute('data-srcset');
+      });
+    };
 
-  // ---- SCROLL REVEAL ----
-  const revealElements = document.querySelectorAll('.reveal-up, .reveal-scale');
+    if (!isTouch && slides.length > 0) {
+      // Load slide assets after idle
+      loadLazySlides();
+      setInterval(() => goToSlide(currentSlide + 1), 6000);
 
-  const revealOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
+      // Event listener load backup
+      const events = ['touchstart', 'mouseover', 'scroll'];
+      const triggerLoad = () => {
+        loadLazySlides();
+        events.forEach(e => window.removeEventListener(e, triggerLoad));
+      };
+      events.forEach(e => window.addEventListener(e, triggerLoad, { passive: true }));
+    }
+
+    // B. HERO REVEALS
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal-up').forEach(el => el.classList.add('visible'));
+    }, 100);
+
+    // C. STATS COUNTER
+    const statNums = document.querySelectorAll('.stat-num');
+    if (statNums.length > 0 && 'IntersectionObserver' in window) {
+      statNums.forEach(el => { el.textContent = '0'; });
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      statNums.forEach(el => statsObserver.observe(el));
+    }
+
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.count, 10);
+      if (isNaN(target)) return;
+      const duration = 1800;
+      const start = performance.now();
+      function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    // D. PORTFOLIO FILTER
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const masonryItems = document.querySelectorAll('.masonry-item');
+    const masonryContainer = document.querySelector('.portfolio-masonry');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        if (masonryContainer) {
+          masonryContainer.setAttribute('data-active-filter', filter);
+        }
+        masonryItems.forEach(item => {
+          const show = filter === 'all' || item.dataset.category === filter;
+          item.style.display = show ? 'block' : 'none';
+          if (show) {
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+            requestAnimationFrame(() => {
+              item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            });
+          }
+        });
+      });
+    });
+
+    // E. FAQ ACCORDION
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // F. PACKAGES TABS
+    const pkgTabs = document.querySelectorAll('.pkg-tab');
+    const pkgPanels = document.querySelectorAll('.pkg-panel');
+    const animatePackageCards = (panel) => {
+      if (!panel) return;
+      const cards = panel.querySelectorAll('.package-card');
+      cards.forEach((card, index) => {
+        card.style.animation = 'none';
+        card.offsetHeight;
+        card.style.animation = `packageCardEnter 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.08}s both`;
+      });
+    };
+    pkgTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        pkgTabs.forEach(t => t.classList.remove('active'));
+        pkgPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.getElementById('pkg-' + tab.dataset.tab);
+        if (panel) {
+          panel.classList.add('active');
+          animatePackageCards(panel);
+        }
+      });
+    });
+
+    // G. PACKAGES CARD HOVER (Desktop Only)
+    if (!isTouch) {
+      document.querySelectorAll('#packagesMain .package-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const tiltX = ((y - centerY) / centerY) * -8;
+          const tiltY = ((x - centerX) / centerX) * 8;
+
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+          card.style.setProperty('--tilt-x', `${tiltX}deg`);
+          card.style.setProperty('--tilt-y', `${tiltY}deg`);
+          card.style.setProperty('--lift', '-10px');
+          card.style.setProperty('--scale', '1.02');
+        });
+
+        card.addEventListener('mouseenter', () => {
+          card.style.setProperty('--lift', '-10px');
+          card.style.setProperty('--scale', '1.02');
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.setProperty('--mouse-x', '50%');
+          card.style.setProperty('--mouse-y', '50%');
+          card.style.setProperty('--tilt-x', '0deg');
+          card.style.setProperty('--tilt-y', '0deg');
+          card.style.setProperty('--lift', '0px');
+          card.style.setProperty('--scale', '1');
+        });
+      });
+    }
+
+    // H. WHATSAPP BUTTON TRACKING
+    document.querySelectorAll('.whatsapp-float, .wa-cta-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log('[YRMP] WhatsApp CTA clicked');
+      }, { passive: true });
+    });
+
+    // I. MARQUEE HOVER EFFECTS
+    const marqueeContainer = document.querySelector('.logo-marquee-container');
+    if (marqueeContainer) {
+      const track = marqueeContainer.querySelector('.logo-marquee-track');
+      marqueeContainer.addEventListener('mouseover', () => {
+        marqueeContainer.style.opacity = '1';
+        if (track) track.style.animationPlayState = 'paused';
+      }, { passive: true });
+      marqueeContainer.addEventListener('mouseout', () => {
+        marqueeContainer.style.opacity = '0.6';
+        if (track) track.style.animationPlayState = 'running';
+      }, { passive: true });
+    }
+
+    // J. CINEMATIC LIGHT PARTICLES (Desktop Only)
+    const heroSection = document.querySelector('.hero');
+    if (!isTouch && heroSection) {
+      const particleCount = 12; // Lowered count to minimize DOM nodes and layouts
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'cinematic-particle';
+        const size = Math.random() * 3 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 10;
+
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+
+        heroSection.appendChild(particle);
+      }
+    }
+
+    // K. SCROLL PARALLAX EFFECT (Desktop Only)
+    const parallaxImages = document.querySelectorAll('.intro-img-main img, .intro-img-side img');
+    if (!isTouch && parallaxImages.length > 0) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        parallaxImages.forEach((img, index) => {
+          const speed = index === 0 ? 0.05 : -0.03;
+          const yPos = -(scrolled * speed);
+          img.style.transform = `translateY(${yPos}px) scale(1.08)`;
+        });
+      }, { passive: true });
+    }
   };
 
-  const revealOnScroll = new IntersectionObserver(function (entries, observer) {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    });
-  }, revealOptions);
-
-  revealElements.forEach(el => revealOnScroll.observe(el));
-
-  // ---- SERVICES 3D TILT & SPOTLIGHT EFFECT ----
-  const serviceCards = document.querySelectorAll('.service-card');
-  serviceCards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      if (!window.matchMedia('(pointer: fine)').matches) return;
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Spotlight glow
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-
-      // 3D Tilt calculation (max 10 degrees)
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const tiltX = ((y - centerY) / centerY) * -10;
-      const tiltY = ((x - centerX) / centerX) * 10;
-
-      // We keep the transition to 0s during movement so it tracks instantly,
-      // but smooth out the entry/exit using a small transition in CSS or via class
-      card.style.transition = 'transform 0.1s ease';
-      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.5s ease';
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-    });
-  });
-
-  // Hero reveal after loader
-  setTimeout(() => {
-    document.querySelectorAll('.hero .reveal-up').forEach(el => el.classList.add('visible'));
-  }, 950);
-
-  // ---- STATS COUNTER ----
-  const statNums = document.querySelectorAll('.stat-num');
-  if (statNums.length > 0 && 'IntersectionObserver' in window) {
-    // Reset to 0 initially only if JS executes and IntersectionObserver is supported
-    statNums.forEach(el => {
-      el.textContent = '0';
-    });
-
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          statsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 }); // Trigger when 15% of element is in viewport (optimized for mobile/desktop layout)
-    statNums.forEach(el => statsObserver.observe(el));
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => initSecondary());
+  } else {
+    setTimeout(initSecondary, 1200);
   }
 
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.count, 10);
-    if (isNaN(target)) return;
-    const duration = 1800;
-    const start = performance.now();
-    function update(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target);
-      if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-  }
-
-  // ---- TESTIMONIALS GRID ----
-  const testimonials = document.querySelectorAll('.testimonial-item');
-  testimonials.forEach(testimonial => testimonial.classList.add('active'));
-  window.changeTestimonial = function () { };
-
-  // ---- PORTFOLIO FILTER ----
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const masonryItems = document.querySelectorAll('.masonry-item');
-  const masonryContainer = document.querySelector('.portfolio-masonry');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      if (masonryContainer) {
-        masonryContainer.setAttribute('data-active-filter', filter);
-      }
-      masonryItems.forEach(item => {
-        const show = filter === 'all' || item.dataset.category === filter;
-        item.style.display = show ? 'block' : 'none';
-        if (show) {
-          item.style.opacity = '0';
-          item.style.transform = 'scale(0.95)';
-          requestAnimationFrame(() => {
-            item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'scale(1)';
-          });
-        }
-      });
-    });
-  });
-
-  // ---- LIGHTBOX ----
-  let lightbox = document.getElementById('lightbox');
-  if (!lightbox) {
-    lightbox = document.createElement('div');
-    lightbox.id = 'lightbox';
-    lightbox.className = 'lightbox';
-    document.body.appendChild(lightbox);
-  }
-
-  // Re-build inner HTML of lightbox to ensure all elements exist on all pages
-  lightbox.innerHTML = `
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-    <div class="lightbox-content">
-      <img src="" alt="Fullscreen View" class="lightbox-img" id="lightboxImg" style="display: none;" />
-      <video src="" controls class="lightbox-video" id="lightboxVideo" style="display: none;"></video>
-      <div class="lightbox-caption" id="lightboxCaption" style="display: none;">
-        <h4 id="lightboxTitle"></h4>
-        <p id="lightboxDesc"></p>
-      </div>
-    </div>
-  `;
-
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxVideo = document.getElementById('lightboxVideo');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-  const lightboxTitle = document.getElementById('lightboxTitle');
-  const lightboxDesc = document.getElementById('lightboxDesc');
-  const lightboxClose = document.getElementById('lightboxClose');
-
+  // ---- LAZY INITIALIZED LIGHTBOX ----
   const openLightbox = (src, type, title, desc) => {
-    // Reset inputs
-    lightboxImg.style.display = 'none';
-    lightboxImg.src = '';
-    lightboxVideo.style.display = 'none';
-    lightboxVideo.pause();
-    lightboxVideo.src = '';
+    let lightbox = document.getElementById('lightbox');
+    if (!lightbox) {
+      lightbox = document.createElement('div');
+      lightbox.id = 'lightbox';
+      lightbox.className = 'lightbox';
+      document.body.appendChild(lightbox);
+      lightbox.innerHTML = `
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+        <div class="lightbox-content">
+          <img src="" alt="Fullscreen View" class="lightbox-img" id="lightboxImg" style="display: none;" />
+          <video src="" controls class="lightbox-video" id="lightboxVideo" style="display: none;"></video>
+          <div class="lightbox-caption" id="lightboxCaption" style="display: none;">
+            <h4 id="lightboxTitle"></h4>
+            <p id="lightboxDesc"></p>
+          </div>
+        </div>
+      `;
 
-    if (type === 'video') {
+      // Bind close events once
+      const closeBtn = document.getElementById('lightboxClose');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closeLightbox();
+        });
+      }
+
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox || e.target.classList.contains('lightbox-content') || e.target.id === 'lightbox') {
+          closeLightbox();
+        }
+      });
+    }
+
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDesc = document.getElementById('lightboxDesc');
+
+    // Reset inputs
+    if (lightboxImg) {
+      lightboxImg.style.display = 'none';
+      lightboxImg.src = '';
+    }
+    if (lightboxVideo) {
+      lightboxVideo.style.display = 'none';
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+    }
+
+    if (type === 'video' && lightboxVideo) {
       lightboxVideo.src = src;
       lightboxVideo.style.display = 'block';
       lightboxVideo.play().catch(e => console.log('Video autoplay blocked or failed', e));
-    } else {
+    } else if (lightboxImg) {
       lightboxImg.src = src;
       lightboxImg.style.display = 'block';
     }
 
-    if (title || desc) {
-      lightboxTitle.textContent = title || '';
-      lightboxDesc.textContent = desc || '';
+    if ((title || desc) && lightboxCaption) {
+      if (lightboxTitle) lightboxTitle.textContent = title || '';
+      if (lightboxDesc) lightboxDesc.textContent = desc || '';
       lightboxCaption.style.display = 'block';
-    } else {
+    } else if (lightboxCaption) {
       lightboxCaption.style.display = 'none';
     }
 
@@ -340,17 +460,23 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const closeLightbox = () => {
-    lightbox.classList.remove('open');
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) lightbox.classList.remove('open');
     document.body.style.overflow = '';
-    lightboxVideo.pause();
-    lightboxVideo.src = '';
-    lightboxImg.src = '';
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxImg = document.getElementById('lightboxImg');
+    if (lightboxVideo) {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+    }
+    if (lightboxImg) {
+      lightboxImg.src = '';
+    }
   };
 
-  // Bind click event to elements that have data-lightbox
+  // Bind clicks dynamically
   document.querySelectorAll('[data-lightbox]').forEach(el => {
     el.addEventListener('click', (e) => {
-      // Prevent default click (e.g. if it's an anchor tag)
       e.preventDefault();
       e.stopPropagation();
       const src = el.dataset.lightbox || el.getAttribute('href');
@@ -370,14 +496,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Bind click events on portfolio masonry items and gallery items
   document.querySelectorAll('.masonry-item, .gallery-item').forEach(item => {
     item.addEventListener('click', (e) => {
-      // If they clicked controls on a video, let them interact with video controls
       if (e.target.tagName === 'VIDEO' && e.target.hasAttribute('controls')) {
         return;
       }
-
       e.preventDefault();
       e.stopPropagation();
 
@@ -414,19 +537,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  if (lightboxClose) {
-    lightboxClose.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      closeLightbox();
-    });
-  }
-
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox || e.target.classList.contains('lightbox-content') || e.target.id === 'lightbox') {
-      closeLightbox();
-    }
-  });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
   });
@@ -529,12 +639,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // If the form has an action, let it submit natively
       if (contactForm.getAttribute('action')) {
-        return; // Allow the browser to proceed
+        return;
       }
 
-      // Otherwise, prevent default and show a generic success (since there's no backend specified)
       e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
@@ -586,7 +694,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!categorySelect || !packageSelect || !packageWrapper) return;
     const cat = categorySelect.value;
     if (cat && packagesByCategory[cat]) {
-      // Clear existing options
       packageSelect.innerHTML = '';
       const defaultOption = document.createElement('option');
       defaultOption.value = '';
@@ -607,149 +714,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (categorySelect) {
     categorySelect.addEventListener('change', updatePackageOptions);
   }
-  // Initial state
   updatePackageOptions();
 
-
-
-  // ---- FAQ ACCORDION ----
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
+  // ---- SERVICE WORKER REGISTRATION ----
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      const pathDepth = window.location.pathname.split('/').filter(p => p.length > 0 && !p.endsWith('.html')).length;
+      const swPath = pathDepth > 0 ? '../sw.js' : 'sw.js';
+      navigator.serviceWorker.register(swPath)
+        .then((reg) => console.log('[SW] Service Worker registered successfully:', reg.scope))
+        .catch((err) => console.error('[SW] Service Worker registration failed:', err));
     });
-  });
-
-  // ---- PACKAGES TABS ----
-  const pkgTabs = document.querySelectorAll('.pkg-tab');
-  const pkgPanels = document.querySelectorAll('.pkg-panel');
-  const animatePackageCards = (panel) => {
-    if (!panel) return;
-    const cards = panel.querySelectorAll('.package-card');
-    cards.forEach((card, index) => {
-      card.style.animation = 'none';
-      card.offsetHeight;
-      card.style.animation = `packageCardEnter 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.08}s both`;
-    });
-  };
-  pkgTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      pkgTabs.forEach(t => t.classList.remove('active'));
-      pkgPanels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      const panel = document.getElementById('pkg-' + tab.dataset.tab);
-      if (panel) {
-        panel.classList.add('active');
-        animatePackageCards(panel);
-      }
-    });
-  });
-
-  // ---- PACKAGES CARD HOVER MOTION ----
-  document.querySelectorAll('#packagesMain .package-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      if (!window.matchMedia('(pointer: fine)').matches) return;
-
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const tiltX = ((y - centerY) / centerY) * -8;
-      const tiltY = ((x - centerX) / centerX) * 8;
-
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-      card.style.setProperty('--tilt-x', `${tiltX}deg`);
-      card.style.setProperty('--tilt-y', `${tiltY}deg`);
-      card.style.setProperty('--lift', '-10px');
-      card.style.setProperty('--scale', '1.02');
-    });
-
-    card.addEventListener('mouseenter', () => {
-      card.style.setProperty('--lift', '-10px');
-      card.style.setProperty('--scale', '1.02');
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.setProperty('--mouse-x', '50%');
-      card.style.setProperty('--mouse-y', '50%');
-      card.style.setProperty('--tilt-x', '0deg');
-      card.style.setProperty('--tilt-y', '0deg');
-      card.style.setProperty('--lift', '0px');
-      card.style.setProperty('--scale', '1');
-    });
-  });
-
-  // ---- SMOOTH SCROLL ----
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  // ---- WHATSAPP BUTTON CLICK TRACKING ----
-  document.querySelectorAll('.whatsapp-float, .wa-cta-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Optional: fire analytics event here
-      console.log('[YRMP] WhatsApp CTA clicked');
-    });
-  });
-
-  // ---- MARQUEE HOVER EFFECTS ----
-  const marqueeContainer = document.querySelector('.logo-marquee-container');
-  if (marqueeContainer) {
-    const track = marqueeContainer.querySelector('.logo-marquee-track');
-    marqueeContainer.addEventListener('mouseover', () => {
-      marqueeContainer.style.opacity = '1';
-      if (track) track.style.animationPlayState = 'paused';
-    });
-    marqueeContainer.addEventListener('mouseout', () => {
-      marqueeContainer.style.opacity = '0.6';
-      if (track) track.style.animationPlayState = 'running';
-    });
-  }
-
-  // ---- CINEMATIC LIGHT PARTICLES ----
-  const heroSection = document.querySelector('.hero');
-  if (heroSection) {
-    const particleCount = 20; // Subtle
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'cinematic-particle';
-      const size = Math.random() * 4 + 2;
-      const posX = Math.random() * 100;
-      const posY = Math.random() * 100;
-      const delay = Math.random() * 5;
-      const duration = Math.random() * 10 + 10;
-
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${posX}%`;
-      particle.style.top = `${posY}%`;
-      particle.style.animationDelay = `${delay}s`;
-      particle.style.animationDuration = `${duration}s`;
-
-      heroSection.appendChild(particle);
-    }
-  }
-
-  // ---- SCROLL PARALLAX EFFECT ----
-  const parallaxImages = document.querySelectorAll('.intro-img-main img, .intro-img-side img');
-  if (parallaxImages.length > 0) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      parallaxImages.forEach((img, index) => {
-        const speed = index === 0 ? 0.05 : -0.03; // Main img down, side img up
-        const yPos = -(scrolled * speed);
-        img.style.transform = `translateY(${yPos}px) scale(1.08)`;
-      });
-    }, { passive: true });
   }
 
 });

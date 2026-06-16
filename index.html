@@ -90,26 +90,29 @@
           <!-- Desktop screen image option (min-width: 769px) -->
           <source media="(min-width: 769px)" srcset="Staticdata/images/Heroimage/Heroimage1.jpeg">
           <img src="Staticdata/images/Heroimage/Heroimage1.jpeg" alt="Wedding Couple Hero"
+            width="1920" height="1080" fetchpriority="high" decoding="async"
             style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </picture>
       </div>
       <div class="hero-slide" id="heroSlide2">
         <picture>
           <!-- Mobile screen image option (max-width: 768px) -->
-          <source media="(max-width: 768px)" srcset="Staticdata/images/Heroimage/Heroimage2.png">
+          <source media="(max-width: 768px)" data-srcset="Staticdata/images/Heroimage/Heroimage2.png">
           <!-- Desktop screen image option (min-width: 769px) -->
-          <source media="(min-width: 769px)" srcset="Staticdata/images/Heroimage/Heroimage2.png">
-          <img src="Staticdata/images/Heroimage/Heroimage2.png" alt="Cinematic Wedding Details"
+          <source media="(min-width: 769px)" data-srcset="Staticdata/images/Heroimage/Heroimage2.png">
+          <img data-src="Staticdata/images/Heroimage/Heroimage2.png" alt="Cinematic Wedding Details"
+            width="1920" height="1080" decoding="async"
             style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </picture>
       </div>
       <div class="hero-slide" id="heroSlide3">
         <picture>
           <!-- Mobile screen image option (max-width: 768px) -->
-          <source media="(max-width: 768px)" srcset="Staticdata/images/Heroimage/Heroimage3.jpeg">
+          <source media="(max-width: 768px)" data-srcset="Staticdata/images/Heroimage/Heroimage3.jpeg">
           <!-- Desktop screen image option (min-width: 769px) -->
-          <source media="(min-width: 769px)" srcset="Staticdata/images/Heroimage/Heroimage3.jpeg">
-          <img src="Staticdata/images/Heroimage/Heroimage3.jpeg" alt="Drone Aerial View"
+          <source media="(min-width: 769px)" data-srcset="Staticdata/images/Heroimage/Heroimage3.jpeg">
+          <img data-src="Staticdata/images/Heroimage/Heroimage3.jpeg" alt="Drone Aerial View"
+            width="1920" height="1080" decoding="async"
             style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </picture>
       </div>
@@ -291,7 +294,7 @@
               </div>
               <h3>Drone Services</h3>
               <p>DGCA-licensed cinematic aerial photography and videography for weddings and events.</p>
-              <a href="drone-photography/" class="service-link">Explore →</a>
+              <!-- <a href="drone-photography/" class="service-link">Explore →</a> -->
             </div>
             <div class="service-card-back">
               <h3>Drone Services</h3>
@@ -394,8 +397,8 @@
           ">
         <video id="cinematicVideo"
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover" controls muted
-          preload="metadata" poster="Staticdata/images/wedding/marriage (1).jpeg">
-          <source src="Staticdata/video/CinematicHome.mp4" type="video/mp4" />
+          preload="none" poster="Staticdata/images/wedding/marriage (1).jpeg"
+          data-src="Staticdata/video/CinematicHome.mp4">
           Your browser does not support the video tag.
         </video>
         <button id="cinematicStop" class="btn-outline" style="margin-top: 1rem"
@@ -404,6 +407,10 @@
           // Play / Pause button
           document.getElementById("cinematicStop").addEventListener("click", function () {
             var vid = document.getElementById("cinematicVideo");
+            if (!vid.src) {
+              vid.src = vid.dataset.src;
+              vid.load();
+            }
             if (vid.paused) {
               vid.play();
               this.textContent = "Pause";
@@ -419,6 +426,7 @@
           const playBtn = document.getElementById("cinematicStop");
 
           let hasManuallyPaused = false;
+          const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
           playBtn.addEventListener("click", function () {
             if (cinematicVideo.paused) {
@@ -436,8 +444,13 @@
                 cinematicContainer.style.transform = `scale(${scale})`;
 
                 // Play video when at least 40% is visible, pause when it leaves
-                if (ratio > 0.4 && !hasManuallyPaused) {
-                  if (cinematicVideo.paused) {
+                if (ratio > 0.4) {
+                  // Lazy load source
+                  if (!cinematicVideo.src) {
+                    cinematicVideo.src = cinematicVideo.dataset.src;
+                    cinematicVideo.load();
+                  }
+                  if (!isMobile && !hasManuallyPaused && cinematicVideo.paused) {
                     cinematicVideo.play().catch(e => console.log('Autoplay prevented', e));
                     playBtn.textContent = "Pause";
                   }

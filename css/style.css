@@ -457,7 +457,9 @@ ul {
   background: rgba(201, 169, 110, 0.1);
 }
 
-@media (max-width: 1024px), (pointer: coarse) {
+@media (max-width: 1024px),
+(pointer: coarse) {
+
   .cursor-dot,
   .cursor-circle {
     display: none !important;
@@ -834,7 +836,8 @@ ul {
 }
 
 .hero-title {
-  font-family: var(--font-serif) !important; /* Elegant Serif */
+  font-family: var(--font-serif) !important;
+  /* Elegant Serif */
   font-size: clamp(2.5rem, 6.5vw, 4.8rem) !important;
   font-weight: 300 !important;
   line-height: 1.15 !important;
@@ -972,14 +975,17 @@ ul {
     transform: scaleY(0);
     transform-origin: top;
   }
+
   50% {
     transform: scaleY(1);
     transform-origin: top;
   }
+
   51% {
     transform: scaleY(1);
     transform-origin: bottom;
   }
+
   100% {
     transform: scaleY(0);
     transform-origin: bottom;
@@ -1035,7 +1041,8 @@ ul {
   }
 
   .hero-scroll {
-    display: none !important; /* Hide scroll indicator on mobile for cleaner card spacing */
+    display: none !important;
+    /* Hide scroll indicator on mobile for cleaner card spacing */
   }
 }
 

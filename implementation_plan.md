@@ -1,96 +1,99 @@
-# Implementation Plan — Lighthouse Performance & Accessibility Optimizations (>90 Score)
+# Implementation Plan — Lighthouse Performance Optimization (Mobile 90+ / Desktop 95+)
 
-This plan details the technical steps to optimize the Yash Raj Motion Picture website for mobile and desktop clients, raising Lighthouse **Performance** and **Accessibility** scores to 90+.
+This plan outlines the technical steps to optimize the Yash Raj Motion Picture website for maximum Lighthouse Performance scores, targeting:
+* **Mobile Performance**: 90+
+* **Desktop Performance**: 95+
+* **Core Web Vitals**: Pass (FCP < 1.8s, LCP < 2.5s, CLS < 0.1, TBT < 150ms, INP < 200ms)
 
 ---
 
 ## User Review Required
 
-Please review the proposed plan to optimize the website's performance and accessibility scores. Since I cannot execute terminal commands directly due to execution constraints in my environment, I have created a script that you can run locally to automate the image compression and conversion process.
+Since our sandboxed environment has restricted local terminal execution permissions, we have designed a fully automated optimization script `scripts/optimize-assets.js`. After reviewing and approving this plan, you will need to run the following command in your local terminal:
 
-> [!IMPORTANT]
-> **Key Steps & Approvals:**
-> 1. **Run the Asset Optimizer Script**: You will need to run `node scripts/optimize-assets.js` in your terminal. This will automatically convert all JPEG/PNG images to WebP and compress the original files to ~75% quality (reducing their total size from ~25MB to under 1.5MB).
-> 2. **Review Asynchronous Font Loading**: We will convert the Google Fonts link on all 14 pages to load asynchronously, preventing them from blocking initial page rendering.
-> 3. **Approve Text Contrast Tuning**: We will adjust the light-theme gold color variable slightly (making it darker) to ensure readability and compliance with the WCAG 4.5:1 ratio.
+```bash
+node scripts/optimize-assets.js
+```
+
+Running this script will automatically perform image conversions, minification of HTML, CSS, and JS, critical CSS extraction/inlining, and static header/footer HTML compilation across all 15 pages of the site.
 
 ---
 
 ## Proposed Changes
 
-### 1. Performance Optimizations
+We will group our optimizations into 6 core performance layers:
 
-#### A. Image Asset Compression & WebP Conversion
-The homepage currently loads around 7.5MB of hero images, and other pages load heavy couple/wedding photos ranging between 2.5MB and 3.5MB each.
-We will create a Node.js utility script, `scripts/optimize-assets.js`, to:
-1. Recursively scan `Staticdata/images/`.
-2. Convert all `.jpg`, `.jpeg`, and `.png` files into optimized next-gen `.webp` formats (at 80% quality).
-3. Compress the original `.jpg`, `.jpeg`, and `.png` files directly (reducing their size by 90-95% to act as fail-safe fallback images).
-4. Run a script-based search-and-replace to update `.jpg`/`.jpeg`/`.png` references to `.webp` across all HTML and CSS files.
+### 1. Inlining Header & Footer (Eliminating Render-Blocking JS & CLS)
+Currently, `js/header.js` and `js/footer.js` dynamically insert the navigation menu and footer elements using `document.write` or `insertAdjacentHTML` on page load. This causes:
+* **Render-Blocking Penalty**: The browser blocks page parsing to fetch and execute these external scripts.
+* **Layout Shift (CLS)**: The page renders briefly without a header, and then shifts dramatically when the navbar is injected, penalizing CLS.
+* **Compatibility Warnings**: Lighthouse flags the use of `document.write` as a critical performance blocker.
 
-#### B. Asynchronous Font Loading (Non-Blocking)
-Google Fonts stylesheets block rendering by default. We will update all 14 HTML pages to load Google Fonts asynchronously using the preload/print onload technique:
+**Solution**:
+Our script will parse the static HTML elements from `js/header.js` and `js/footer.js`, resolve the relative file paths (e.g. `./` for root, `../` for subpages), and compile them directly into the 15 HTML files. The script tags `<script src="js/header.js"></script>` and `footer.js` will be removed.
+
+### 2. Critical CSS Inlining & Async Stylesheets (Eliminating FOUC & Render-Blocking CSS)
+Stylesheets block initial paint. The site loads ~140KB of CSS (`style.css`, `pages.css`, `animations.css`) synchronously.
+
+**Solution**:
+* We will extract the first **900 lines of style.css** (containing `:root` variables, reset rules, loading screens, custom cursor coordinates, navbar alignment, and hero layout), minify them, and inline them in a `<style id="critical-css">` tag in the `<head>` of all HTML files.
+* We will convert the full stylesheets loading sequence to load asynchronously:
 ```html
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+<link rel="preload" as="style" href="css/style.css" />
+<link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'" />
 ```
+This ensures above-the-fold content paints instantly with zero layout shifts, while the remaining heavy styles load in the background.
 
-#### C. Mobile Performance: Custom Cursor & Particle Controls
-- We will add a media query in `css/style.css` to hide the custom cursor elements (`#cursorDot` and `#cursorCircle`) on screens under `1024px` and devices with touch pointers (`@media (pointer: coarse)` or `(max-width: 1024px)`) to reduce DOM paint and mouse-tracking layout shifting overhead on mobile viewports.
-- We will ensure cinematic background animations are paused or disabled on mobile screens to save GPU cycles.
+### 3. Dynamic LCP Preloading & Image Optimization
+Large uncompressed JPEGs (up to 3.5MB each) delay the Largest Contentful Paint (LCP).
 
-#### D. Lazy Video Preloading
-We will audit and ensure all `<video>` elements (e.g. subpages, galleries, portfolios) have `preload="none"` or `preload="metadata"` and fallback poster frames, removing auto-buffering over slow mobile cellular connections.
+**Solution**:
+* **Next-Gen WebP Conversion**: The script will recursively convert JPEGs/PNGs into optimized WebP formats (80% quality) and update references in all HTML and CSS files.
+* **Image Compression**: Original files will be compressed in-place to ~75% quality as fallbacks.
+* **LCP Preload Injection**: For each page, our script will detect the above-the-fold LCP image (e.g. `Heroimage1.webp` on the homepage, or the unique page-hero backgrounds on subpages) and inject a `<link rel="preload" as="image" href="..." />` tag in the `<head>` to start downloading the asset immediately.
 
----
+### 4. Code Minification & Non-Blocking JS Execution
+* **HTML, CSS, JS Minification**: Our script will recursively remove comments, collapse whitespace, and compress code lines in all static assets.
+* **Non-Blocking Scripts**: We will add the `defer` attribute to the remaining `main.js` and `animations.js` tags at the bottom of the body.
+* **Throttling Custom Cursor & Particle Controls**: In `js/main.js`, we will throttle cursor tracking coordinates using `requestAnimationFrame` and skip tracking entirely on mobile screens, minimizing main-thread blocking time (TBT) and improving Interaction to Next Paint (INP).
 
-### 2. Accessibility Optimizations
+### 5. Service Worker Caching for Repeat Visits
+We will create a Service Worker (`sw.js`) that caches static assets (WebP images, CSS, JS, Google Fonts) using a cache-first strategy. This guarantees near-instant loading (0ms network cost) for repeat visits.
 
-#### A. Color Contrast Adjustments
-We will modify `--gold-dark` (`#997852`) to a slightly darker shade `#825e36` specifically under `.white-theme` rules in `css/style.css` to ensure all gold headers and small text elements achieve a contrast ratio above the WCAG AA requirement of **4.5:1** on light backgrounds (current contrast is 4.1:1).
-
-#### B. Instagram Grid Accessible Names
-The homepage footer features an Instagram grid with 10 visual link cards. Currently, these links contain no inner text and no labels, causing Lighthouse to flag "Links do not have a discernible name". We will add descriptive `aria-label` tags to each link:
-```html
-<a href="https://www.instagram.com/yashraj_motion_picturez/" target="_blank" rel="noopener" class="insta-item" style="..." aria-label="View Yash Raj Motion Picture Instagram portfolio post 1"></a>
-```
+### 6. HTML Payload Minification
+We will strip comments and collapse whitespace in all 15 HTML files to reduce initial payload bytes, leading to faster Time to First Byte (TTFB) and First Contentful Paint (FCP).
 
 ---
 
 ## Proposed File Changes
 
-### [Technical & Scripting Layer]
+### [Scripting & Build Layer]
+#### [MODIFY] [optimize-assets.js](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/scripts/optimize-assets.js)
+* Update/Rewrite the automation script to handle:
+  1. Header/Footer HTML inlining in all HTML files.
+  2. Critical CSS extraction and injection.
+  3. Dynamic LCP preloading injection per page.
+  4. HTML, CSS, and JS minification.
+  5. Image compression and WebP conversion.
 
-#### [NEW] [optimize-assets.js](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/scripts/optimize-assets.js)
-* Write a Node script utilizing the `sharp` library to compress all JPEGs/PNGs, generate WebP formats, and automatically update reference paths in all HTML and CSS files.
-* Since our environment runner has system-restricted execution permissions, the USER can execute this script locally via:
-  ```bash
-  node scripts/optimize-assets.js
-  ```
+### [Asset & Caching Layer]
+#### [NEW] [sw.js](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/sw.js)
+* Implement cache-first service worker for static files and preloaded fonts.
 
-### [Global CSS Stylesheet]
-
-#### [MODIFY] [style.css](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/css/style.css)
-* Adjust text contrast parameters for `.white-theme .section-label` and `.white-theme .btn-text-link`.
-* Add media queries to set custom cursors `.cursor-dot` and `.cursor-circle` to `display: none` on mobile/touch pointers.
-
-### [HTML Page Templates]
-
-#### [MODIFY] All HTML Pages (14 files)
-* Update Google Font tags to load asynchronously.
-* Ensure all image/video links point to compressed next-gen WebP formats.
-* Add accessible names/labels (`aria-label`) to elements lacking discernible names (specifically the Instagram feed on the homepage).
+### [Global Stylesheet & Logic]
+#### [MODIFY] [main.js](file:///c:/Users/Admin/source/repos/Photoandvideographywhitethem/js/main.js)
+* Add Service Worker registration script.
+* Optimize custom cursor code to prevent main thread blocking (lower TBT and INP).
 
 ---
 
 ## Verification Plan
 
-### Automated Checks
-- Run a site review pass using Lighthouse F12 locally to confirm:
-  - Mobile & Desktop Performance > 90
-  - Mobile & Desktop Accessibility > 90
-- Validate that all updated resource links (WebP) map correctly.
+### Automated Tests
+* **Lighthouse Audits**: Once you run the optimization script, run a local Lighthouse audit to confirm:
+  * Performance: Mobile > 90, Desktop > 95.
+  * LCP < 2.5s, TBT < 150ms, CLS < 0.1.
+* **Syntax/Lint check**: Check console for any JS errors or broken images.
 
 ### Manual Verification
-- Test key inputs, forms, and pages across viewports (mobile, tablet, desktop) to ensure no layouts break.
-- Verify touch inputs work smoothly on mobile layout simulations without the custom cursor layer.
+* Inspect pages on mobile viewports to verify that the navbar toggle, slider, WhatsApp float, and images load correctly and align.
